@@ -27,3 +27,8 @@ out
 hs_err_pid*
 
 # project specific ignores
+.classpath
+.factorypath
+.project
+.settings
+target
