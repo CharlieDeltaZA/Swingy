@@ -13,7 +13,7 @@ TBC/25
 Summary: A GUI RPG game created using the SWING framework.
 
 ### Installing & Running:
-Ensure you have the latest JRE & JDK (14 at time of development).
+Ensure you have the latest JRE & JDK (14 at time of development), as well as Maven.
 
 Build with Maven:
 ```
@@ -22,5 +22,5 @@ mvn clean package
 
 Run with Java, specificying which interface you would like to use:
 ```
-java -jar /path/to/swingy.jar [console/gui]
+java -jar ./target/swingy.jar [console/gui]
 ```
