@@ -15,4 +15,12 @@ Summary: A GUI RPG game created using the SWING framework.
 ### Installing & Running:
 Ensure you have the latest JRE & JDK (14 at time of development).
 
-TBC
+Build with Maven:
+```
+mvn clean package
+```
+
+Run with Java, specificying which interface you would like to use:
+```
+java -jar /path/to/swingy.jar [console/gui]
+```
