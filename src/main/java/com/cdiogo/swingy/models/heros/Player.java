@@ -9,42 +9,42 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class Player {
+public abstract class Player {
     @NotNull
-    private String heroName;
+    protected String heroName;
 
     @NotNull
-    private String heroClass;
+    protected String heroClass;
 
     @NotNull
     @Min(value=1, message="Level cannot be lower than 1")
     @Max(value=10, message="Level cannot be higher than 10")
-    private int level;
+    protected int level;
 
     @NotNull
     @Min(value=0, message="Experience cannot be lower than 0")
-    private int xp;
+    protected int xp;
 
     @NotNull
     @Min(value=0, message="Attack cannot be lower than 0")
-    private int attack;
+    protected int attack;
 
     @NotNull
     @Min(value=0, message="Defense cannot be lower than 0")
-    private int defense;
+    protected int defense;
 
     @NotNull
     @Min(value=0, message="Health cannot be lower than 0")
-    private int hp;
+    protected int hp;
 
-    public Player(String heroName, String heroClass, @Min(0) int xp, int def, int atk, int hp, int lvl) {
+    public Player(String heroName, String heroClass, int lvl, int xp, int hp, int atk, int def) {
         this.setHeroName(heroName);
         this.setHeroClass(heroClass);
+        this.setLevel(lvl);
         this.setXp(xp);
         this.setHp(hp);
-        this.setDefense(def);
         this.setAttack(atk);
-        this.setLevel(lvl);
+        this.setDefense(def);
     }
 
     @Override

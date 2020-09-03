@@ -6,13 +6,14 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Ranger extends Player {
+    // New Character
     public Ranger(String heroName, String heroClass) {
-        super(heroName, heroClass, -69, 15, 20, 100, 3);
-        // xp = -5;
-        // hp = 100;
-        // attack = 20;
-        // defense = 15;
-        // level = 3;
+        super(heroName, heroClass, 1, 1000, 60, 7, 4);
+    }
+
+    // Saved Character
+    public Ranger(String heroName, String heroClass, int level, int xp, int health, int attack, int defense) {
+        super(heroName, heroClass, level, xp, health, attack, defense);
     }
 
     @Override

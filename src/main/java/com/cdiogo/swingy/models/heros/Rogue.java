@@ -7,12 +7,11 @@ import lombok.Setter;
 @Setter
 public class Rogue extends Player {
     public Rogue(String heroName, String heroClass) {
-        super(heroName, heroClass, -69, 15, 20, 100, 3);
-        // xp = -5;
-        // hp = 100;
-        // attack = 20;
-        // defense = 15;
-        // level = 3;
+        super(heroName, heroClass, 1, 1000, 40, 6, 6);
+    }
+
+    public Rogue(String heroName, String heroClass, int level, int xp, int health, int attack, int defense) {
+        super(heroName, heroClass, level, xp, health, attack, defense);
     }
 
     @Override
