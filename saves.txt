@@ -1,4 +1,4 @@
 Lone Ranger,Ranger,2,2500,65,8,5,Short Bow,Leather Armour
-James the Strong,Fighter,3,5000,80,15,10,Great Axe,Chainmail
+James the Strong,Fighter,4,5000,80,15,10,Great Axe,Chainmail
 Stregobor,Wizard,2,2450,50,8,5,Thunderbolt,Quen
 Randy the Rogue,Rogue,1,1000,40,6,6,Dagger,Leather Armour
