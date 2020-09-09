@@ -39,6 +39,7 @@ public class GameController {
     public void handleInput(String input) {
         switch (input) {
             case "c":
+            // TODO: Handle names with spaces
                 String heroName = console.createCharName();
                 String heroClass = console.createCharClass();
                 hero = PlayerFactory.newPlayer(heroName, heroClass);
@@ -52,7 +53,7 @@ public class GameController {
                     System.out.println(hero.toString());
                 }
                 String choice = console.loadChar(heroes);
-                Integer index = Integer.parseInt(choice);
+                int index = Integer.parseInt(choice);
                 hero = heroes.get(index-1);
                 System.out.println(hero.toString());
                 break;
@@ -73,7 +74,7 @@ public class GameController {
                 String[] splitLine = line.split(",");
                 try {
                     Player hero = PlayerFactory.existingPlayer(splitLine[0], splitLine[1], Integer.parseInt(splitLine[2]), Integer.parseInt(splitLine[3]),
-                        Integer.parseInt(splitLine[4]), Integer.parseInt(splitLine[5]), Integer.parseInt(splitLine[6]));
+                        Integer.parseInt(splitLine[4]), Integer.parseInt(splitLine[5]), Integer.parseInt(splitLine[6]), splitLine[7], splitLine[8], splitLine[9]);
                     if (hero != null) {
                         heroes.add(hero);
                     }

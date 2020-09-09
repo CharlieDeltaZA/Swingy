@@ -33,22 +33,22 @@ public abstract class PlayerFactory {
         return (null);
     }
 
-    public static Player existingPlayer(String heroName, String heroClass, int level, int xp, int health, int attack, int defense) {
+    public static Player existingPlayer(String heroName, String heroClass, int level, int xp, int health, int attack, int defense, String weapon, String armour, String helm) {
         switch (heroClass) {
             case "Ranger":
-                return (new Ranger(heroName, heroClass, level, xp, health, attack, defense));
+                return (new Ranger(heroName, heroClass, level, xp, health, attack, defense, weapon, armour, helm));
                 // break;
         
             case "Wizard":
-                return (new Wizard(heroName, heroClass, level, xp, health, attack, defense));
+                return (new Wizard(heroName, heroClass, level, xp, health, attack, defense, weapon, armour, helm));
                 // break;
 
             case "Fighter":
-                return (new Fighter(heroName, heroClass, level, xp, health, attack, defense));
+                return (new Fighter(heroName, heroClass, level, xp, health, attack, defense, weapon, armour, helm));
                 // break;
 
             case "Rogue":
-                return (new Rogue(heroName, heroClass, level, xp, health, attack, defense));
+                return (new Rogue(heroName, heroClass, level, xp, health, attack, defense, weapon, armour, helm));
                 // break;
 
             default:

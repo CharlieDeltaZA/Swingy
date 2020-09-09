@@ -4,6 +4,10 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import com.cdiogo.swingy.models.artifacts.Armour;
+import com.cdiogo.swingy.models.artifacts.Helm;
+import com.cdiogo.swingy.models.artifacts.Weapon;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -37,6 +41,10 @@ public abstract class Player {
     @Min(value=0, message="Health cannot be lower than 0")
     protected int hp;
 
+    protected Armour armour;
+    protected Weapon weapon;
+    protected Helm helm;
+
     public Player(String heroName, String heroClass, int lvl, int xp, int hp, int atk, int def) {
         this.setHeroName(heroName);
         this.setHeroClass(heroClass);
@@ -49,7 +57,8 @@ public abstract class Player {
 
     @Override
     public String toString() {
-        return (String.format("%s (%s), Atk: %d Def: %d XP: %d Lvl: %d HP: %d", this.heroName, this.heroClass, this.attack, this.defense, this.xp, this.level, this.hp));
+        return (String.format("%s (%s)\nLvl: %d XP: %d HP: %d Atk: %d Def: %d\nWeapon: %s\nArmour: %s\nHelm: %s", 
+            this.heroName, this.heroClass, this.level, this.xp, this.hp, this.attack, this.defense, this.weapon.toString(), this.armour.toString(), this.helm.toString()));
     }
     
 }

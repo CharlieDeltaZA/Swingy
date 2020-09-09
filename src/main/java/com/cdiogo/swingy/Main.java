@@ -9,6 +9,8 @@ public class Main {
         System.out.println("HelloWorld");
         Player ranger = new Ranger("Charlie", "Ranger");
         System.out.println(ranger.toString());
+        ranger.setXp(ranger.getXp()+69);
+        System.out.println(ranger.toString());
         System.out.println("Working Directory = " + System.getProperty("user.dir"));
         try {
             GameController controller = new GameController(args[0].toLowerCase());
