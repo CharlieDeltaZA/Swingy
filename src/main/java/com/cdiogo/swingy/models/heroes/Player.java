@@ -1,4 +1,4 @@
-package com.cdiogo.swingy.models.heros;
+package com.cdiogo.swingy.models.heroes;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;

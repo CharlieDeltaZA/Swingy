@@ -1,8 +1,8 @@
 package com.cdiogo.swingy;
 
 import com.cdiogo.swingy.controllers.GameController;
-import com.cdiogo.swingy.models.heros.Ranger;
-import com.cdiogo.swingy.models.heros.Player;
+import com.cdiogo.swingy.models.heroes.Player;
+import com.cdiogo.swingy.models.heroes.Ranger;
 
 public class Main {
     public static void main(String[] args) {

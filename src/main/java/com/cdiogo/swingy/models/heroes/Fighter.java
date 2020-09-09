@@ -1,4 +1,4 @@
-package com.cdiogo.swingy.models.heros;
+package com.cdiogo.swingy.models.heroes;
 
 import lombok.Getter;
 import lombok.Setter;
