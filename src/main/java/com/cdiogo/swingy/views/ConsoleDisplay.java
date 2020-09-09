@@ -1,8 +1,10 @@
 package com.cdiogo.swingy.views;
 
+import java.util.List;
 import java.util.Scanner;
 
 import com.cdiogo.swingy.controllers.GameController;
+import com.cdiogo.swingy.models.heroes.Player;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -73,18 +75,17 @@ public class ConsoleDisplay {
         // controller.handleInput(choice);
         switch (choice) {
             case "1":
-                
+                heroClass = "Ranger";
                 break;
             case "2":
-                
+                heroClass = "Wizard";
                 break;
             case "3":
-                
+                heroClass = "Fighter";
                 break;
             case "4":
-                
+                heroClass = "Rogue";
                 break;
-        
             default:
                 System.out.println("Unrecognized class, try again");
                 break;
@@ -92,6 +93,28 @@ public class ConsoleDisplay {
         return (heroClass);
     }
 
-	public void loadChar() {
+	public String loadChar(List<Player> heroes) {
+        Integer i = 1;
+        System.out.print("\033[H\033[2J");
+        System.out.println("*****************************");
+        System.out.println("                             ");
+        System.out.println("        Choose a Hero        ");
+        System.out.println("                             ");
+        try {
+            for (Player hero : heroes) {
+                System.out.println(String.format("   %d - %s : %s ", i, hero.getHeroName(), hero.getHeroClass()));
+                i++;
+            }
+            
+        } catch (NullPointerException e) {
+            //TODO: handle exception
+            e.printStackTrace();
+        }
+
+
+        System.out.println("                             ");
+        System.out.println("*****************************");
+        String choice = sysin.next();
+        return (choice);
 	}
 }
