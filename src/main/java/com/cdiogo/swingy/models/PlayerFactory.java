@@ -12,23 +12,16 @@ public abstract class PlayerFactory {
         switch (heroClass) {
             case "Ranger":
                 return (new Ranger(heroName, heroClass));
-                // break;
-        
             case "Wizard":
                 return (new Wizard(heroName, heroClass));
-                // break;
-
             case "Fighter":
                 return (new Fighter(heroName, heroClass));
-                // break;
-
             case "Rogue":
                 return (new Rogue(heroName, heroClass));
-                // break;
-
             default:
                 System.out.println(String.format("Hero Class '%s' not recognized", heroClass));
-                break;
+                System.exit(0);
+                // break;
         }
         return (null);
     }
@@ -37,23 +30,16 @@ public abstract class PlayerFactory {
         switch (heroClass) {
             case "Ranger":
                 return (new Ranger(heroName, heroClass, level, xp, health, attack, defense, weapon, armour, helm));
-                // break;
-        
             case "Wizard":
                 return (new Wizard(heroName, heroClass, level, xp, health, attack, defense, weapon, armour, helm));
-                // break;
-
             case "Fighter":
                 return (new Fighter(heroName, heroClass, level, xp, health, attack, defense, weapon, armour, helm));
-                // break;
-
             case "Rogue":
                 return (new Rogue(heroName, heroClass, level, xp, health, attack, defense, weapon, armour, helm));
-                // break;
-
             default:
                 System.out.println(String.format("Hero Class '%s' not recognized", heroClass));
-                break;
+                System.exit(0);
+                // break;
         }
         return (null);
     }
