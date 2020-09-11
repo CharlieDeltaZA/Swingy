@@ -46,8 +46,10 @@ public abstract class Player {
     protected Helm helm;
 
     @NotNull
+    @Min(value = 0, message = "Edge of map exceeded")
     protected int positionX;
     @NotNull
+    @Min(value = 0, message = "Edge of map exceeded")
     protected int positionY;
 
     public Player(String heroName, String heroClass, int lvl, int xp, int hp, int atk, int def) {

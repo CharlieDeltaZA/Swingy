@@ -15,23 +15,28 @@ public class Map {
     private char[][] map;
     private int mapSize;
 
-    public Map(GameController controller, List<Villain> villains) {
+    public Map(GameController controller) {
         this.controller = controller;
 
-        int level = controller.getHero().getLevel();
+    }
+    
+    public char[][] generateMap(int level) {
+        // int level = controller.getHero().getLevel();
         mapSize = (level - 1) * 5 + 10 - (level % 2);
         // System.out.println(String.format("Level: %d ; mapSize: %d", level, mapSize));
         map = new char[mapSize][mapSize];
         int heroPos = (mapSize - 1) / 2;
-
+    
         for (int i = 0; i < mapSize; i++) {
             for (int k = 0; k < mapSize; k++) {
                 map[i][k] = '.';
             }
         }
-
+    
         map[heroPos][heroPos] = 'H';
         controller.getHero().setPositionX(heroPos);
         controller.getHero().setPositionY(heroPos);
+        
+        return (map);
     }
 }

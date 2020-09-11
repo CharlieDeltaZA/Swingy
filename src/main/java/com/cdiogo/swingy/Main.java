@@ -14,7 +14,7 @@ public class Main {
         System.out.println("Working Directory = " + System.getProperty("user.dir"));
         try {
             GameController controller = new GameController(args[0].toLowerCase());
-            // controller.playGame();
+            controller.playGame();
             
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Please specificy a display to use: 'console' or 'gui'");
