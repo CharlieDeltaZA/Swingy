@@ -45,6 +45,11 @@ public abstract class Player {
     protected Weapon weapon;
     protected Helm helm;
 
+    @NotNull
+    protected int positionX;
+    @NotNull
+    protected int positionY;
+
     public Player(String heroName, String heroClass, int lvl, int xp, int hp, int atk, int def) {
         this.setHeroName(heroName);
         this.setHeroClass(heroClass);
