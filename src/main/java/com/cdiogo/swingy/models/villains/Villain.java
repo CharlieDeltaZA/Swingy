@@ -75,4 +75,8 @@ public class Villain {
     public String toString() {
         return (String.format("%s - Atk: %d Def: %d", this.name, this.attack, this.defense));
     }
+
+    public String debugCoords() {
+        return (String.format("X: %d Y: %d", this.positionX, this.positionY));
+    }
 }
