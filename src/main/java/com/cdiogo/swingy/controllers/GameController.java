@@ -25,6 +25,7 @@ public class GameController {
     // private GuiDisplay gui = new GuiDisplay(this);
     private Display display;
     private Player hero;
+    private Villain currentEnemy;
     private List<Player> heroes;
     private List<Villain> villains;
     public enum gameState { START, SELECT, CREATE, PLAY, FIGHT_FLIGHT, NO_ESCAPE, GAME_OVER, WIN, QUIT }
@@ -32,6 +33,8 @@ public class GameController {
     private boolean gameOver;
     private Map mapper;
     private char[][] map;
+    private int xBeforeMove;
+    private int yBeforeMove;
 
     public GameController(String displayType) {
         currentGameState = gameState.START;
@@ -85,12 +88,80 @@ public class GameController {
                 initMap();
                 currentGameState = gameState.PLAY;
                 break;
+
+            case PLAY:
+                // Moves
+                if (input.equals("w") || input.equals("a") || input.equals("s") || input.equals("d")) {
+                    movePlayer(input);
+                    if (checkConflict()) {
+                        currentGameState = gameState.FIGHT_FLIGHT;
+                    } else {
+                        updateMap();
+                    }
+                } 
+                // else if (input.equals("c")) {
+                    // savePlayer();
+                // } else if (input.equals("q")) {
+                    // currentGameState = gameState.QUIT;
+                // }
+                // Save / Quit
+                break;
+                
+            case FIGHT_FLIGHT:
+                // Fight / Run
+                // Equip / Ignore
+                break;
+
+            case NO_ESCAPE:
+                // Equip / Ignore
+                break;
+
+            case GAME_OVER:
+                // Quit / Restart (Start Menu)
+                break;
+
+            case WIN:
+                // Continue to next map / quit
+                break;
         
             default:
                 System.out.println("Bad Game State");
                 System.exit(0);
                 // break;
         }
+    }
+
+    private boolean checkConflict() {
+        for (Villain villain : villains) {
+            if (villain.getPositionX() == hero.getPositionX() && villain.getPositionY() == hero.getPositionY()) {
+                currentEnemy = villain;
+                return (true);
+            }
+        }
+        return (false);
+    }
+
+    private void movePlayer(String move) {
+        // x and y seemingly reversed? Weird Java behaviour.
+        xBeforeMove = hero.getPositionX();
+        yBeforeMove = hero.getPositionY();
+        
+        System.out.println(String.format("Pos before move: (%d,%d)", xBeforeMove, yBeforeMove));
+        
+        if (move.equals("w")) {
+            hero.setPositionX(xBeforeMove - 1);
+        } else if (move.equals("a")) {
+            hero.setPositionY(yBeforeMove - 1);
+        } else if (move.equals("s")) {
+            hero.setPositionX(xBeforeMove + 1);
+        } else if (move.equals("d")) {
+            hero.setPositionY(yBeforeMove + 1);
+        }
+    }
+    
+    private void updateMap() {
+        map[hero.getPositionX()][hero.getPositionY()] = 'H';
+        map[xBeforeMove][yBeforeMove] = '.';
     }
 
     private void initMap() {
@@ -108,6 +179,7 @@ public class GameController {
             System.out.print("\n");
         }
         
+        // Debug villains
         for (Villain vil : villains) {
             System.out.println(vil.toString() + " - " + vil.debugCoords());
         }
@@ -154,6 +226,18 @@ public class GameController {
                 display.loadChar(heroes);
                 break;
             case PLAY:
+                display.playGame();
+                break;
+            case FIGHT_FLIGHT:
+                display.fightOrFlight();
+                break;
+            case NO_ESCAPE:
+                break;
+            case GAME_OVER:
+                break;
+            case WIN:
+                break;
+            case QUIT:
                 break;
         
             default:
