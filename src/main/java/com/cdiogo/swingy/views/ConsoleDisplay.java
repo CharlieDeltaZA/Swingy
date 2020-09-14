@@ -26,6 +26,7 @@ public class ConsoleDisplay implements Display {
 
         while (!(choice.equals("c") || choice.equals("l"))) {
             System.out.print("\033[H\033[2J");
+            System.out.flush();
             System.out.println("************************************************");
             System.out.println("*  WELCOME TO                                  *");
             System.out.println("*      _____          _                        *");
@@ -54,6 +55,7 @@ public class ConsoleDisplay implements Display {
         String choice = "";
 
         System.out.print("\033[H\033[2J");
+        System.out.flush();
         System.out.println("***************************");
         System.out.println("*                         *");
         System.out.println("*     Enter Hero Name     *");
@@ -66,49 +68,35 @@ public class ConsoleDisplay implements Display {
     }
     
     @Override
-    public String createCharClass() {
-        String heroClass = "";
+    public void createCharClass() {
+        String choice = "";
 
-        System.out.print("\033[H\033[2J");
-        System.out.println("****************************");
-        System.out.println("*                          *");
-        System.out.println("*     Enter Hero Class     *");
-        System.out.println("*                          *");
-        System.out.println("*     1 - Ranger           *");
-        System.out.println("*     2 - Wizard           *");
-        System.out.println("*     3 - Fighter          *");
-        System.out.println("*     4 - Rogue            *");
-        System.out.println("*                          *");
-        System.out.println("****************************");
-        System.out.print("Hero Class: ");
-        String choice = sysin.next();
-        // controller.handleInput(choice);
-        switch (choice) {
-            case "1":
-                heroClass = "Ranger";
-                break;
-            case "2":
-                heroClass = "Wizard";
-                break;
-            case "3":
-                heroClass = "Fighter";
-                break;
-            case "4":
-                heroClass = "Rogue";
-                break;
-            default:
-                System.out.println("Unrecognized class, try again");
-                break;
+        while (!(choice.equals("1") || choice.equals("2") || choice.equals("3") || choice.equals("4"))) {
+            System.out.print("\033[H\033[2J");
+            System.out.flush();
+            System.out.println("****************************");
+            System.out.println("*                          *");
+            System.out.println("*     Enter Hero Class     *");
+            System.out.println("*                          *");
+            System.out.println("*     1 - Ranger           *");
+            System.out.println("*     2 - Wizard           *");
+            System.out.println("*     3 - Fighter          *");
+            System.out.println("*     4 - Rogue            *");
+            System.out.println("*                          *");
+            System.out.println("****************************");
+            System.out.print("Hero Class: ");
+            choice = sysin.next();
         }
-        return (heroClass);
+        controller.handleInput(choice);
     }
 
     @Override
-	public String loadChar(List<Player> heroes) {
-        Integer i = 1;
+	public void loadChar(List<Player> heroes) {
+        int i = 1;
         String choice;
 
         System.out.print("\033[H\033[2J");
+        System.out.flush();
         System.out.println("*****************************");
         System.out.println("                             ");
         System.out.println("        Choose a Hero        ");
@@ -127,9 +115,10 @@ public class ConsoleDisplay implements Display {
 
         System.out.println("                             ");
         System.out.println("*****************************");
+        System.out.print("Your choice: ");
         choice = sysin.next();
-
-        return (choice);
+        controller.handleInput(choice);
+        // return (choice);
 	}
 
     @Override
