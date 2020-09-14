@@ -11,7 +11,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ConsoleDisplay {
+public class ConsoleDisplay implements Display {
     private Scanner sysin;
     private GameController controller;
 
@@ -20,30 +20,39 @@ public class ConsoleDisplay {
         this.controller = controller;
     }
 
+    @Override
     public void startScreen() {
-        System.out.print("\033[H\033[2J");
-        System.out.println("************************************************");
-        System.out.println("*  WELCOME TO                                  *");
-        System.out.println("*      _____          _                        *");
-        System.out.println("*     /  ___|        (_)                       *");
-        System.out.println("*     \\ `--.__      ___ _ __   __ _ _   _      *");
-        System.out.println("*      `--. \\ \\ /\\ / / | '_ \\ / _` | | | |     *");
-        System.out.println("*     /\\__/ /\\ V  V /| | | | | (_| | |_| |     *");
-        System.out.println("*     \\____/  \\_/\\_/ |_|_| |_|\\__, |\\__, |     *");
-        System.out.println("*                              __/ | __/ |     *");
-        System.out.println("*                             |___/ |___/      *");
-        System.out.println("*                                              *");
-        System.out.println("*     c - Create a Character                   *");
-        System.out.println("*     l - Load an existing Character           *");
-        System.out.println("*                                              *");
-        System.out.println("************************************************");
-        System.out.print("Your choice: ");
-        String choice = sysin.next();
-        System.out.println("You chose... something! " + choice);
+        String choice = "";
+
+        while (!(choice.equals("c") || choice.equals("l"))) {
+            System.out.print("\033[H\033[2J");
+            System.out.println("************************************************");
+            System.out.println("*  WELCOME TO                                  *");
+            System.out.println("*      _____          _                        *");
+            System.out.println("*     /  ___|        (_)                       *");
+            System.out.println("*     \\ `--.__      ___ _ __   __ _ _   _      *");
+            System.out.println("*      `--. \\ \\ /\\ / / | '_ \\ / _` | | | |     *");
+            System.out.println("*     /\\__/ /\\ V  V /| | | | | (_| | |_| |     *");
+            System.out.println("*     \\____/  \\_/\\_/ |_|_| |_|\\__, |\\__, |     *");
+            System.out.println("*                              __/ | __/ |     *");
+            System.out.println("*                             |___/ |___/      *");
+            System.out.println("*                                              *");
+            System.out.println("*     c - Create a Character                   *");
+            System.out.println("*     l - Load an existing Character           *");
+            System.out.println("*                                              *");
+            System.out.println("************************************************");
+            System.out.print("Your choice: ");
+            choice = sysin.next();
+        }
+
+        // System.out.println("You chose... something! " + choice);
         controller.handleInput(choice);
     }
 
+    @Override
 	public String createCharName() {
+        String choice = "";
+
         System.out.print("\033[H\033[2J");
         System.out.println("***************************");
         System.out.println("*                         *");
@@ -51,11 +60,12 @@ public class ConsoleDisplay {
         System.out.println("*                         *");
         System.out.println("***************************");
         System.out.print("Hero Name: ");
-        String choice = sysin.next();
+        choice = sysin.next();
         // controller.handleInput(choice);
         return (choice);
     }
     
+    @Override
     public String createCharClass() {
         String heroClass = "";
 
@@ -93,8 +103,11 @@ public class ConsoleDisplay {
         return (heroClass);
     }
 
+    @Override
 	public String loadChar(List<Player> heroes) {
         Integer i = 1;
+        String choice;
+
         System.out.print("\033[H\033[2J");
         System.out.println("*****************************");
         System.out.println("                             ");
@@ -114,7 +127,16 @@ public class ConsoleDisplay {
 
         System.out.println("                             ");
         System.out.println("*****************************");
-        String choice = sysin.next();
+        choice = sysin.next();
+
         return (choice);
 	}
+
+    @Override
+    public void renderGame() {
+        // TODO Auto-generated method stub
+        while (!controller.isGameOver()) {
+            controller.displayState();
+        }
+    }
 }

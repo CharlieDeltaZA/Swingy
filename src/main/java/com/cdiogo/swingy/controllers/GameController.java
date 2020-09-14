@@ -16,87 +16,119 @@ import com.cdiogo.swingy.models.PlayerFactory;
 import com.cdiogo.swingy.models.heroes.Player;
 import com.cdiogo.swingy.models.villains.Villain;
 import com.cdiogo.swingy.views.ConsoleDisplay;
+import com.cdiogo.swingy.views.Display;
 
 @Getter
 @Setter
 public class GameController {
     private ConsoleDisplay console = new ConsoleDisplay(this);
+    // private GuiDisplay gui = new GuiDisplay(this);
+    private Display display;
     private Player hero;
     private List<Player> heroes;
     private List<Villain> villains;
-    public enum gameState { START, SELECT, CREATE, PLAY, FIGHT_FLIGHT, NO_ESCAPE, GAME_OVER, QUIT }
+    public enum gameState { START, SELECT, CREATE, PLAY, FIGHT_FLIGHT, NO_ESCAPE, GAME_OVER, WIN, QUIT }
     private gameState currentGameState;
     private boolean gameOver;
     private Map mapper;
     private char[][] map;
 
-    public GameController(String display) {
+    public GameController(String displayType) {
         currentGameState = gameState.START;
         gameOver = false;
         mapper = new Map(this);
 
-        switch (display) {
+        switch (displayType) {
             case "console":
                 System.out.println("Cool, lets console");
-                console.startScreen();
+                display = console;
+                // console.startScreen();
                 break;
             case "gui":
                 System.out.println("Not yet mate");
                 break;
             default:
-                System.out.println(String.format("Display type '%s' not supported, exiting...", display));
+                System.out.println(String.format("Display type '%s' not supported, exiting...", displayType));
                 System.exit(0);
         }
     }
 
     public void handleInput(String input) {
-        switch (input) {
-            case "c":
-            // TODO: Handle names with spaces
-                String heroName = console.createCharName();
-                String heroClass = console.createCharClass();
-                hero = PlayerFactory.newPlayer(heroName, heroClass);
-                System.out.println(hero.toString());
-                // mapper = new Map(this);
+        switch (currentGameState) {
+            case START:
+                switch (input) {
+                    case "c":
+                        currentGameState = gameState.CREATE;
+                        // TODO: Handle names with spaces
+                        String heroName = console.createCharName();
+                        String heroClass = console.createCharClass();
+                        hero = PlayerFactory.newPlayer(heroName, heroClass);
+                        System.out.println(hero.toString());
+                        // mapper = new Map(this);
+        
+                        System.out.println(String.format("X: %d ; Y: %d", hero.getPositionX(), hero.getPositionY()));
+                        break;
+        
+                    case "l":
+                        currentGameState = gameState.SELECT;
 
-                System.out.println(String.format("X: %d ; Y: %d", hero.getPositionX(), hero.getPositionY()));
-                break;
-
-            case "l":
-                heroes = loadFromFile();
-                System.out.println("List of heroes");
-                // for (Player hero : heroes) {
-                //     System.out.println(hero.toString());
-                // }
-                String choice = console.loadChar(heroes);
-                int index = Integer.parseInt(choice);
-                hero = heroes.get(index-1);
-                System.out.println(hero.toString());
-                // mapper = new Map(this);
-                map = mapper.generateMap(hero.getLevel());
-
-                for (int i = 0; i < map[0].length; i++) {
-                    for (int k = 0; k < map[0].length; k++) {
-                        System.out.print(map[i][k]);
-                    }
-                    System.out.print("\n");
+                        heroes = loadFromFile();
+                        System.out.println("List of heroes");
+                        // for (Player hero : heroes) {
+                        //     System.out.println(hero.toString());
+                        // }
+                        String choice = console.loadChar(heroes);
+                        int index = Integer.parseInt(choice);
+                        hero = heroes.get(index-1);
+                        System.out.println(hero.toString());
+                        // mapper = new Map(this);
+                        map = mapper.generateMap(hero.getLevel());
+        
+                        // for (int i = 0; i < map[0].length; i++) {
+                        //     for (int k = 0; k < map[0].length; k++) {
+                        //         System.out.print(map[i][k]);
+                        //     }
+                        //     System.out.print("\n");
+                        // }
+        
+                        villains = generateVillains(map[0].length, hero.getLevel());
+                        spawnVillains();
+        
+                        System.out.println(String.format("Hero X: %d ; Hero Y: %d", hero.getPositionX(), hero.getPositionY()));
+        
+                        for (int i = 0; i < map[0].length; i++) {
+                            for (int k = 0; k < map[0].length; k++) {
+                                System.out.print(map[i][k]);
+                            }
+                            System.out.print("\n");
+                        }
+        
+                        for (Villain vil : villains) {
+                            System.out.println(vil.toString() + " - " + vil.debugCoords());
+                        }
+                        break;
+        
+                    default:
+                        System.out.println("Bad Choice - START");
+                        System.exit(0);
+                        // break;
                 }
-
-                villains = generateVillains(map[0].length, hero.getLevel());
-                spawnVillains();
-
-                System.out.println(String.format("Hero X: %d ; Hero Y: %d", hero.getPositionX(), hero.getPositionY()));
-
-                for (int i = 0; i < map[0].length; i++) {
-                    for (int k = 0; k < map[0].length; k++) {
-                        System.out.print(map[i][k]);
-                    }
-                    System.out.print("\n");
-                }
-                // Villain villain = new Villain("Leshen");
-                // System.out.println(villain.toString());
+                
                 break;
+        
+            default:
+                System.out.println("Bad Game State");
+                System.exit(0);
+                // break;
+        }
+    }
 
+    public void displayState() {
+        switch (currentGameState) {
+            case value:
+                
+                break;
+        
             default:
                 break;
         }
@@ -180,6 +212,6 @@ public class GameController {
     }
 
 	public void playGame() {
-        
+        display.renderGame();
     }
 }
