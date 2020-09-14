@@ -10,4 +10,6 @@ public interface Display {
     public void createCharClass();
 	public void loadChar(List<Player> heroes);
     public void renderGame();
+    public void playGame();
+    public void fightOrFlight();
 }
