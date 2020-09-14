@@ -97,10 +97,10 @@ public class ConsoleDisplay implements Display {
 
         System.out.print("\033[H\033[2J");
         System.out.flush();
-        System.out.println("*****************************");
-        System.out.println("                             ");
-        System.out.println("        Choose a Hero        ");
-        System.out.println("                             ");
+        System.out.println("*****************************************");
+        System.out.println("                                         ");
+        System.out.println("              Choose a Hero              ");
+        System.out.println("                                         ");
         try {
             for (Player hero : heroes) {
                 System.out.println(String.format("   %d - %s : %s ", i, hero.getHeroName(), hero.getHeroClass()));
@@ -113,8 +113,8 @@ public class ConsoleDisplay implements Display {
         }
 
 
-        System.out.println("                             ");
-        System.out.println("*****************************");
+        System.out.println("                                         ");
+        System.out.println("*****************************************");
         System.out.print("Your choice: ");
         choice = sysin.next();
         controller.handleInput(choice);
@@ -127,5 +127,43 @@ public class ConsoleDisplay implements Display {
         while (!controller.isGameOver()) {
             controller.displayState();
         }
+    }
+
+    @Override
+    public void playGame() {
+        String choice = "";
+        char[][] map;
+
+        while (!(choice.equals("w") || choice.equals("a") || choice.equals("s") || choice.equals("d")
+                                    || choice.equals("q") || choice.equals("c"))) {
+
+            System.out.println("*****************************************");
+            System.out.println("*                                       *");
+            System.out.println("*     w/a/s/d - Move                    *");
+            System.out.println("*     q       - Quit                    *");
+            System.out.println("*     c       - Save                    *");
+            System.out.println("*                                       *");
+            System.out.println("*****************************************");
+
+            controller.getHero().toString();
+            map = controller.getMap();
+
+            for (int i = 0; i < map[0].length; i++) {
+                for (int k = 0; k < map[0].length; k++) {
+                    System.out.print(map[i][k]);
+                }
+                System.out.print("\n");
+            }
+
+            System.out.print("Your choice: ");
+            choice = sysin.next();
+        }
+
+        controller.handleInput(choice);
+    }
+
+    @Override
+    public void fightOrFlight() {
+        System.out.println("Infi loop!");
     }
 }
