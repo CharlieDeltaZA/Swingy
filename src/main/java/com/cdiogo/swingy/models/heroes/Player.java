@@ -64,7 +64,7 @@ public abstract class Player {
 
     @Override
     public String toString() {
-        return (String.format("%s (%s)\nLvl: %d XP: %d HP: %d Atk: %d Def: %d\nWeapon: %s\nArmour: %s\nHelm: %s", 
+        return (String.format("%s (%s)\nLvl: %d XP: %d HP: %d\nAtk: %d Def: %d\nWeapon: %s\nArmour: %s\nHelm: %s", 
             this.heroName, this.heroClass, this.level, this.xp, this.hp, this.attack, this.defense, this.weapon.toString(), this.armour.toString(), this.helm.toString()));
     }
     
