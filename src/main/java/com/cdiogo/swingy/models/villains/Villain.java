@@ -19,6 +19,9 @@ public class Villain {
     protected int defense;
 
     @NotNull
+    protected int hp;
+
+    @NotNull
     protected int xp;
 
     @NotNull
@@ -43,21 +46,25 @@ public class Villain {
                 atkMin = 6;
                 defMin = 5;
                 this.xp = 250;
+                this.hp = random.nextInt(45) + 20;
                 break;
             case "Bandit":
                 atkMin = 4;
                 defMin = 5;
                 this.xp = 150;
+                this.hp = random.nextInt(45) + 15;
                 break;
             case "Leshen":
                 atkMin = 8;
                 defMin = 7;
                 this.xp = 350;
+                this.hp = random.nextInt(50) + 30;
                 break;
             case "Vampire":
                 atkMin = 5;
                 defMin = 6;
                 this.xp = 200;
+                this.hp = random.nextInt(45) + 25;
                 break;
             default:
                 System.out.println(String.format("Unrecognized Villain type '%s'", name));
