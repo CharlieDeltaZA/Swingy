@@ -30,6 +30,8 @@ public class Villain {
     @NotNull
     protected int positionY;
 
+    protected boolean defeated;
+
     // protected artifact
 
     // Villains : Wraith ; Bandit ; Leshen ; Vampire
@@ -37,6 +39,7 @@ public class Villain {
         int atkMin = 0;
         int defMin = 0;
         this.name = name;
+        this.defeated = false;
 
         Random random = new Random();
 
@@ -80,7 +83,7 @@ public class Villain {
 
     @Override
     public String toString() {
-        return (String.format("%s - Atk: %d Def: %d", this.name, this.attack, this.defense));
+        return (String.format("%s - HP: %d Atk: %d Def: %d", this.name, this.hp, this.attack, this.defense));
     }
 
     public String debugCoords() {
