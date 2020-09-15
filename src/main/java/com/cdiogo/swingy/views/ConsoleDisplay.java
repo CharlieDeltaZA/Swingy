@@ -170,7 +170,26 @@ public class ConsoleDisplay implements Display {
 
     @Override
     public void fightOrFlight() {
-        System.out.println("Infi loop!");
+        String choice = "";
+
+        while (!(choice.equals("f") || choice.equals("r") || choice.equals("y") || choice.equals("n"))) {
+            System.out.print("\033[H\033[2J");
+            System.out.println("****************************************");
+            System.out.println("                                        ");
+            System.out.println("    You have encountered a villain!     ");
+            System.out.println("                                        ");
+            // System.out.println("                                        ");
+            System.out.println(String.format("    %s    ", controller.getCurrentEnemy().toString()));
+            System.out.println("                                        ");
+            System.out.println("    f - Fight the enemy                 ");
+            System.out.println("    r - Attempt to flea                 ");
+            System.out.println("                                        ");
+            System.out.println("****************************************");
+            System.out.print("Your choice: ");
+            choice = sysin.next();
+
+        }
+        controller.handleInput(choice);
     }
 
     @Override

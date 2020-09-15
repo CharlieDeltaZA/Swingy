@@ -114,17 +114,33 @@ public class GameController {
                     if (checkWon()) {
                         currentGameState = gameState.WIN;
                     }
-                } 
-                // else if (input.equals("c")) {
-                    // savePlayer();
-                // } else if (input.equals("q")) {
-                    // currentGameState = gameState.QUIT;
-                // }
+                } else if (input.equals("c")) {
+                    savePlayer();
+                } else if (input.equals("q")) {
+                    currentGameState = gameState.QUIT;
+                }
                 // Save / Quit
                 break;
                 
             case FIGHT_FLIGHT:
                 // Fight / Run
+                if (input.equals("f")) {
+                    // FIGHT
+                    // fightEnemy();
+                    System.out.println("FIGHT!");
+                    System.out.println(villains.size());
+                    currentEnemy.setDefeated(true);
+                    villains.remove(currentEnemy);
+                    System.out.println(villains.size());
+                    currentGameState = gameState.PLAY;
+                } else if (input.equals("r")) {
+                    // FLEA
+                    tryFlea();
+                } else if (input.equals("y")) {
+                    // EQUIP ARTIFACT IF ANY
+                } else if (input.equals("n")) {
+                    // IGNORE ARTIFACT
+                }
                 // Equip / Ignore
                 break;
 
@@ -139,21 +155,44 @@ public class GameController {
             case WIN:
                 // Continue to next map (via start screen?) / quit
                 if (input.equals("r")) {
-                    if (!heroes.contains(hero)) {
-                        heroes.add(hero);
-                    }
+                    // Save updated array to saves.txt (overwrite existing one if any)
+                    savePlayer();
                     currentGameState = gameState.START;
                 } 
-                // else if (input.equals("q")) {
-                //     currentGameState = gameState.QUIT;
-                // }
+                else if (input.equals("q")) {
+                    currentGameState = gameState.QUIT;
+                }
                 break;
-        
+                
             default:
                 System.out.println("Bad Game State");
                 System.exit(0);
                 // break;
+            }
         }
+        
+        private void tryFlea() {
+            // 65% chance to escape
+            Random random = new Random();
+            int chance = random.nextInt(101);
+            if (chance <= 35) {
+                // No escape
+                System.out.println("FIGHT!");
+                currentGameState = gameState.PLAY;
+            } else {
+                // escape
+                hero.setPositionX(xBeforeMove);
+                hero.setPositionY(yBeforeMove);
+                currentGameState = gameState.PLAY;
+            }
+        }
+
+        private void savePlayer() {
+        // Add current hero to heroes from file
+        if (!heroes.contains(hero)) {
+            heroes.add(hero);
+        }
+        // TODO: write current heroes array to file (overwrite)
     }
 
     private boolean checkWon() {
@@ -288,6 +327,7 @@ public class GameController {
             if (validateSpawn(x,y)) {
                 villain.setPositionX(x);
                 villain.setPositionY(y);
+                // TODO: Remove below line
                 map[x][y] = 'V';
             } else {
                 x = random.nextInt(map[0].length);
@@ -296,6 +336,7 @@ public class GameController {
                 if (validateSpawn(x,y)) {
                     villain.setPositionX(x);
                     villain.setPositionY(y);
+                    // TODO: Remove below line
                     map[x][y] = 'V';
                 }
             }
@@ -322,6 +363,7 @@ public class GameController {
     }
 
     private List<Player> loadFromFile() {
+        // TODO: Handle no file/empty file appropriately across all places where <heroes> is used
         String filename = System.getProperty("user.dir") + "/saves.txt";
         List<Player> heroes = new ArrayList<>();
         String line;
