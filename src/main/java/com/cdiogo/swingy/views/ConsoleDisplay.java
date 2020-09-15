@@ -104,12 +104,18 @@ public class ConsoleDisplay implements Display {
         System.out.println("                                         ");
         System.out.println("              Choose a Hero              ");
         System.out.println("                                         ");
+        // TODO: Handle empty hero array
         try {
-            for (Player hero : heroes) {
-                System.out.println(String.format("   %d - %s : %s ", i, hero.getHeroName(), hero.getHeroClass()));
-                i++;
+            if (heroes != null) {
+                for (Player hero : heroes) {
+                    System.out.println(String.format("   %d - %s : %s ", i, hero.getHeroName(), hero.getHeroClass()));
+                    i++;
+                }
+            } else {
+                System.out.println("   No Saved Heroes found!                ");
+                System.out.println("   Try creating one instead              ");
             }
-            
+
         } catch (NullPointerException e) {
             //TODO: handle exception
             e.printStackTrace();
