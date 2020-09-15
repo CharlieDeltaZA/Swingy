@@ -28,7 +28,11 @@ public class GameController {
     private Villain currentEnemy;
     private List<Player> heroes;
     private List<Villain> villains;
-    public enum gameState { START, SELECT, CREATE, PLAY, FIGHT_FLIGHT, NO_ESCAPE, GAME_OVER, WIN, QUIT }
+
+    public enum gameState {
+        START, SELECT, CREATE, PLAY, FIGHT_FLIGHT, NO_ESCAPE, GAME_OVER, WIN, QUIT
+    }
+
     private gameState currentGameState;
     private boolean gameOver;
     private Map mapper;
@@ -64,7 +68,7 @@ public class GameController {
                     case "c":
                         currentGameState = gameState.CREATE;
                         break;
-        
+
                     case "l":
                         currentGameState = gameState.SELECT;
                         break;
@@ -72,7 +76,7 @@ public class GameController {
                     case "q":
                         currentGameState = gameState.QUIT;
                         break;
-                            
+
                     default:
                         System.out.println("Bad Choice - START");
                         System.exit(0);
@@ -88,14 +92,14 @@ public class GameController {
                 createHero(input);
                 currentGameState = gameState.PLAY;
                 break;
-                        
+
             case SELECT:
                 if (input.equals("b")) {
                     currentGameState = gameState.START;
                     break;
                 } else {
                     int index = Integer.parseInt(input);
-                    hero = heroes.get(index-1);
+                    hero = heroes.get(index - 1);
                     System.out.println(hero.toString());
                     initMap();
                     currentGameState = gameState.PLAY;
@@ -121,7 +125,7 @@ public class GameController {
                 }
                 // Save / Quit
                 break;
-                
+
             case FIGHT_FLIGHT:
                 // Fight / Run
                 if (input.equals("f")) {
@@ -158,45 +162,51 @@ public class GameController {
                     // Save updated array to saves.txt (overwrite existing one if any)
                     savePlayer();
                     currentGameState = gameState.START;
-                } 
-                else if (input.equals("q")) {
+                } else if (input.equals("q")) {
                     currentGameState = gameState.QUIT;
                 }
                 break;
-                
+
             default:
                 System.out.println("Bad Game State");
                 System.exit(0);
                 // break;
-            }
         }
-        
-        private void tryFlea() {
-            // 65% chance to escape
-            Random random = new Random();
-            int chance = random.nextInt(101);
-            if (chance <= 35) {
-                // No escape
-                System.out.println("FIGHT!");
-                currentGameState = gameState.PLAY;
-            } else {
-                // escape
-                hero.setPositionX(xBeforeMove);
-                hero.setPositionY(yBeforeMove);
-                currentGameState = gameState.PLAY;
-            }
-        }
+    }
 
-        private void savePlayer() {
+    private void tryFlea() {
+        // 65% chance to escape
+        Random random = new Random();
+        int chance = random.nextInt(101);
+        if (chance <= 35) {
+            // No escape
+            System.out.println("FIGHT!");
+            currentGameState = gameState.PLAY;
+        } else {
+            // escape
+            hero.setPositionX(xBeforeMove);
+            hero.setPositionY(yBeforeMove);
+            currentGameState = gameState.PLAY;
+        }
+    }
+
+    private void savePlayer() {
         // Add current hero to heroes from file
-        if (!heroes.contains(hero)) {
+        if (heroes != null) {
+            if (!heroes.contains(hero)) {
+                heroes.add(hero);
+            }
+
+        } else {
+            heroes = new ArrayList<Player>();
             heroes.add(hero);
         }
         // TODO: write current heroes array to file (overwrite)
     }
 
     private boolean checkWon() {
-        if (hero.getPositionX() == 0 || hero.getPositionY() == 0 || hero.getPositionX() == map[0].length - 1|| hero.getPositionY() == map[0].length - 1) {
+        if (hero.getPositionX() == 0 || hero.getPositionY() == 0 || hero.getPositionX() == map[0].length - 1
+                || hero.getPositionY() == map[0].length - 1) {
             return (true);
         }
         return (false);
@@ -216,9 +226,9 @@ public class GameController {
         // x and y seemingly reversed? Weird Java behaviour.
         xBeforeMove = hero.getPositionX();
         yBeforeMove = hero.getPositionY();
-        
+
         System.out.println(String.format("Pos before move: (%d,%d)", xBeforeMove, yBeforeMove));
-        
+
         if (move.equals("w")) {
             hero.setPositionX(xBeforeMove - 1);
         } else if (move.equals("a")) {
@@ -229,7 +239,7 @@ public class GameController {
             hero.setPositionY(yBeforeMove + 1);
         }
     }
-    
+
     private void updateMap() {
         map[hero.getPositionX()][hero.getPositionY()] = 'H';
         map[xBeforeMove][yBeforeMove] = '.';
@@ -239,9 +249,9 @@ public class GameController {
         map = mapper.generateMap(hero.getLevel());
         villains = generateVillains(map[0].length, hero.getLevel());
         spawnVillains();
-        
+
         System.out.println(String.format("Hero X: %d ; Hero Y: %d", hero.getPositionX(), hero.getPositionY()));
-        
+
         // Debug map after villains spawned
         for (int i = 0; i < map[0].length; i++) {
             for (int k = 0; k < map[0].length; k++) {
@@ -249,7 +259,7 @@ public class GameController {
             }
             System.out.print("\n");
         }
-        
+
         // Debug villains
         for (Villain vil : villains) {
             System.out.println(vil.toString() + " - " + vil.debugCoords());
@@ -259,7 +269,7 @@ public class GameController {
     private void createHero(String input) {
         String heroClass = "";
         String heroName;
-        
+
         switch (input) {
             case "1":
                 heroClass = "Ranger";
@@ -311,7 +321,7 @@ public class GameController {
                 break;
             case QUIT:
                 break;
-        
+
             default:
                 break;
         }
@@ -324,7 +334,7 @@ public class GameController {
             int x = random.nextInt(map[0].length);
             int y = random.nextInt(map[0].length);
 
-            if (validateSpawn(x,y)) {
+            if (validateSpawn(x, y)) {
                 villain.setPositionX(x);
                 villain.setPositionY(y);
                 // TODO: Remove below line
@@ -333,7 +343,7 @@ public class GameController {
                 x = random.nextInt(map[0].length);
                 y = random.nextInt(map[0].length);
 
-                if (validateSpawn(x,y)) {
+                if (validateSpawn(x, y)) {
                     villain.setPositionX(x);
                     villain.setPositionY(y);
                     // TODO: Remove below line
@@ -363,7 +373,8 @@ public class GameController {
     }
 
     private List<Player> loadFromFile() {
-        // TODO: Handle no file/empty file appropriately across all places where <heroes> is used
+        // TODO: Handle no file/empty file appropriately across all places where
+        // <heroes> is used
         String filename = System.getProperty("user.dir") + "/saves.txt";
         List<Player> heroes = new ArrayList<>();
         String line;
@@ -373,31 +384,34 @@ public class GameController {
             while ((line = reader.readLine()) != null) {
                 String[] splitLine = line.split(",");
                 try {
-                    Player hero = PlayerFactory.existingPlayer(splitLine[0], splitLine[1], Integer.parseInt(splitLine[2]), Integer.parseInt(splitLine[3]),
-                        Integer.parseInt(splitLine[4]), Integer.parseInt(splitLine[5]), Integer.parseInt(splitLine[6]), splitLine[7], splitLine[8], splitLine[9]);
+                    Player hero = PlayerFactory.existingPlayer(splitLine[0], splitLine[1],
+                            Integer.parseInt(splitLine[2]), Integer.parseInt(splitLine[3]),
+                            Integer.parseInt(splitLine[4]), Integer.parseInt(splitLine[5]),
+                            Integer.parseInt(splitLine[6]), splitLine[7], splitLine[8], splitLine[9]);
                     if (hero != null) {
                         heroes.add(hero);
                     }
-                    
+
                 } catch (NumberFormatException e) {
-                    //TODO: handle exception
+                    // TODO: handle exception
                     e.printStackTrace();
                 }
             }
             reader.close();
             System.out.println(heroes);
-            return heroes;
+            return (heroes);
         } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
+            // TODO remove the stackTrace
+            System.out.println(String.format("File '%s' not found, continuing", filename));
             e.printStackTrace();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        return null;
+        return (null);
     }
 
-	public void playGame() {
+    public void playGame() {
         display.renderGame();
     }
 }
