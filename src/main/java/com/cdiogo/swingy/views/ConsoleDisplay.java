@@ -24,7 +24,7 @@ public class ConsoleDisplay implements Display {
     public void startScreen() {
         String choice = "";
 
-        while (!(choice.equals("c") || choice.equals("l"))) {
+        while (!(choice.equals("c") || choice.equals("l") || choice.equals("q"))) {
             System.out.print("\033[H\033[2J");
             System.out.flush();
             System.out.println("************************************************");
@@ -40,6 +40,7 @@ public class ConsoleDisplay implements Display {
             System.out.println("*                                              *");
             System.out.println("*     c - Create a Character                   *");
             System.out.println("*     l - Load an existing Character           *");
+            System.out.println("*     q - Quit Game                            *");
             System.out.println("*                                              *");
             System.out.println("************************************************");
             System.out.print("Your choice: ");
@@ -71,7 +72,7 @@ public class ConsoleDisplay implements Display {
     public void createCharClass() {
         String choice = "";
 
-        while (!(choice.equals("1") || choice.equals("2") || choice.equals("3") || choice.equals("4"))) {
+        while (!(choice.equals("1") || choice.equals("2") || choice.equals("3") || choice.equals("4") || choice.equals("b"))) {
             System.out.print("\033[H\033[2J");
             System.out.flush();
             System.out.println("****************************");
@@ -82,6 +83,8 @@ public class ConsoleDisplay implements Display {
             System.out.println("*     2 - Wizard           *");
             System.out.println("*     3 - Fighter          *");
             System.out.println("*     4 - Rogue            *");
+            System.out.println("*                          *");
+            System.out.println("*     b - Back to Menu     *");
             System.out.println("*                          *");
             System.out.println("****************************");
             System.out.print("Hero Class: ");
@@ -114,6 +117,8 @@ public class ConsoleDisplay implements Display {
 
 
         System.out.println("                                         ");
+        System.out.println("   b - Back to Menu                      ");
+        System.out.println("                                         ");
         System.out.println("*****************************************");
         System.out.print("Your choice: ");
         choice = sysin.next();
@@ -137,11 +142,12 @@ public class ConsoleDisplay implements Display {
         while (!(choice.equals("w") || choice.equals("a") || choice.equals("s") || choice.equals("d")
                                     || choice.equals("q") || choice.equals("c"))) {
 
+            System.out.print("\033[H\033[2J");
             System.out.println("*****************************************");
             System.out.println("*                                       *");
-            System.out.println("*     w/a/s/d - Move                    *");
-            System.out.println("*     q       - Quit                    *");
-            System.out.println("*     c       - Save                    *");
+            System.out.println("*     w/a/s/d - Move Hero               *");
+            System.out.println("*     q       - Quit Game               *");
+            System.out.println("*     c       - Save Hero               *");
             System.out.println("*                                       *");
             System.out.println("*****************************************");
 
@@ -165,5 +171,26 @@ public class ConsoleDisplay implements Display {
     @Override
     public void fightOrFlight() {
         System.out.println("Infi loop!");
+    }
+
+    @Override
+    public void roundWon() {
+        String choice = "";
+
+        while (!(choice.equals("r") || choice.equals("q"))) {
+            System.out.print("\033[H\033[2J");
+            System.out.println("***********************************");
+            System.out.println("*                                 *");
+            System.out.println("*      You have Successfully      *");
+            System.out.println("*      completed this level       *");
+            System.out.println("*                                 *");
+            System.out.println("*      r - Return to Main Menu    *");
+            System.out.println("*      q - Quit Game              *");
+            System.out.println("*                                 *");
+            System.out.println("***********************************");
+            System.out.print("Your choice: ");
+            choice = sysin.next();
+        }
+        controller.handleInput(choice);
     }
 }

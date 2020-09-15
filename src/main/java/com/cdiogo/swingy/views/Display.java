@@ -12,4 +12,5 @@ public interface Display {
     public void renderGame();
     public void playGame();
     public void fightOrFlight();
+	public void roundWon();
 }

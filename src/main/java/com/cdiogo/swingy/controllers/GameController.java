@@ -68,6 +68,10 @@ public class GameController {
                     case "l":
                         currentGameState = gameState.SELECT;
                         break;
+
+                    case "q":
+                        currentGameState = gameState.QUIT;
+                        break;
                             
                     default:
                         System.out.println("Bad Choice - START");
@@ -77,16 +81,25 @@ public class GameController {
                 break; // case START
 
             case CREATE:
+                if (input.equals("b")) {
+                    currentGameState = gameState.START;
+                    break;
+                }
                 createHero(input);
                 currentGameState = gameState.PLAY;
                 break;
                         
             case SELECT:
-                int index = Integer.parseInt(input);
-                hero = heroes.get(index-1);
-                System.out.println(hero.toString());
-                initMap();
-                currentGameState = gameState.PLAY;
+                if (input.equals("b")) {
+                    currentGameState = gameState.START;
+                    break;
+                } else {
+                    int index = Integer.parseInt(input);
+                    hero = heroes.get(index-1);
+                    System.out.println(hero.toString());
+                    initMap();
+                    currentGameState = gameState.PLAY;
+                }
                 break;
 
             case PLAY:
@@ -97,6 +110,9 @@ public class GameController {
                         currentGameState = gameState.FIGHT_FLIGHT;
                     } else {
                         updateMap();
+                    }
+                    if (checkWon()) {
+                        currentGameState = gameState.WIN;
                     }
                 } 
                 // else if (input.equals("c")) {
@@ -121,7 +137,16 @@ public class GameController {
                 break;
 
             case WIN:
-                // Continue to next map / quit
+                // Continue to next map (via start screen?) / quit
+                if (input.equals("r")) {
+                    if (!heroes.contains(hero)) {
+                        heroes.add(hero);
+                    }
+                    currentGameState = gameState.START;
+                } 
+                // else if (input.equals("q")) {
+                //     currentGameState = gameState.QUIT;
+                // }
                 break;
         
             default:
@@ -129,6 +154,13 @@ public class GameController {
                 System.exit(0);
                 // break;
         }
+    }
+
+    private boolean checkWon() {
+        if (hero.getPositionX() == 0 || hero.getPositionY() == 0 || hero.getPositionX() == map[0].length - 1|| hero.getPositionY() == map[0].length - 1) {
+            return (true);
+        }
+        return (false);
     }
 
     private boolean checkConflict() {
@@ -236,6 +268,7 @@ public class GameController {
             case GAME_OVER:
                 break;
             case WIN:
+                display.roundWon();
                 break;
             case QUIT:
                 break;
