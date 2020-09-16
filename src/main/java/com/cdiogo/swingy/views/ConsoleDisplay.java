@@ -113,7 +113,7 @@ public class ConsoleDisplay implements Display {
         System.out.println("                                         ");
         // TODO: Handle bad index (GameController) / non number / 'b' input
         try {
-            if (heroes != null) {
+            if (heroes.size() != 0) {
                 for (Player hero : heroes) {
                     System.out.println(String.format("   %d - %s : %s ", i, hero.getHeroName(), hero.getHeroClass()));
                     i++;
@@ -212,15 +212,20 @@ public class ConsoleDisplay implements Display {
 
         while (!(choice.equals("r") || choice.equals("q"))) {
             System.out.print("\033[H\033[2J");
-            System.out.println("+---------------------------------+");
-            System.out.println("|                                 |");
-            System.out.println("|      You have Successfully      |");
-            System.out.println("|      completed this level       |");
-            System.out.println("|                                 |");
-            System.out.println("|      r - Return to Main Menu    |");
-            System.out.println("|      q - Quit Game              |");
-            System.out.println("|                                 |");
-            System.out.println("+---------------------------------+");
+            System.out.println("+-----------------------------------+");
+            System.out.println("|                                   |");
+            System.out.println("|      You have Successfully        |");
+            System.out.println("|      completed this level         |");
+            System.out.println("|                                   |");
+            System.out.println("|      Continue your adventure      |");
+            System.out.println("|      from the main menu, or       |");
+            System.out.println("|      try a new character, by      |");
+            System.out.println("|      pressing 'l' to choose.      |");
+            System.out.println("|                                   |");
+            System.out.println("|      r - Return to Main Menu      |");
+            System.out.println("|      q - Quit Game                |");
+            System.out.println("|                                   |");
+            System.out.println("+-----------------------------------+");
             System.out.print("Your choice: ");
             choice = sysin.next();
         }
