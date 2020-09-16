@@ -6,6 +6,8 @@ import lombok.Getter;
 import java.util.Random;
 import javax.validation.constraints.NotNull;
 
+import com.cdiogo.swingy.models.artifacts.Artifact;
+
 @Getter
 @Setter
 public class Villain {
@@ -32,7 +34,7 @@ public class Villain {
 
     protected boolean defeated;
 
-    // protected artifact
+    protected Artifact artifact;
 
     // Villains : Wraith ; Bandit ; Leshen ; Vampire
     public Villain(String name, int level) {

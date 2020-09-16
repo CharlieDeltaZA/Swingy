@@ -10,6 +10,10 @@ import java.util.Random;
 import com.cdiogo.swingy.File;
 import com.cdiogo.swingy.models.Map;
 import com.cdiogo.swingy.models.PlayerFactory;
+import com.cdiogo.swingy.models.artifacts.Armour;
+import com.cdiogo.swingy.models.artifacts.Artifact;
+import com.cdiogo.swingy.models.artifacts.Helm;
+import com.cdiogo.swingy.models.artifacts.Weapon;
 import com.cdiogo.swingy.models.heroes.Player;
 import com.cdiogo.swingy.models.villains.Villain;
 import com.cdiogo.swingy.views.ConsoleDisplay;
@@ -98,7 +102,7 @@ public class GameController {
                 } else {
                     int index = Integer.parseInt(input);
                     hero = heroes.get(index - 1);
-                    System.out.println(hero.toString());
+                    // System.out.println(hero.toString());
                     initMap();
                     currentGameState = gameState.PLAY;
                 }
@@ -363,15 +367,51 @@ public class GameController {
         return (map[x][y] == '*');
     }
 
+    private Artifact generateArtifact() {
+        String[] artifactTypes = { "Weapon", "Armour", "Helm" };
+        String[] weaponTypes = { "Great Axe", "Short Bow", "Magic Missle", "Dagger", "Silver Sword" };
+        String[] armourTypes = { "Leather Armour", "Chainmail", "Quen", "Knights Armour", "Shield" };
+        String[] helmTypes = { "Balaclava", "Crown", "Wizards Hat" };
+        Random random = new Random();
+        
+        String artifactType = artifactTypes[random.nextInt(3)];
+        switch (artifactType) {
+            case "Weapon":
+                return (new Weapon(weaponTypes[random.nextInt(5)]));
+                // break;
+            case "Armour":
+                return (new Armour(armourTypes[random.nextInt(5)]));
+                // break;
+            case "Helm":
+                return (new Helm(helmTypes[random.nextInt(3)]));
+                // break;
+            
+            default:
+                System.out.println("Something went wrong generating artifact, returning null");
+                return (null);
+                // break;
+        }
+
+        // return (null);
+    }
+    
     private List<Villain> generateVillains(int mapSize, int level) {
         List<Villain> villains = new ArrayList<>();
+        Villain villain;
         int villainCount = mapSize + 1;
         int i = 0;
         String[] villainTypes = { "Wraith", "Bandit", "Leshen", "Vampire" };
         Random random = new Random(mapSize * level);
-
+        
         while (i < villainCount) {
-            villains.add(new Villain(villainTypes[random.nextInt(4)], level));
+            int artifactChance = random.nextInt(101);
+            // 10% chance a villain has an artifact
+            villain = new Villain(villainTypes[random.nextInt(4)], level);
+            if (artifactChance >= 90) {
+                villain.setArtifact(generateArtifact());
+                System.out.println(String.format("Artifact Generated :: %s", villain.getArtifact().toString()));
+            }
+            villains.add(villain);
             i++;
         }
 
