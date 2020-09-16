@@ -10,10 +10,10 @@ public class Helm extends Artifact {
             case "Balaclava":
                 value = 8;
                 break;
-            case "Chainmail":
+            case "Crown":
                 value = 10;
                 break;
-            case "Quen":
+            case "Wizards Hat":
                 value = 5;
                 break;
             case "None":
