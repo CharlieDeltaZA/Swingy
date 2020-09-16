@@ -44,7 +44,9 @@ public class ConsoleDisplay implements Display {
             System.out.println("|                                              |");
             System.out.println("+----------------------------------------------+");
             System.out.print("Your choice: ");
-            choice = sysin.next();
+            if (sysin.hasNext()) {
+                choice = sysin.next();
+            }
         }
 
         // System.out.println("You chose... something! " + choice);
@@ -55,15 +57,20 @@ public class ConsoleDisplay implements Display {
 	public String createCharName() {
         String choice = "";
 
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-        System.out.println("+-------------------------+");
-        System.out.println("|                         |");
-        System.out.println("|     Enter Hero Name     |");
-        System.out.println("|                         |");
-        System.out.println("+-------------------------+");
-        System.out.print("Hero Name: ");
-        choice = sysin.next();
+        while (choice.equals("")) {
+            System.out.print("\033[H\033[2J");
+            System.out.flush();
+            System.out.println("+-------------------------+");
+            System.out.println("|                         |");
+            System.out.println("|     Enter Hero Name     |");
+            System.out.println("|                         |");
+            System.out.println("+-------------------------+");
+            System.out.print("Hero Name: ");
+            if (sysin.hasNext()) {
+                // choice = sysin.next();
+                choice = sysin.nextLine();
+            }
+        }
         // controller.handleInput(choice);
         return (choice);
     }
@@ -104,7 +111,7 @@ public class ConsoleDisplay implements Display {
         System.out.println("                                         ");
         System.out.println("              Choose a Hero              ");
         System.out.println("                                         ");
-        // TODO: Handle empty hero array
+        // TODO: Handle bad index (GameController) / non number / 'b' input
         try {
             if (heroes != null) {
                 for (Player hero : heroes) {
@@ -157,7 +164,8 @@ public class ConsoleDisplay implements Display {
             System.out.println("|                                       |");
             System.out.println("+---------------------------------------+");
 
-            controller.getHero().toString();
+            System.out.println(controller.getHero().toString());
+            System.out.println("");
             map = controller.getMap();
 
             for (int i = 0; i < map[0].length; i++) {
