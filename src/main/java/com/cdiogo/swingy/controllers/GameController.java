@@ -3,14 +3,11 @@ package com.cdiogo.swingy.controllers;
 import lombok.Setter;
 import lombok.Getter;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import com.cdiogo.swingy.File;
 import com.cdiogo.swingy.models.Map;
 import com.cdiogo.swingy.models.PlayerFactory;
 import com.cdiogo.swingy.models.heroes.Player;
@@ -28,6 +25,7 @@ public class GameController {
     private Villain currentEnemy;
     private List<Player> heroes;
     private List<Villain> villains;
+    private File file = new File();
 
     public enum gameState {
         START, SELECT, CREATE, PLAY, FIGHT_FLIGHT, NO_ESCAPE, GAME_OVER, WIN, QUIT
@@ -44,7 +42,7 @@ public class GameController {
         currentGameState = gameState.START;
         gameOver = false;
         mapper = new Map(this);
-        heroes = loadFromFile();
+        heroes = file.loadFromFile();
 
         switch (displayType) {
             case "console":
@@ -202,6 +200,14 @@ public class GameController {
             heroes.add(hero);
         }
         // TODO: write current heroes array to file (overwrite)
+        for (Player hero : heroes) {
+            String heroString = String.format("%s,%s,%d,%d,%d,%d,%d,%s,%s,%s\n",
+                hero.getHeroName(), hero.getHeroClass(), hero.getLevel(), hero.getXp(),
+                hero.getHp(), hero.getAttack(), hero.getDefense(), hero.getWeapon().getArtifactName(),
+                hero.getArmour().getArtifactName(), hero.getHelm().getArtifactName());
+            file.addLine(heroString);
+        }
+        file.saveFile();
     }
 
     private boolean checkWon() {
@@ -354,7 +360,7 @@ public class GameController {
     }
 
     private boolean validateSpawn(int x, int y) {
-        return (map[x][y] == '.');
+        return (map[x][y] == '*');
     }
 
     private List<Villain> generateVillains(int mapSize, int level) {
@@ -370,45 +376,6 @@ public class GameController {
         }
 
         return (villains);
-    }
-
-    private List<Player> loadFromFile() {
-        // TODO: Handle no file/empty file appropriately across all places where
-        // <heroes> is used
-        String filename = System.getProperty("user.dir") + "/saves.txt";
-        List<Player> heroes = new ArrayList<>();
-        String line;
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(filename));
-            // String line = reader.readLine();
-            while ((line = reader.readLine()) != null) {
-                String[] splitLine = line.split(",");
-                try {
-                    Player hero = PlayerFactory.existingPlayer(splitLine[0], splitLine[1],
-                            Integer.parseInt(splitLine[2]), Integer.parseInt(splitLine[3]),
-                            Integer.parseInt(splitLine[4]), Integer.parseInt(splitLine[5]),
-                            Integer.parseInt(splitLine[6]), splitLine[7], splitLine[8], splitLine[9]);
-                    if (hero != null) {
-                        heroes.add(hero);
-                    }
-
-                } catch (NumberFormatException e) {
-                    // TODO: handle exception
-                    e.printStackTrace();
-                }
-            }
-            reader.close();
-            System.out.println(heroes);
-            return (heroes);
-        } catch (FileNotFoundException e) {
-            // TODO remove the stackTrace
-            System.out.println(String.format("File '%s' not found, continuing", filename));
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return (null);
     }
 
     public void playGame() {
