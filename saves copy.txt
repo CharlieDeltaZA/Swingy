@@ -1,0 +1,4 @@
+Lone Ranger,Ranger,2,2500,65,8,5,Short Bow,Leather Armour,None
+James the Strong,Fighter,4,5000,80,15,10,Great Axe,Chainmail,None
+Stregobor,Wizard,2,2450,50,8,5,Magic Missle,Quen,None
+Randy the Rogue,Rogue,1,1000,40,6,6,Dagger,Leather Armour,Balaclava
