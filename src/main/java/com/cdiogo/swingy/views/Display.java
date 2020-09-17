@@ -14,4 +14,7 @@ public interface Display {
     public void fightOrFlight();
 	public void roundWon();
 	public void quitGame();
+	public void noEscape();
+	public void gameOver();
+	public void afterAction();
 }

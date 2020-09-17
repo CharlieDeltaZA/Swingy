@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import com.cdiogo.swingy.controllers.GameController;
 import com.cdiogo.swingy.models.heroes.Player;
+import com.cdiogo.swingy.models.villains.Villain;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -158,6 +159,13 @@ public class ConsoleDisplay implements Display {
             System.out.print("\033[H\033[2J");
             System.out.println("+---------------------------------------+");
             System.out.println("|                                       |");
+
+            if (controller.isHeroEscaped()) {
+                controller.setHeroEscaped(false);
+                System.out.println("|     You have successfully escaped     |");
+                System.out.println("|                                       |");
+            }
+
             System.out.println("|     w/a/s/d - Move Hero               |");
             System.out.println("|     q       - Quit Game               |");
             System.out.println("|     c       - Save Hero               |");
@@ -246,6 +254,94 @@ public class ConsoleDisplay implements Display {
             System.out.println("|      y - Save and Quit           |");
             System.out.println("|      n - Return to previous      |");
             System.out.println("|          screen                  |");
+            System.out.println("|                                  |");
+            System.out.println("+----------------------------------+");
+            System.out.print("Your choice: ");
+            choice = sysin.next();
+        }
+        controller.handleInput(choice);
+    }
+
+    @Override
+    public void noEscape() {
+        String choice = "";
+
+        while (!(choice.equals("c"))) {
+            System.out.print("\033[H\033[2J");
+            System.out.println("+----------------------------------+");
+            System.out.println("|                                  |");
+            System.out.println("|     Your attempt to flea has     |");
+            System.out.println("|     has failed! Prepare for      |");
+            System.out.println("|             BATTLE!              |");
+            System.out.println("|                                  |");
+            System.out.println("|           c - Continue           |");
+            System.out.println("|                                  |");
+            System.out.println("+----------------------------------+");
+            System.out.print("Your choice: ");
+            choice = sysin.next();
+        }
+        controller.handleInput(choice);
+
+    }
+
+    @Override
+    public void afterAction() {
+        String choice = "";
+        Villain enemy = controller.getCurrentEnemy();
+
+        if (enemy.getArtifact() != null) {
+            while (!(choice.equals("y") || choice.equals("n"))) {
+                System.out.print("\033[H\033[2J");
+                System.out.println("+----------------------------------+");
+                System.out.println("                                    ");
+                System.out.println(String.format("    You have defeated the %s        ", enemy.getName()));
+                System.out.println(String.format("            You gain %d XP       ", enemy.getXp()));
+                System.out.println("                                    ");
+                System.out.println("  This villain dropped an artifact! ");
+                System.out.println(String.format("       %s", enemy.getArtifact().toString()));
+                System.out.println("                                    ");
+                System.out.println("     Would you like to equip it?    ");
+                System.out.println("     y - Equip   //   n - Ignore    ");
+                System.out.println("                                    ");
+                System.out.println("+----------------------------------+");
+                System.out.print("Your choice: ");
+                choice = sysin.next();
+            }
+        } else {
+            while (!(choice.equals("c"))) {
+                System.out.print("\033[H\033[2J");
+                System.out.println("+----------------------------------+");
+                System.out.println("                                    ");
+                System.out.println(String.format("    You have defeated the %s        ", enemy.getName()));
+                System.out.println(String.format("            You gain %d XP       ", enemy.getXp()));
+                System.out.println("            c - Continue            ");
+                System.out.println("                                    ");
+                System.out.println("+----------------------------------+");
+                System.out.print("Your choice: ");
+                choice = sysin.next();
+            }
+        }
+        controller.handleInput(choice);
+    }
+
+    @Override
+    public void gameOver() {
+        String choice = "";
+
+        while (!(choice.equals("r") || choice.equals("q"))) {
+            System.out.print("\033[H\033[2J");
+            System.out.println("+----------------------------------+");
+            System.out.println("|                                  |");
+            System.out.println("|            GAME  OVER            |");
+            System.out.println("|                                  |");
+            System.out.println("|      Your hero has died :(       |");
+            System.out.println("|                                  |");
+            System.out.println("|      You may return to the       |");
+            System.out.println("|      menu and play again, or     |");
+            System.out.println("|      you may quit.               |");
+            System.out.println("|                                  |");
+            System.out.println("|      r - Return to menu          |");
+            System.out.println("|      q - Save and Quit           |");
             System.out.println("|                                  |");
             System.out.println("+----------------------------------+");
             System.out.print("Your choice: ");
