@@ -231,4 +231,26 @@ public class ConsoleDisplay implements Display {
         }
         controller.handleInput(choice);
     }
+
+    @Override
+    public void quitGame() {
+        String choice = "";
+
+        while (!(choice.equals("y") || choice.equals("n"))) {
+            System.out.print("\033[H\033[2J");
+            System.out.println("+----------------------------------+");
+            System.out.println("|                                  |");
+            System.out.println("|      Are you sure you would      |");
+            System.out.println("|      like to quit the game?      |");
+            System.out.println("|                                  |");
+            System.out.println("|      y - Save and Quit           |");
+            System.out.println("|      n - Return to previous      |");
+            System.out.println("|          screen                  |");
+            System.out.println("|                                  |");
+            System.out.println("+----------------------------------+");
+            System.out.print("Your choice: ");
+            choice = sysin.next();
+        }
+        controller.handleInput(choice);
+    }
 }

@@ -29,13 +29,14 @@ public class GameController {
     private Villain currentEnemy;
     private List<Player> heroes;
     private List<Villain> villains;
-    private File file = new File();
+    private File file;
 
     public enum gameState {
         START, SELECT, CREATE, PLAY, FIGHT_FLIGHT, NO_ESCAPE, GAME_OVER, WIN, QUIT
     }
 
     private gameState currentGameState;
+    private gameState stateBeforeQuit;
     private boolean gameOver;
     private Map mapper;
     private char[][] map;
@@ -44,8 +45,10 @@ public class GameController {
 
     public GameController(String displayType) {
         currentGameState = gameState.START;
+        stateBeforeQuit = gameState.START;
         gameOver = false;
         mapper = new Map(this);
+        file = new File();
         heroes = file.loadFromFile();
 
         switch (displayType) {
@@ -76,6 +79,7 @@ public class GameController {
                         break;
 
                     case "q":
+                        stateBeforeQuit = gameState.START;
                         currentGameState = gameState.QUIT;
                         break;
 
@@ -122,7 +126,9 @@ public class GameController {
                     }
                 } else if (input.equals("c")) {
                     savePlayer();
+                    System.out.println("Player saved!");
                 } else if (input.equals("q")) {
+                    stateBeforeQuit = gameState.PLAY;
                     currentGameState = gameState.QUIT;
                 }
                 // Save / Quit
@@ -165,11 +171,24 @@ public class GameController {
                     savePlayer();
                     currentGameState = gameState.START;
                 } else if (input.equals("q")) {
-                    currentGameState = gameState.QUIT;
+                        stateBeforeQuit = gameState.WIN;
+                        currentGameState = gameState.QUIT;
+                }
+                break;
+            
+            case QUIT:
+                if (input.equals("y")) {
+                    if (hero != null) {
+                        savePlayer();
+                    }
+                    gameOver = true;
+                } else if (input.equals("n")) {
+                    currentGameState = stateBeforeQuit;
                 }
                 break;
 
             default:
+                gameOver = true;
                 System.out.println("Bad Game State");
                 System.exit(0);
                 // break;
@@ -330,9 +349,11 @@ public class GameController {
                 display.roundWon();
                 break;
             case QUIT:
+                display.quitGame();
                 break;
 
             default:
+                gameOver = true;
                 break;
         }
     }

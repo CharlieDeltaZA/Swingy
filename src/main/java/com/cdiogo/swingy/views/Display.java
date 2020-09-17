@@ -13,4 +13,5 @@ public interface Display {
     public void playGame();
     public void fightOrFlight();
 	public void roundWon();
+	public void quitGame();
 }
