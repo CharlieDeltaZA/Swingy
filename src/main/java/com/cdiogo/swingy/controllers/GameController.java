@@ -230,6 +230,7 @@ public class GameController {
         currentEnemy.setDefeated(true);
         villains.remove(currentEnemy);
         System.out.println(villains.size());
+        updateMap();
         currentGameState = gameState.AFTER_ACTION;
     }
 
