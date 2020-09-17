@@ -295,7 +295,7 @@ public class ConsoleDisplay implements Display {
                 System.out.println("+----------------------------------+");
                 System.out.println("                                    ");
                 System.out.println(String.format("    You have defeated the %s        ", enemy.getName()));
-                System.out.println(String.format("            You gain %d XP       ", enemy.getXp()));
+                System.out.println(String.format("           You gain %d XP       ", enemy.getXp()));
                 System.out.println("                                    ");
                 System.out.println("  This villain dropped an artifact! ");
                 System.out.println(String.format("       %s", enemy.getArtifact().toString()));
@@ -313,7 +313,7 @@ public class ConsoleDisplay implements Display {
                 System.out.println("+----------------------------------+");
                 System.out.println("                                    ");
                 System.out.println(String.format("    You have defeated the %s        ", enemy.getName()));
-                System.out.println(String.format("            You gain %d XP       ", enemy.getXp()));
+                System.out.println(String.format("           You gain %d XP       ", enemy.getXp()));
                 System.out.println("            c - Continue            ");
                 System.out.println("                                    ");
                 System.out.println("+----------------------------------+");
