@@ -32,12 +32,13 @@ public class GameController {
     private File file;
 
     public enum gameState {
-        START, SELECT, CREATE, PLAY, FIGHT_FLIGHT, NO_ESCAPE, GAME_OVER, WIN, QUIT
+        START, SELECT, CREATE, PLAY, FIGHT_FLIGHT, NO_ESCAPE, GAME_OVER, WIN, QUIT, AFTER_ACTION
     }
 
     private gameState currentGameState;
     private gameState stateBeforeQuit;
     private boolean gameOver;
+    private boolean heroEscaped;
     private Map mapper;
     private char[][] map;
     private int xBeforeMove;
@@ -47,6 +48,7 @@ public class GameController {
         currentGameState = gameState.START;
         stateBeforeQuit = gameState.START;
         gameOver = false;
+        heroEscaped = false;
         mapper = new Map(this);
         file = new File();
         heroes = file.loadFromFile();
@@ -138,30 +140,41 @@ public class GameController {
                 // Fight / Run
                 if (input.equals("f")) {
                     // FIGHT
-                    // fightEnemy();
-                    System.out.println("FIGHT!");
-                    System.out.println(villains.size());
-                    currentEnemy.setDefeated(true);
-                    villains.remove(currentEnemy);
-                    System.out.println(villains.size());
-                    currentGameState = gameState.PLAY;
+                    fightEnemy();
                 } else if (input.equals("r")) {
                     // FLEA
                     tryFlea();
-                } else if (input.equals("y")) {
-                    // EQUIP ARTIFACT IF ANY
-                } else if (input.equals("n")) {
-                    // IGNORE ARTIFACT
-                }
-                // Equip / Ignore
+                } 
                 break;
 
             case NO_ESCAPE:
-                // Equip / Ignore
+                // Forced Fight
+                if (input.equals("c")) {
+                    fightEnemy();
+                }
+                break;
+
+            case AFTER_ACTION:
+                // If hero wins, display xp gained, artifacts to equip
+                if (input.equals("c") || input.equals("n")) {
+                    levelUp();
+                    currentGameState = gameState.PLAY;
+                } else if (input.equals("y")) {
+                    levelUp();
+                    equipArtifact();
+                    currentGameState = gameState.PLAY;
+                }
                 break;
 
             case GAME_OVER:
                 // Quit / Restart (Start Menu)
+                if (input.equals("r")) {
+                    savePlayer();
+                    currentGameState = gameState.START;
+                } else if (input.equals("q")) {
+                    stateBeforeQuit = gameState.GAME_OVER;
+                    currentGameState = gameState.QUIT;
+                }
                 break;
 
             case WIN:
@@ -171,8 +184,8 @@ public class GameController {
                     savePlayer();
                     currentGameState = gameState.START;
                 } else if (input.equals("q")) {
-                        stateBeforeQuit = gameState.WIN;
-                        currentGameState = gameState.QUIT;
+                    stateBeforeQuit = gameState.WIN;
+                    currentGameState = gameState.QUIT;
                 }
                 break;
             
@@ -195,18 +208,43 @@ public class GameController {
         }
     }
 
+    private void levelUp() {
+
+    }
+
+    private void equipArtifact() {
+        Artifact enemyArt = currentEnemy.getArtifact();
+
+        if (enemyArt instanceof Weapon) {
+            hero.setWeapon(new Weapon(enemyArt.getArtifactName()));
+        } else if (enemyArt instanceof Armour) {
+            hero.setArmour(new Armour(enemyArt.getArtifactName()));
+        } else if (enemyArt instanceof Helm) {
+            hero.setHelm(new Helm(enemyArt.getArtifactName()));
+        }
+    }
+
+    private void fightEnemy() {
+        System.out.println("FIGHT!");
+        System.out.println(villains.size());
+        currentEnemy.setDefeated(true);
+        villains.remove(currentEnemy);
+        System.out.println(villains.size());
+        currentGameState = gameState.AFTER_ACTION;
+    }
+
     private void tryFlea() {
-        // 65% chance to escape
+        // 50% chance to escape
         Random random = new Random();
         int chance = random.nextInt(101);
-        if (chance <= 35) {
+        if (chance <= 50) {
             // No escape
-            System.out.println("FIGHT!");
-            currentGameState = gameState.PLAY;
+            currentGameState = gameState.NO_ESCAPE;
         } else {
             // escape
             hero.setPositionX(xBeforeMove);
             hero.setPositionY(yBeforeMove);
+            heroEscaped = true;
             currentGameState = gameState.PLAY;
         }
     }
@@ -342,8 +380,13 @@ public class GameController {
                 display.fightOrFlight();
                 break;
             case NO_ESCAPE:
+                display.noEscape();
+                break;
+            case AFTER_ACTION:
+                display.afterAction();
                 break;
             case GAME_OVER:
+                display.gameOver();
                 break;
             case WIN:
                 display.roundWon();
@@ -431,6 +474,8 @@ public class GameController {
             if (artifactChance >= 90) {
                 villain.setArtifact(generateArtifact());
                 System.out.println(String.format("Artifact Generated :: %s", villain.getArtifact().toString()));
+            } else {
+                villain.setArtifact(null);
             }
             villains.add(villain);
             i++;
