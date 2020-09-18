@@ -188,6 +188,7 @@ public class GameController {
                 if (input.equals("r")) {
                     // Save updated array to saves.txt (overwrite existing one if any)
                     savePlayer();
+                    heroWon = false;
                     currentGameState = gameState.START;
                 } else if (input.equals("q")) {
                     stateBeforeQuit = gameState.WIN;
@@ -258,31 +259,38 @@ public class GameController {
                     enemyEffectiveHp += currentEnemy.getArtifact().getArtifactValue();
                     break;
             }
-            System.out.println(currentEnemy.getArtifact().toString());
+            // System.out.println(currentEnemy.getArtifact().toString());
         }
-        // while (hero.getHp() > 0 && currentEnemy.getHp() > 0) {
-        //     if (heroInit >= enemyInit) {
-        //         // Hero Attacks first
+        while (heroEffectiveHp > 0 && enemyEffectiveHp > 0) {
+            if (heroInit >= enemyInit) {
+                // Hero Attacks first
+                enemyEffectiveHp -= heroEffectiveAtk;
+                heroEffectiveHp -= enemyEffectiveAtk;
                 
-        //     } else {
-        //         // Enemy Attacks first
-        //     }
-        // }
-        currentEnemy.setDefeated(true);
-        villains.remove(currentEnemy);
-        System.out.println(villains.size());
+            } else {
+                // Enemy Attacks first
+                heroEffectiveHp -= enemyEffectiveAtk;
+                enemyEffectiveHp -= heroEffectiveAtk;
+            }
+        }
+        // currentEnemy.setDefeated(true);
+        // villains.remove(currentEnemy);
         System.out.println("");
         System.out.println(String.format("HeroInit: %d ; EnemyInit: %d", heroInit, enemyInit));
         System.out.println(String.format("effHP: %d ; effAtk: %d ; effDef: %d ;", heroEffectiveHp, heroEffectiveAtk, heroEffectiveDef));
         System.out.println(String.format("ENEMYeffHP: %d ; ENEMYeffAtk: %d ; ENEMYeffDef: %d ;", enemyEffectiveHp, enemyEffectiveAtk, enemyEffectiveDef));
-        updateMap();
-        currentGameState = gameState.AFTER_ACTION;
-        // if (hero.getHp() <= 0) {
-        //     currentGameState = gameState.GAME_OVER;
-        // } else if (currentEnemy.getHp() <= 0) {
-        //     updateMap();
-        //     currentGameState = gameState.AFTER_ACTION;
-        // }
+        // updateMap();
+        // currentGameState = gameState.AFTER_ACTION;
+        if (heroEffectiveHp <= 0) {
+            currentGameState = gameState.GAME_OVER;
+        } else if (enemyEffectiveHp <= 0) {
+            currentEnemy.setDefeated(true);
+            villains.remove(currentEnemy);
+            System.out.println(villains.size());
+            
+            updateMap();
+            currentGameState = gameState.AFTER_ACTION;
+        }
     }
 
     private void tryFlea() {
