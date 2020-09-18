@@ -165,7 +165,7 @@ public class GameController {
                     levelUp();
                     equipArtifact();
                 }
-                if (heroWon) {
+                if (heroWon == true) {
                     currentGameState = gameState.WIN;
                 } else {
                     currentGameState = gameState.PLAY;
@@ -233,11 +233,56 @@ public class GameController {
     private void fightEnemy() {
         System.out.println("FIGHT!");
         System.out.println(villains.size());
+        Random rand = new Random();
+
+        int heroInit = rand.nextInt(21);
+        int enemyInit = rand.nextInt(21);
+
+        int heroEffectiveAtk = hero.getAttack() + hero.getWeapon().getArtifactValue();
+        int heroEffectiveDef = hero.getDefense() + hero.getArmour().getArtifactValue();
+        int heroEffectiveHp = hero.getHp() + hero.getHelm().getArtifactValue();
+
+        int enemyEffectiveAtk = currentEnemy.getAttack();
+        int enemyEffectiveDef = currentEnemy.getDefense();
+        int enemyEffectiveHp = currentEnemy.getHp();
+
+        if (currentEnemy.getArtifact() != null) {
+            switch (currentEnemy.getArtifact().getArtifactTrait()) {
+                case "Atk":
+                    enemyEffectiveAtk += currentEnemy.getArtifact().getArtifactValue();
+                    break;
+                case "Def":
+                    enemyEffectiveDef += currentEnemy.getArtifact().getArtifactValue();
+                    break;
+                case "HP":
+                    enemyEffectiveHp += currentEnemy.getArtifact().getArtifactValue();
+                    break;
+            }
+            System.out.println(currentEnemy.getArtifact().toString());
+        }
+        // while (hero.getHp() > 0 && currentEnemy.getHp() > 0) {
+        //     if (heroInit >= enemyInit) {
+        //         // Hero Attacks first
+                
+        //     } else {
+        //         // Enemy Attacks first
+        //     }
+        // }
         currentEnemy.setDefeated(true);
         villains.remove(currentEnemy);
         System.out.println(villains.size());
+        System.out.println("");
+        System.out.println(String.format("HeroInit: %d ; EnemyInit: %d", heroInit, enemyInit));
+        System.out.println(String.format("effHP: %d ; effAtk: %d ; effDef: %d ;", heroEffectiveHp, heroEffectiveAtk, heroEffectiveDef));
+        System.out.println(String.format("ENEMYeffHP: %d ; ENEMYeffAtk: %d ; ENEMYeffDef: %d ;", enemyEffectiveHp, enemyEffectiveAtk, enemyEffectiveDef));
         updateMap();
         currentGameState = gameState.AFTER_ACTION;
+        // if (hero.getHp() <= 0) {
+        //     currentGameState = gameState.GAME_OVER;
+        // } else if (currentEnemy.getHp() <= 0) {
+        //     updateMap();
+        //     currentGameState = gameState.AFTER_ACTION;
+        // }
     }
 
     private void tryFlea() {
@@ -448,12 +493,15 @@ public class GameController {
         String artifactType = artifactTypes[random.nextInt(3)];
         switch (artifactType) {
             case "Weapon":
+                // System.out.println("Generating weapon");
                 return (new Weapon(weaponTypes[random.nextInt(5)]));
                 // break;
             case "Armour":
+                // System.out.println("Generating armour");
                 return (new Armour(armourTypes[random.nextInt(5)]));
                 // break;
             case "Helm":
+                // System.out.println("Generating helm");
                 return (new Helm(helmTypes[random.nextInt(3)]));
                 // break;
             
@@ -472,10 +520,11 @@ public class GameController {
         int villainCount = mapSize + 1;
         int i = 0;
         String[] villainTypes = { "Wraith", "Bandit", "Leshen", "Vampire" };
-        Random random = new Random(mapSize * (level + 1));
+        Random random = new Random(mapSize * level);
         
         while (i < villainCount) {
             int artifactChance = random.nextInt(101);
+            // System.out.println("Artifact Chance: " + artifactChance);
             // 10% chance a villain has an artifact
             villain = new Villain(villainTypes[random.nextInt(4)], level);
             if (artifactChance >= 90) {
