@@ -12,7 +12,7 @@ import lombok.Setter;
 public class Ranger extends Player {
     // New Character
     public Ranger(String heroName, String heroClass) {
-        super(heroName, heroClass, 1, 1000, 60, 7, 4);
+        super(heroName, heroClass, 0, 0, 60, 7, 4);
         this.weapon = new Weapon("Short Bow");
         this.armour = new Armour("Leather Armour");
         this.helm = new Helm("None");

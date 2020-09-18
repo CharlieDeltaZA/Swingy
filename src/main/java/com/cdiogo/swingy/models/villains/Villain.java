@@ -76,8 +76,8 @@ public class Villain {
                 System.exit(0);
         }
 
-        this.attack = atkMin + random.nextInt(level);
-        this.defense = defMin + random.nextInt(level);
+        this.attack = atkMin + random.nextInt(level + 1);
+        this.defense = defMin + random.nextInt(level + 1);
 
         // System.out.println(String.format("atkMin: %d defMin: %d", atkMin, defMin));
 
