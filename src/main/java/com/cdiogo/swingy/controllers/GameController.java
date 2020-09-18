@@ -39,6 +39,7 @@ public class GameController {
     private gameState stateBeforeQuit;
     private boolean gameOver;
     private boolean heroEscaped;
+    private boolean heroWon;
     private Map mapper;
     private char[][] map;
     private int xBeforeMove;
@@ -49,6 +50,7 @@ public class GameController {
         stateBeforeQuit = gameState.START;
         gameOver = false;
         heroEscaped = false;
+        heroWon = false;
         mapper = new Map(this);
         file = new File();
         heroes = file.loadFromFile();
@@ -124,7 +126,8 @@ public class GameController {
                         updateMap();
                     }
                     if (checkWon()) {
-                        currentGameState = gameState.WIN;
+                        heroWon = true;
+                        // currentGameState = gameState.WIN;
                     }
                 } else if (input.equals("c")) {
                     savePlayer();
@@ -158,10 +161,13 @@ public class GameController {
                 // If hero wins, display xp gained, artifacts to equip
                 if (input.equals("c") || input.equals("n")) {
                     levelUp();
-                    currentGameState = gameState.PLAY;
                 } else if (input.equals("y")) {
                     levelUp();
                     equipArtifact();
+                }
+                if (heroWon) {
+                    currentGameState = gameState.WIN;
+                } else {
                     currentGameState = gameState.PLAY;
                 }
                 break;
@@ -466,7 +472,7 @@ public class GameController {
         int villainCount = mapSize + 1;
         int i = 0;
         String[] villainTypes = { "Wraith", "Bandit", "Leshen", "Vampire" };
-        Random random = new Random(mapSize * level);
+        Random random = new Random(mapSize * (level + 1));
         
         while (i < villainCount) {
             int artifactChance = random.nextInt(101);
