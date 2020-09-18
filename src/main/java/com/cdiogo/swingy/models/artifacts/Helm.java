@@ -17,6 +17,7 @@ public class Helm extends Artifact {
                 value = 5;
                 break;
             case "None":
+                value = 0;
                 break;
             default:
                 System.out.println(String.format("Unrecognized Helm: '%s'", name));

@@ -22,6 +22,9 @@ public class Weapon extends Artifact {
             case "Silver Sword":
                 value = 8;
                 break;
+            case "None":
+                value = 0;
+                break;
             default:
                 System.out.println(String.format("Unrecognized Weapon: '%s'", name));
                 System.exit(0);

@@ -22,6 +22,9 @@ public class Armour extends Artifact {
             case "Shield":
                 value = 2;
                 break;
+            case "None":
+                value = 0;
+                break;
             default:
                 System.out.println(String.format("Unrecognized Armour: '%s'", name));
                 System.exit(0);
