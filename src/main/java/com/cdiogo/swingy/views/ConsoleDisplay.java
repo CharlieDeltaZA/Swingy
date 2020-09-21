@@ -179,6 +179,7 @@ public class ConsoleDisplay implements Display {
             for (int i = 0; i < map[0].length; i++) {
                 for (int k = 0; k < map[0].length; k++) {
                     System.out.print(map[i][k]);
+                    System.out.print(" ");
                 }
                 System.out.print("\n");
             }
