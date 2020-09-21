@@ -18,12 +18,13 @@ import com.cdiogo.swingy.models.heroes.Player;
 import com.cdiogo.swingy.models.villains.Villain;
 import com.cdiogo.swingy.views.ConsoleDisplay;
 import com.cdiogo.swingy.views.Display;
+import com.cdiogo.swingy.views.GuiDisplay;
 
 @Getter
 @Setter
 public class GameController {
     private ConsoleDisplay console = new ConsoleDisplay(this);
-    // private GuiDisplay gui = new GuiDisplay(this);
+    private GuiDisplay gui = new GuiDisplay(this);
     private Display display;
     private Player hero;
     private Villain currentEnemy;
@@ -64,7 +65,7 @@ public class GameController {
                 break;
             case "gui":
                 System.out.println("Not yet mate");
-                // display = gui;
+                display = gui;
                 break;
             default:
                 System.out.println(String.format("Display type '%s' not supported, exiting...", displayType));
