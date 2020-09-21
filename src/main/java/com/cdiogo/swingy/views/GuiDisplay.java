@@ -2,6 +2,7 @@ package com.cdiogo.swingy.views;
 
 import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -13,12 +14,15 @@ public class GuiDisplay implements Display {
     GameController controller;
     JFrame frame = new JFrame();
     JPanel panel = new JPanel();
+    JButton test = new JButton("Test");
 
     public GuiDisplay(GameController controller) {
         this.controller = controller;
         frame.setTitle("Swingy - cdiogo");
+        frame.setSize(640, 640);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+        panel.add(test);
     }
 
     @Override
