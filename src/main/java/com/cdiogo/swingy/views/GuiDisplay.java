@@ -5,6 +5,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 import com.cdiogo.swingy.controllers.GameController;
 import com.cdiogo.swingy.models.heroes.Player;
@@ -15,6 +16,7 @@ public class GuiDisplay implements Display {
     JFrame frame = new JFrame();
     JPanel panel = new JPanel();
     JButton test = new JButton("Test");
+    JTextArea output = new JTextArea("Hello\n\n\n\n poes");
 
     public GuiDisplay(GameController controller) {
         this.controller = controller;
@@ -29,6 +31,7 @@ public class GuiDisplay implements Display {
     public void startScreen() {
         // TODO Auto-generated method stub
         panel.removeAll();
+        frame.setVisible(true);
 
     }
 
