@@ -166,6 +166,12 @@ public class ConsoleDisplay implements Display {
                 System.out.println("|                                       |");
             }
 
+            if (controller.isLevelUp()) {
+                controller.setLevelUp(false);
+                System.out.println("|         You have levelled up!         |");
+                System.out.println("|                                       |");
+            }
+
             System.out.println("|     w/a/s/d - Move Hero               |");
             System.out.println("|     q       - Quit Game               |");
             System.out.println("|     c       - Save Hero               |");
