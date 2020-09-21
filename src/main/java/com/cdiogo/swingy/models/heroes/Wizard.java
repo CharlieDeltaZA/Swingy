@@ -13,7 +13,7 @@ public class Wizard extends Player {
 
     // New Character
     public Wizard(String heroName, String heroClass) {
-        super(heroName, heroClass, 1, 1000, 50, 8, 5);
+        super(heroName, heroClass, 1, 0, 50, 8, 5);
         this.weapon = new Weapon("Magic Missle");
         this.armour = new Armour("Quen");
         this.helm = new Helm("None");

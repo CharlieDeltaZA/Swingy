@@ -13,7 +13,7 @@ public class Fighter extends Player {
     
     // New Character
     public Fighter(String heroName, String heroClass) {
-        super(heroName, heroClass, 1, 1000, 70, 10, 7);
+        super(heroName, heroClass, 1, 0, 50, 10, 7);
         this.weapon = new Weapon("Great Axe");
         this.armour = new Armour("Chainmail");
         this.helm = new Helm("None");

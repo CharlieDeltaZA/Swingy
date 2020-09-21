@@ -13,7 +13,7 @@ public class Rogue extends Player {
 
     // New Character
     public Rogue(String heroName, String heroClass) {
-        super(heroName, heroClass, 1, 1000, 40, 6, 6);
+        super(heroName, heroClass, 1, 0, 40, 6, 6);
         this.weapon = new Weapon("Dagger");
         this.armour = new Armour("Leather Armour");
         this.helm = new Helm("Balaclava");
