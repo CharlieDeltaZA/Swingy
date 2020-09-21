@@ -39,6 +39,7 @@ public class GameController {
     private gameState stateBeforeQuit;
     private boolean gameOver;
     private boolean heroEscaped;
+    private boolean levelUp;
     private boolean heroWon;
     private Map mapper;
     private char[][] map;
@@ -51,6 +52,7 @@ public class GameController {
         gameOver = false;
         heroEscaped = false;
         heroWon = false;
+        levelUp = false;
         mapper = new Map(this);
         file = new File();
         heroes = file.loadFromFile();
@@ -219,7 +221,18 @@ public class GameController {
     }
 
     private void levelUp() {
+        int newXp = hero.getXp() + currentEnemy.getXp();
+        int levelThresh = (hero.getLevel() * 1000 + (int)Math.pow((double)hero.getLevel() - 1, 2.0) * 450);
+        System.out.println("newXp: "+newXp);
+        System.out.println("LevelThresh: "+levelThresh);
 
+        if (newXp >= levelThresh) {
+            levelUp = true;
+            hero.setLevel(hero.getLevel() + 1);
+            hero.setXp(newXp);
+        } else {
+            hero.setXp(newXp);
+        }
     }
 
     private void equipArtifact() {
@@ -277,14 +290,14 @@ public class GameController {
             if (heroInit >= enemyInit) {
                 // Hero Attacks first
                 System.out.println("Hero Attacks first");
-                enemyEffectiveHp -= (heroEffectiveAtk / enemyEffectiveDef);
-                heroEffectiveHp -= (enemyEffectiveAtk / heroEffectiveDef);
+                enemyEffectiveHp -= heroEffectiveAtk;
+                heroEffectiveHp -= enemyEffectiveAtk;
                 
             } else {
                 // Enemy Attacks first
                 System.out.println("Enemy Attacks first");
-                heroEffectiveHp -= (enemyEffectiveAtk / heroEffectiveDef);
-                enemyEffectiveHp -= (heroEffectiveAtk / enemyEffectiveDef);
+                heroEffectiveHp -= enemyEffectiveAtk;
+                enemyEffectiveHp -= heroEffectiveAtk;
             }
         }
         // currentEnemy.setDefeated(true);
@@ -545,9 +558,9 @@ public class GameController {
         while (i < villainCount) {
             int artifactChance = random.nextInt(101);
             // System.out.println("Artifact Chance: " + artifactChance);
-            // 10% chance a villain has an artifact
+            // 20% chance a villain has an artifact
             villain = new Villain(villainTypes[random.nextInt(4)], level);
-            if (artifactChance >= 90) {
+            if (artifactChance >= 80) {
                 villain.setArtifact(generateArtifact());
                 System.out.println(String.format("Artifact Generated :: %s", villain.getArtifact().toString()));
             } else {
