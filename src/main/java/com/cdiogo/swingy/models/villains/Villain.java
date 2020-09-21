@@ -48,36 +48,36 @@ public class Villain {
         // Might need to tweak these values later
         switch (name) {
             case "Wraith":
-                atkMin = 6;
-                defMin = 5;
-                this.xp = 250;
-                this.hp = random.nextInt(45) + 20;
+                atkMin = 9;
+                defMin = 7;
+                this.xp = (250 * level);
+                this.hp = random.nextInt(45) + 25;
                 break;
             case "Bandit":
-                atkMin = 4;
-                defMin = 5;
-                this.xp = 150;
-                this.hp = random.nextInt(45) + 15;
+                atkMin = 8;
+                defMin = 6;
+                this.xp = (150 * level);
+                this.hp = random.nextInt(45) + 25;
                 break;
             case "Leshen":
-                atkMin = 8;
-                defMin = 7;
-                this.xp = 350;
-                this.hp = random.nextInt(50) + 30;
+                atkMin = 12;
+                defMin = 10;
+                this.xp = (350 * level);
+                this.hp = random.nextInt(50) + 40;
                 break;
             case "Vampire":
-                atkMin = 5;
-                defMin = 6;
-                this.xp = 200;
-                this.hp = random.nextInt(45) + 25;
+                atkMin = 8;
+                defMin = 9;
+                this.xp = (200 * level);
+                this.hp = random.nextInt(45) + 30;
                 break;
             default:
                 System.out.println(String.format("Unrecognized Villain type '%s'", name));
                 System.exit(0);
         }
 
-        this.attack = atkMin + random.nextInt(level + 1);
-        this.defense = defMin + random.nextInt(level + 1);
+        this.attack = atkMin + random.nextInt((level + 5));
+        this.defense = defMin + random.nextInt((level + 5));
 
         // System.out.println(String.format("atkMin: %d defMin: %d", atkMin, defMin));
 
