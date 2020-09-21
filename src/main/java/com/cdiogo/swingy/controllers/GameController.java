@@ -126,8 +126,11 @@ public class GameController {
                         updateMap();
                     }
                     if (checkWon()) {
-                        heroWon = true;
-                        // currentGameState = gameState.WIN;
+                        if (currentGameState == gameState.FIGHT_FLIGHT) {
+                            heroWon = true;
+                        } else {
+                            currentGameState = gameState.WIN;
+                        }
                     }
                 } else if (input.equals("c")) {
                     savePlayer();
@@ -261,16 +264,27 @@ public class GameController {
             }
             // System.out.println(currentEnemy.getArtifact().toString());
         }
+
+        System.out.println("");
+        System.out.println(String.format("HeroInit: %d ; EnemyInit: %d", heroInit, enemyInit));
+        System.out.println(String.format("effHP: %d ; effAtk: %d ; effDef: %d ;", heroEffectiveHp, heroEffectiveAtk, heroEffectiveDef));
+        System.out.println(String.format("ENEMYeffHP: %d ; ENEMYeffAtk: %d ; ENEMYeffDef: %d ;", enemyEffectiveHp, enemyEffectiveAtk, enemyEffectiveDef));
+
         while (heroEffectiveHp > 0 && enemyEffectiveHp > 0) {
+            System.out.println("---------------------");
+            System.out.println("Hero: " + heroEffectiveHp);
+            System.out.println("Enemy: " + enemyEffectiveHp);
             if (heroInit >= enemyInit) {
                 // Hero Attacks first
-                enemyEffectiveHp -= heroEffectiveAtk;
-                heroEffectiveHp -= enemyEffectiveAtk;
+                System.out.println("Hero Attacks first");
+                enemyEffectiveHp -= (heroEffectiveAtk / enemyEffectiveDef);
+                heroEffectiveHp -= (enemyEffectiveAtk / heroEffectiveDef);
                 
             } else {
                 // Enemy Attacks first
-                heroEffectiveHp -= enemyEffectiveAtk;
-                enemyEffectiveHp -= heroEffectiveAtk;
+                System.out.println("Enemy Attacks first");
+                heroEffectiveHp -= (enemyEffectiveAtk / heroEffectiveDef);
+                enemyEffectiveHp -= (heroEffectiveAtk / enemyEffectiveDef);
             }
         }
         // currentEnemy.setDefeated(true);
@@ -315,12 +329,10 @@ public class GameController {
             if (!heroes.contains(hero)) {
                 heroes.add(hero);
             }
-
         } else {
             heroes = new ArrayList<Player>();
             heroes.add(hero);
         }
-        // TODO: write current heroes array to file (overwrite)
         for (Player hero : heroes) {
             String heroString = String.format("%s,%s,%d,%d,%d,%d,%d,%s,%s,%s\n",
                 hero.getHeroName(), hero.getHeroClass(), hero.getLevel(), hero.getXp(),
