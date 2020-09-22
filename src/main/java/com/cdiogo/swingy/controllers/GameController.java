@@ -33,7 +33,7 @@ public class GameController {
     private File file;
 
     public enum gameState {
-        START, SELECT, CREATE, PLAY, FIGHT_FLIGHT, NO_ESCAPE, GAME_OVER, WIN, QUIT, AFTER_ACTION
+        START, SELECT, CREATE_CLASS, CREATE_NAME, PLAY, FIGHT_FLIGHT, NO_ESCAPE, GAME_OVER, WIN, QUIT, AFTER_ACTION
     }
 
     private gameState currentGameState;
@@ -46,6 +46,8 @@ public class GameController {
     private char[][] map;
     private int xBeforeMove;
     private int yBeforeMove;
+
+    private String heroClass;
 
     public GameController(String displayType) {
         currentGameState = gameState.START;
@@ -79,7 +81,7 @@ public class GameController {
             case START:
                 switch (input) {
                     case "c":
-                        currentGameState = gameState.CREATE;
+                        currentGameState = gameState.CREATE_CLASS;
                         break;
 
                     case "l":
@@ -98,11 +100,19 @@ public class GameController {
                 }
                 break; // case START
 
-            case CREATE:
+            case CREATE_CLASS:
                 if (input.equals("b")) {
                     currentGameState = gameState.START;
                     break;
                 } else {
+                    // createHero(input);
+                    heroClass = input;
+                    currentGameState = gameState.CREATE_NAME;
+                }
+                break;
+
+            case CREATE_NAME:
+                if (input.length() > 2) {
                     createHero(input);
                     currentGameState = gameState.PLAY;
                 }
@@ -422,11 +432,11 @@ public class GameController {
         }
     }
 
-    private void createHero(String input) {
-        String heroClass = "";
-        String heroName;
+    private void createHero(String heroName) {
+        // String heroClass = "";
+        // String heroName;
 
-        switch (input) {
+        switch (heroClass) {
             case "1":
                 heroClass = "Ranger";
                 break;
@@ -443,7 +453,7 @@ public class GameController {
                 System.out.println("Unrecognized Hero Class");
                 System.exit(0);
         }
-        heroName = display.createCharName();
+        // heroName = display.createCharName();
         hero = PlayerFactory.newPlayer(heroName, heroClass);
 
         System.out.println(hero.toString());
@@ -457,8 +467,11 @@ public class GameController {
             case START:
                 display.startScreen();
                 break;
-            case CREATE:
+            case CREATE_CLASS:
                 display.createCharClass();
+                break;
+            case CREATE_NAME:
+                display.createCharName();
                 break;
             case SELECT:
                 display.loadChar(heroes);
