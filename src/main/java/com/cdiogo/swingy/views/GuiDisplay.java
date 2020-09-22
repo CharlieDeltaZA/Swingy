@@ -53,6 +53,7 @@ public class GuiDisplay implements Display {
 
     private final JTextPane welcomeText = new JTextPane();
     private final JTextPane heroStatsText = new JTextPane();
+    JTextArea characterLoadText = new JTextArea();
     JTextPane mapText = new JTextPane();
     JTextField heroNameText;
 
@@ -421,6 +422,15 @@ public class GuiDisplay implements Display {
         	}
         });
 
+        submitIndexBtn.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+                int index = (int)heroSelect.getValue();
+                controller.handleInput(Integer.toString(index));
+                controller.displayState();
+        	}
+        });
+
         upBtn.addActionListener(new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -585,28 +595,31 @@ public class GuiDisplay implements Display {
         // TODO Auto-generated method stub
         panel.removeAll();
         
-        submitIndexBtn.setBounds(597, 215, 85, 23);
-        panel.add(submitIndexBtn);
         welcomeText.setBackground(Color.LIGHT_GRAY);
-      
+        
         welcomeText.setEditable(false);
         welcomeText.setText("\r\n   WELCOME TO                                  \r\n         _____          _                   \r\n        /  ___|        (_)                  \r\n        \\ `--.__      ___ _ __   __ _ _   _ \r\n         `--. \\ \\ /\\ / / | '_ \\ / _` | | | |\r\n        /\\__/ /\\ V  V /| | | | | (_| | |_| |\r\n        \\____/  \\_/\\_/ |_|_| |_|\\__, |\\__, |\r\n                                 __/ | __/ |\r\n                                |___/ |___/ \r\n\r\n\r\n");
         welcomeText.setFont(new Font("Monospaced", Font.PLAIN, 11));
         welcomeText.setBounds(10, 11, 352, 193);
         panel.add(welcomeText);
-      
-        JTextArea characterLoadText = new JTextArea();
+        
         characterLoadText.setWrapStyleWord(true);
         characterLoadText.setBackground(Color.LIGHT_GRAY);
-        characterLoadText.setText("\r\n\r\n   Choose a Hero");
+        // characterLoadText.setText("\r\n\r\n   Choose a Hero");
+        displayHeroes(heroes);
         characterLoadText.setFont(new Font("Monospaced", Font.PLAIN, 13));
         characterLoadText.setEditable(false);
         characterLoadText.setBounds(400, 11, 295, 193);
         panel.add(characterLoadText);
         
-        heroSelect.setModel(new SpinnerNumberModel(1, 1, 4, 1));
-        heroSelect.setBounds(410, 215, 92, 23);
-        panel.add(heroSelect);
+        if (heroes.size() != 0) {
+            submitIndexBtn.setBounds(597, 215, 85, 23);
+            panel.add(submitIndexBtn);
+            
+            heroSelect.setModel(new SpinnerNumberModel(1, 1, heroes.size(), 1));
+            heroSelect.setBounds(410, 215, 92, 23);
+            panel.add(heroSelect);
+        }
         
         backBtn.setBounds(20, 215, 60, 23);
         panel.add(backBtn);
@@ -615,6 +628,23 @@ public class GuiDisplay implements Display {
         panel.repaint();
         frame.setVisible(true);
 
+    }
+
+    private void displayHeroes(List<Player> heroes) {
+        String line = "\r\n\r\n   Choose a Hero\n\n";
+        int i = 1;
+
+        if (heroes.size() != 0) {
+            for (Player hero : heroes) {
+                line += String.format("\t %d - %s : %s\n", i, hero.getHeroName(), hero.getHeroClass());
+                i++;
+            }
+        } else {
+            line += "\tNo Saved Heroes found!\n";
+            line += "\tTry creating one instead";
+        }
+
+        characterLoadText.setText(line);
     }
 
     @Override
