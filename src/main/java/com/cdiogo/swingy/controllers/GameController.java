@@ -74,6 +74,7 @@ public class GameController {
     }
 
     public void handleInput(String input) {
+        System.out.println("Input: " + input);
         switch (currentGameState) {
             case START:
                 switch (input) {
@@ -101,9 +102,10 @@ public class GameController {
                 if (input.equals("b")) {
                     currentGameState = gameState.START;
                     break;
+                } else {
+                    createHero(input);
+                    currentGameState = gameState.PLAY;
                 }
-                createHero(input);
-                currentGameState = gameState.PLAY;
                 break;
 
             case SELECT:
@@ -449,6 +451,7 @@ public class GameController {
     }
 
     public void displayState() {
+        System.out.println("CURRENT GAME STATE : " + currentGameState);
         switch (currentGameState) {
             case START:
                 display.startScreen();

@@ -47,22 +47,22 @@ public class GuiDisplay implements Display {
         panel.setLayout(null);
         
         // START SCREEN
-        welcomeText.setEditable(false);
-        welcomeText.setText("\r\n   WELCOME TO                                  \r\n         _____          _                   \r\n        /  ___|        (_)                  \r\n        \\ `--.__      ___ _ __   __ _ _   _ \r\n         `--. \\ \\ /\\ / / | '_ \\ / _` | | | |\r\n        /\\__/ /\\ V  V /| | | | | (_| | |_| |\r\n        \\____/  \\_/\\_/ |_|_| |_|\\__, |\\__, |\r\n                                 __/ | __/ |\r\n                                |___/ |___/ \r\n\r\n\r\n");
-        welcomeText.setFont(new Font("Monospaced", Font.PLAIN, 11));
-        welcomeText.setBounds(10, 11, 352, 193);
+        // welcomeText.setEditable(false);
+        // welcomeText.setText("\r\n   WELCOME TO                                  \r\n         _____          _                   \r\n        /  ___|        (_)                  \r\n        \\ `--.__      ___ _ __   __ _ _   _ \r\n         `--. \\ \\ /\\ / / | '_ \\ / _` | | | |\r\n        /\\__/ /\\ V  V /| | | | | (_| | |_| |\r\n        \\____/  \\_/\\_/ |_|_| |_|\\__, |\\__, |\r\n                                 __/ | __/ |\r\n                                |___/ |___/ \r\n\r\n\r\n");
+        // welcomeText.setFont(new Font("Monospaced", Font.PLAIN, 11));
+        // welcomeText.setBounds(10, 11, 352, 193);
         
-        createBtn.setSize(135, 23);
-        createBtn.setLocation(10, 215);
-        loadBtn.setSize(110, 23);
-        loadBtn.setLocation(155, 215);
-        quitBtn.setSize(75, 23);
-        quitBtn.setLocation(287, 215);
+        // createBtn.setSize(135, 23);
+        // createBtn.setLocation(10, 215);
+        // loadBtn.setSize(110, 23);
+        // loadBtn.setLocation(155, 215);
+        // quitBtn.setSize(75, 23);
+        // quitBtn.setLocation(287, 215);
         
-        panel.add(createBtn);
-        panel.add(loadBtn);
-        panel.add(quitBtn);
-        panel.add(welcomeText);
+        // panel.add(createBtn);
+        // panel.add(loadBtn);
+        // panel.add(quitBtn);
+        // panel.add(welcomeText);
         // END START SCREEN
         
         // CREATE SCREEN
@@ -93,7 +93,7 @@ public class GuiDisplay implements Display {
         
         // END CREATE SCREEN
         
-        frame.setVisible(true);
+        // frame.setVisible(true);
     }
 
     @Override
@@ -117,8 +117,9 @@ public class GuiDisplay implements Display {
         panel.add(welcomeText);
         
         createBtn.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent arg0) {
-        		controller.handleInput("c");
+        	public void actionPerformed(ActionEvent e) {
+                controller.handleInput("c");
+                controller.displayState();
         	}
         });
         
@@ -153,8 +154,9 @@ public class GuiDisplay implements Display {
         panel.add(backBtn);
         
         backBtn.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent arg0) {
-        		controller.handleInput("b");
+        	public void actionPerformed(ActionEvent e) {
+                controller.handleInput("b");
+                controller.displayState();
         	}
         });
         
