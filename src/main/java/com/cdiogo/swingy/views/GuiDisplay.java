@@ -10,6 +10,8 @@ import javax.swing.JTextArea;
 
 import com.cdiogo.swingy.controllers.GameController;
 import com.cdiogo.swingy.models.heroes.Player;
+import javax.swing.JTextPane;
+import java.awt.Font;
 
 public class GuiDisplay implements Display {
 
@@ -29,17 +31,22 @@ public class GuiDisplay implements Display {
     JButton quit = new JButton("Quit");
     JButton create = new JButton("Create Character");
     JButton load = new JButton("Load Character");
-    JLabel welcome = new JLabel("Welcome to SWINGY");
+//    JLabel welcome = new JLabel("Welcome to SWINGY");
+    private final JTextPane welcome = new JTextPane();
 
     public GuiDisplay(GameController controller) {
         this.controller = controller;
         frame.setTitle("Swingy - cdiogo");
-        frame.setSize(860, 640);
+        frame.setSize(780, 548);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(panel);
-        panel.add(welcome);
-        back.setBounds(20, 20, 50, 20);
+        panel.setLayout(null);
+//        welcome.setBounds(288, 331, 99, 14);
+//        panel.add(welcome);
+        back.setBounds(277, 475, 55, 23);
         panel.add(back);
+        
+        
         // panel.add(output);
         frame.setVisible(true);
     }
@@ -48,6 +55,23 @@ public class GuiDisplay implements Display {
     public void startScreen() {
         // TODO Auto-generated method stub
         panel.removeAll();
+        
+        welcome.setText("\r\n   WELCOME TO                                  \r\n         _____          _                   \r\n        /  ___|        (_)                  \r\n        \\ `--.__      ___ _ __   __ _ _   _ \r\n         `--. \\ \\ /\\ / / | '_ \\ / _` | | | |\r\n        /\\__/ /\\ V  V /| | | | | (_| | |_| |\r\n        \\____/  \\_/\\_/ |_|_| |_|\\__, |\\__, |\r\n                                 __/ | __/ |\r\n                                |___/ |___/ \r\n\r\n\r\n");
+        welcome.setFont(new Font("Monospaced", Font.PLAIN, 11));
+        welcome.setBounds(10, 11, 352, 193);
+        create.setSize(120, 23);
+        create.setLocation(10, 215);
+        load.setSize(120, 23);
+        load.setLocation(140, 215);
+        quit.setSize(75, 23);
+        quit.setLocation(287, 215);
+        
+        panel.add(create);
+        panel.add(load);
+        panel.add(quit);
+        panel.add(welcome);
+        
+        panel.repaint();
         frame.setVisible(true);
 
     }
@@ -76,8 +100,9 @@ public class GuiDisplay implements Display {
     @Override
     public void renderGame() {
         // TODO Auto-generated method stub
-        panel.removeAll();
-
+    	while (!controller.isGameOver()) {
+            controller.displayState();
+        }
     }
 
     @Override
