@@ -16,6 +16,8 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
+import java.awt.Color;
 
 public class GuiDisplay implements Display {
 
@@ -37,12 +39,14 @@ public class GuiDisplay implements Display {
     JButton loadBtn = new JButton("Load Character");
 //    JLabel welcome = new JLabel("Welcome to SWINGY");
     private final JTextPane welcomeText = new JTextPane();
+    JTextField heroNameText;
 
     public GuiDisplay(GameController controller) {
         this.controller = controller;
         frame.setTitle("Swingy - cdiogo");
         frame.setSize(720, 548);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        panel.setBackground(Color.DARK_GRAY);
         frame.getContentPane().add(panel);
         panel.setLayout(null);
         
@@ -51,6 +55,7 @@ public class GuiDisplay implements Display {
         // welcomeText.setText("\r\n   WELCOME TO                                  \r\n         _____          _                   \r\n        /  ___|        (_)                  \r\n        \\ `--.__      ___ _ __   __ _ _   _ \r\n         `--. \\ \\ /\\ / / | '_ \\ / _` | | | |\r\n        /\\__/ /\\ V  V /| | | | | (_| | |_| |\r\n        \\____/  \\_/\\_/ |_|_| |_|\\__, |\\__, |\r\n                                 __/ | __/ |\r\n                                |___/ |___/ \r\n\r\n\r\n");
         // welcomeText.setFont(new Font("Monospaced", Font.PLAIN, 11));
         // welcomeText.setBounds(10, 11, 352, 193);
+        // welcomeText.setBackground(Color.LIGHT_GRAY);
         
         // createBtn.setSize(135, 23);
         // createBtn.setLocation(10, 215);
@@ -65,7 +70,8 @@ public class GuiDisplay implements Display {
         // panel.add(welcomeText);
         // END START SCREEN
         
-        // CREATE SCREEN
+        // CREATE SCREEN CLASS
+        // welcomeText.setBackground(Color.LIGHT_GRAY);
         // welcomeText.setEditable(false);
         // welcomeText.setText("\r\n   WELCOME TO                                  \r\n         _____          _                   \r\n        /  ___|        (_)                  \r\n        \\ `--.__      ___ _ __   __ _ _   _ \r\n         `--. \\ \\ /\\ / / | '_ \\ / _` | | | |\r\n        /\\__/ /\\ V  V /| | | | | (_| | |_| |\r\n        \\____/  \\_/\\_/ |_|_| |_|\\__, |\\__, |\r\n                                 __/ | __/ |\r\n                                |___/ |___/ \r\n\r\n\r\n");
         // welcomeText.setFont(new Font("Monospaced", Font.PLAIN, 11));
@@ -85,15 +91,44 @@ public class GuiDisplay implements Display {
         // panel.add(submitBtn);
         
         // JTextArea characterCreateText = new JTextArea();
+        // characterCreateText.setBackground(Color.LIGHT_GRAY);
         // characterCreateText.setText("\r\n\r\n   Choose a Hero Class\r\n\r\n      1 - Ranger\r\n      2 - Wizard\r\n      3 - Fighter\r\n      4 - Rogue");
         // characterCreateText.setFont(new Font("Monospaced", Font.PLAIN, 13));
         // characterCreateText.setEditable(false);
         // characterCreateText.setBounds(400, 11, 295, 193);
         // panel.add(characterCreateText);
         
-        // END CREATE SCREEN
+        // END CREATE SCREEN CLASS
         
-        // frame.setVisible(true);
+        // START CREATE SCREEN NAME
+        JButton submitBtn = new JButton("Submit");
+        submitBtn.setBounds(597, 215, 85, 23);
+        panel.add(submitBtn);
+        welcomeText.setBackground(Color.LIGHT_GRAY);
+        
+        welcomeText.setEditable(false);
+        welcomeText.setText("\r\n   WELCOME TO                                  \r\n         _____          _                   \r\n        /  ___|        (_)                  \r\n        \\ `--.__      ___ _ __   __ _ _   _ \r\n         `--. \\ \\ /\\ / / | '_ \\ / _` | | | |\r\n        /\\__/ /\\ V  V /| | | | | (_| | |_| |\r\n        \\____/  \\_/\\_/ |_|_| |_|\\__, |\\__, |\r\n                                 __/ | __/ |\r\n                                |___/ |___/ \r\n\r\n\r\n");
+        welcomeText.setFont(new Font("Monospaced", Font.PLAIN, 11));
+        welcomeText.setBounds(10, 11, 352, 193);
+        panel.add(welcomeText);
+        
+        JTextArea characterCreateText = new JTextArea();
+        characterCreateText.setBackground(Color.LIGHT_GRAY);
+        characterCreateText.setText("\r\n\r\n   Enter a name for your Hero");
+        characterCreateText.setFont(new Font("Monospaced", Font.PLAIN, 13));
+        characterCreateText.setEditable(false);
+        characterCreateText.setBounds(400, 11, 295, 193);
+        panel.add(characterCreateText);
+        
+        heroNameText = new JTextField();
+        heroNameText.setFont(new Font("Monospaced", Font.PLAIN, 11));
+        heroNameText.setBounds(410, 216, 159, 20);
+        panel.add(heroNameText);
+        heroNameText.setColumns(10);
+        
+        // END CREATE SCREEN NAME
+        
+         frame.setVisible(true);
     }
 
     @Override
@@ -101,6 +136,7 @@ public class GuiDisplay implements Display {
         // TODO Auto-generated method stub
         panel.removeAll();
         
+        welcomeText.setBackground(Color.LIGHT_GRAY);
         welcomeText.setText("\r\n   WELCOME TO                                  \r\n         _____          _                   \r\n        /  ___|        (_)                  \r\n        \\ `--.__      ___ _ __   __ _ _   _ \r\n         `--. \\ \\ /\\ / / | '_ \\ / _` | | | |\r\n        /\\__/ /\\ V  V /| | | | | (_| | |_| |\r\n        \\____/  \\_/\\_/ |_|_| |_|\\__, |\\__, |\r\n                                 __/ | __/ |\r\n                                |___/ |___/ \r\n\r\n\r\n");
         welcomeText.setFont(new Font("Monospaced", Font.PLAIN, 11));
         welcomeText.setBounds(10, 11, 352, 193);
@@ -111,11 +147,6 @@ public class GuiDisplay implements Display {
         quitBtn.setSize(75, 23);
         quitBtn.setLocation(287, 215);
         
-        panel.add(createBtn);
-        panel.add(loadBtn);
-        panel.add(quitBtn);
-        panel.add(welcomeText);
-        
         createBtn.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
                 controller.handleInput("c");
@@ -123,7 +154,15 @@ public class GuiDisplay implements Display {
         	}
         });
         
+        panel.add(createBtn);
+        panel.add(loadBtn);
+        panel.add(quitBtn);
+        panel.add(welcomeText);
+        
+        
+        panel.validate();
         panel.repaint();
+        
         frame.setVisible(true);
 
     }
@@ -132,6 +171,41 @@ public class GuiDisplay implements Display {
     public String createCharName() {
         // TODO Auto-generated method stub
         panel.removeAll();
+        
+        JButton submitBtn = new JButton("Submit");
+        submitBtn.setBounds(597, 215, 85, 23);
+//        submitBtn.addActionListener(new ActionListener() {
+//        	@Override
+//        	public void actionPerformed(ActionEvent e) {
+//                controller.handleInput("b");
+//                controller.displayState();
+//        	}
+//        });
+        panel.add(submitBtn);
+        
+        welcomeText.setBackground(Color.LIGHT_GRAY);
+        welcomeText.setEditable(false);
+        welcomeText.setText("\r\n   WELCOME TO                                  \r\n         _____          _                   \r\n        /  ___|        (_)                  \r\n        \\ `--.__      ___ _ __   __ _ _   _ \r\n         `--. \\ \\ /\\ / / | '_ \\ / _` | | | |\r\n        /\\__/ /\\ V  V /| | | | | (_| | |_| |\r\n        \\____/  \\_/\\_/ |_|_| |_|\\__, |\\__, |\r\n                                 __/ | __/ |\r\n                                |___/ |___/ \r\n\r\n\r\n");
+        welcomeText.setFont(new Font("Monospaced", Font.PLAIN, 11));
+        welcomeText.setBounds(10, 11, 352, 193);
+        panel.add(welcomeText);
+        
+        JTextArea characterCreateText = new JTextArea();
+        characterCreateText.setBackground(Color.LIGHT_GRAY);
+        characterCreateText.setText("\r\n\r\n   Enter a name for your Hero");
+        characterCreateText.setFont(new Font("Monospaced", Font.PLAIN, 13));
+        characterCreateText.setEditable(false);
+        characterCreateText.setBounds(400, 11, 295, 193);
+        panel.add(characterCreateText);
+        
+        heroNameText = new JTextField();
+        heroNameText.setFont(new Font("Monospaced", Font.PLAIN, 11));
+        heroNameText.setBounds(410, 216, 159, 20);
+        panel.add(heroNameText);
+        heroNameText.setColumns(10);
+        
+        
+        
         return null;
     }
 
@@ -151,26 +225,30 @@ public class GuiDisplay implements Display {
         panel.add(classSelect);
         
         backBtn.setBounds(20, 215, 60, 23);
-        panel.add(backBtn);
-        
         backBtn.addActionListener(new ActionListener() {
+        	@Override
         	public void actionPerformed(ActionEvent e) {
                 controller.handleInput("b");
                 controller.displayState();
         	}
         });
+        panel.add(backBtn);
+        
+        
         
         JButton submitBtn = new JButton("Submit");
         submitBtn.setBounds(512, 215, 85, 23);
         panel.add(submitBtn);
         
         JTextArea characterCreateText = new JTextArea();
+        characterCreateText.setBackground(Color.LIGHT_GRAY);
         characterCreateText.setText("\r\n\r\n   Choose a Hero Class\r\n\r\n      1 - Ranger\r\n      2 - Wizard\r\n      3 - Fighter\r\n      4 - Rogue");
         characterCreateText.setFont(new Font("Monospaced", Font.PLAIN, 13));
         characterCreateText.setEditable(false);
         characterCreateText.setBounds(400, 11, 295, 193);
         panel.add(characterCreateText);
 
+        panel.validate();
         panel.repaint();
         frame.setVisible(true);
     }
