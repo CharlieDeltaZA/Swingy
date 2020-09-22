@@ -334,26 +334,21 @@ public class GuiDisplay implements Display {
         // END AFTER ACTION
         
         // START QUIT
-//        JTextPane mapText = new JTextPane();
-//        mapText.setEditable(false);
-//        mapText.setBackground(Color.LIGHT_GRAY);
-//        mapText.setBounds(10, 11, 485, 485);
-//        panel.add(mapText);
-//        
+        
 //        JTextArea messageText = new JTextArea();
 //        messageText.setWrapStyleWord(true);
 //        messageText.setLineWrap(true);
-//        messageText.setText("Are you sure you would like to quit the game?");
+//        messageText.setText("Are you sure you would like to quit the game?\r\n\r\nConfirm - Save and Quit\r\nDeny - Return to previous screen");
 //        messageText.setEditable(false);
 //        messageText.setBackground(Color.LIGHT_GRAY);
-//        messageText.setBounds(505, 11, 190, 72);
+//        messageText.setBounds(10, 11, 200, 130);
 //        panel.add(messageText);
-//        quitConfirmBtn.setLocation(540, 473);
-//        quitConfirmBtn.setSize(120, 23);
+//        quitConfirmBtn.setLocation(10, 152);
+//        quitConfirmBtn.setSize(90, 23);
 //    
 //        panel.add(quitConfirmBtn);
-//        quitDenyBtn.setLocation(540, 439);
-//        quitDenyBtn.setSize(120, 23);
+//        quitDenyBtn.setLocation(120, 152);
+//        quitDenyBtn.setSize(90, 23);
 //        panel.add(quitDenyBtn);
         // END QUIT
         
@@ -678,26 +673,20 @@ public class GuiDisplay implements Display {
         // TODO Auto-generated method stub
         panel.removeAll();
         
-        JTextPane mapText = new JTextPane();
-        mapText.setEditable(false);
-        mapText.setBackground(Color.LIGHT_GRAY);
-        mapText.setBounds(10, 11, 485, 485);
-        panel.add(mapText);
-        
         JTextArea messageText = new JTextArea();
         messageText.setWrapStyleWord(true);
         messageText.setLineWrap(true);
-        messageText.setText("Are you sure you would like to quit the game?");
+        messageText.setText("Are you sure you would like to quit the game?\r\n\r\nConfirm - Save and Quit\r\nDeny - Return to previous screen");
         messageText.setEditable(false);
         messageText.setBackground(Color.LIGHT_GRAY);
-        messageText.setBounds(505, 11, 190, 72);
+        messageText.setBounds(10, 11, 200, 130);
         panel.add(messageText);
-        quitConfirmBtn.setLocation(540, 473);
-        quitConfirmBtn.setSize(120, 23);
+        quitConfirmBtn.setLocation(10, 152);
+        quitConfirmBtn.setSize(90, 23);
     
         panel.add(quitConfirmBtn);
-        quitDenyBtn.setLocation(540, 439);
-        quitDenyBtn.setSize(120, 23);
+        quitDenyBtn.setLocation(120, 152);
+        quitDenyBtn.setSize(90, 23);
         panel.add(quitDenyBtn);
         
         panel.validate();
