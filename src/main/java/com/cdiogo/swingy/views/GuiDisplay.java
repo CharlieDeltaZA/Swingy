@@ -2,23 +2,13 @@ package com.cdiogo.swingy.views;
 
 import java.util.List;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-
 import com.cdiogo.swingy.controllers.GameController;
 import com.cdiogo.swingy.models.heroes.Player;
-import javax.swing.JTextPane;
-import java.awt.Font;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerNumberModel;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JTextField;
-import java.awt.Color;
-import javax.swing.SwingConstants;
+import com.cdiogo.swingy.models.villains.Villain;
+
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
 
 public class GuiDisplay implements Display {
 
@@ -55,6 +45,7 @@ public class GuiDisplay implements Display {
     private final JTextPane heroStatsText = new JTextPane();
     JTextArea characterLoadText = new JTextArea();
     JTextPane mapText = new JTextPane();
+    JTextArea messageText = new JTextArea();
     JTextField heroNameText;
 
     public GuiDisplay(GameController controller) {
@@ -486,6 +477,38 @@ public class GuiDisplay implements Display {
                 controller.displayState();
         	}
         });
+
+        equipBtn.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+                controller.handleInput("y");
+                controller.displayState();
+        	}
+        });
+
+        ignoreBtn.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+                controller.handleInput("n");
+                controller.displayState();
+        	}
+        });
+
+        saveBtn.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+                controller.handleInput("c");
+                controller.displayState();
+        	}
+        });
+
+        menuBtn.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+                controller.handleInput("r");
+                controller.displayState();
+        	}
+        });
     			
 	}
 
@@ -604,6 +627,7 @@ public class GuiDisplay implements Display {
         panel.add(welcomeText);
         
         characterLoadText.setWrapStyleWord(true);
+        characterLoadText.setLineWrap(true);
         characterLoadText.setBackground(Color.LIGHT_GRAY);
         // characterLoadText.setText("\r\n\r\n   Choose a Hero");
         displayHeroes(heroes);
@@ -666,11 +690,18 @@ public class GuiDisplay implements Display {
         printMap();
         panel.add(mapText);
         
-        JTextArea messageText = new JTextArea();
         messageText.setWrapStyleWord(true);
         messageText.setLineWrap(true);
         // messageText.setText("Placeholder text that will hopefully word wrap because long messages might exist?!");
-        messageText.setText("Reach the edge of the map to win the current mission.\nEnemies may be encountered!");
+        messageText.setText("Reach the edge of the map to win the current mission.\n\nEnemies may be encountered!");
+        if (controller.isHeroEscaped()) {
+            controller.setHeroEscaped(false);
+            messageText.setText("You have successfully escaped!");
+        }
+        if (controller.isLevelUp()) {
+            controller.setLevelUp(false);
+            messageText.setText("You have levelled up!");
+        }
         messageText.setEditable(false);
         messageText.setBackground(Color.LIGHT_GRAY);
         messageText.setBounds(505, 11, 190, 88);
@@ -730,6 +761,7 @@ public class GuiDisplay implements Display {
     @Override
     public void fightOrFlight() {
         // TODO Auto-generated method stub
+        String line = "";
         panel.removeAll();
         
         mapText.setEditable(false);
@@ -738,10 +770,10 @@ public class GuiDisplay implements Display {
         printMap();
         panel.add(mapText);
         
-        JTextArea messageText = new JTextArea();
         messageText.setWrapStyleWord(true);
         messageText.setLineWrap(true);
-        messageText.setText("Placeholder text that will hopefully word wrap because long messages might exist?!");
+        line = String.format("You have encountered a villain!\n\n\t%s", controller.getCurrentEnemy().toString());
+        messageText.setText(line);
         messageText.setEditable(false);
         messageText.setBackground(Color.LIGHT_GRAY);
         messageText.setBounds(505, 11, 190, 88);
@@ -769,7 +801,6 @@ public class GuiDisplay implements Display {
         printMap();
         panel.add(mapText);
         
-        JTextArea messageText = new JTextArea();
         messageText.setWrapStyleWord(true);
         messageText.setLineWrap(true);
         messageText.setText("You have Successfully completed this level!\r\n\r\nContinue your adventure from the main menu, or try a new character.");
@@ -796,7 +827,6 @@ public class GuiDisplay implements Display {
         // TODO Auto-generated method stub
         panel.removeAll();
         
-        JTextArea messageText = new JTextArea();
         messageText.setWrapStyleWord(true);
         messageText.setLineWrap(true);
         messageText.setText("Are you sure you would like to quit the game?\r\n\r\nConfirm - Save and Quit\r\nDeny - Return to previous screen");
@@ -829,7 +859,6 @@ public class GuiDisplay implements Display {
         printMap();
         panel.add(mapText);
         
-        JTextArea messageText = new JTextArea();
         messageText.setWrapStyleWord(true);
         messageText.setLineWrap(true);
         messageText.setText("Your attempt to flea has failed!\r\n\r\nPrepare for BATTLE!");
@@ -858,7 +887,6 @@ public class GuiDisplay implements Display {
         printMap();
         panel.add(mapText);
         
-        JTextArea messageText = new JTextArea();
         messageText.setWrapStyleWord(true);
         messageText.setLineWrap(true);
         messageText.setText("      GAME   OVER\r\n\r\nYour hero has died :(\r\n\r\nYou may return to the menu and play again, or you may quit.");
@@ -883,6 +911,8 @@ public class GuiDisplay implements Display {
     @Override
     public void afterAction() {
         // TODO Auto-generated method stub
+        Villain enemy = controller.getCurrentEnemy();
+        String line = "";
         panel.removeAll();
         
         mapText.setEditable(false);
@@ -891,10 +921,10 @@ public class GuiDisplay implements Display {
         printMap();
         panel.add(mapText);
         
-        JTextArea messageText = new JTextArea();
+        // messageText.setText("Placeholder Text");
+
         messageText.setWrapStyleWord(true);
         messageText.setLineWrap(true);
-        messageText.setText("Placeholder Text");
         messageText.setEditable(false);
         messageText.setBackground(Color.LIGHT_GRAY);
         messageText.setBounds(505, 11, 190, 154);
@@ -902,16 +932,29 @@ public class GuiDisplay implements Display {
         
         continueBtn.setLocation(505, 176);
         continueBtn.setSize(90, 23);
-        panel.add(continueBtn);
+        
         
         equipBtn.setLocation(505, 210);
         equipBtn.setSize(90, 23);
-        panel.add(equipBtn);
+        
         
         ignoreBtn.setLocation(605, 210);
         ignoreBtn.setSize(90, 23);
         
-        panel.add(ignoreBtn);
+        
+
+        line += String.format("You have defeated the %s\n", enemy.getName());
+        line += String.format("You gain %d XP\n", enemy.getXp());
+        if (enemy.getArtifact() != null) {
+            line += String.format("\n\nThis villain dropped an artifact!\n%s", enemy.getArtifact().toString());
+            line += "\n\nWould you like to equip it?";
+            messageText.setText(line);
+            panel.add(equipBtn);
+            panel.add(ignoreBtn);
+        } else {
+            messageText.setText(line);
+            panel.add(continueBtn);
+        }
         
         panel.validate();
         panel.repaint();
