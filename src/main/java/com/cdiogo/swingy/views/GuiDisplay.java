@@ -41,13 +41,26 @@ public class GuiDisplay implements Display {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(panel);
         panel.setLayout(null);
-//        welcome.setBounds(288, 331, 99, 14);
-//        panel.add(welcome);
         back.setBounds(277, 475, 55, 23);
         panel.add(back);
         
+        // START SCREEN
+        welcome.setText("\r\n   WELCOME TO                                  \r\n         _____          _                   \r\n        /  ___|        (_)                  \r\n        \\ `--.__      ___ _ __   __ _ _   _ \r\n         `--. \\ \\ /\\ / / | '_ \\ / _` | | | |\r\n        /\\__/ /\\ V  V /| | | | | (_| | |_| |\r\n        \\____/  \\_/\\_/ |_|_| |_|\\__, |\\__, |\r\n                                 __/ | __/ |\r\n                                |___/ |___/ \r\n\r\n\r\n");
+        welcome.setFont(new Font("Monospaced", Font.PLAIN, 11));
+        welcome.setBounds(10, 11, 352, 193);
+        create.setSize(120, 23);
+        create.setLocation(10, 215);
+        load.setSize(120, 23);
+        load.setLocation(140, 215);
+        quit.setSize(75, 23);
+        quit.setLocation(287, 215);
         
-        // panel.add(output);
+        panel.add(create);
+        panel.add(load);
+        panel.add(quit);
+        panel.add(welcome);
+        // END START SCREEN
+        
         frame.setVisible(true);
     }
 
@@ -100,9 +113,9 @@ public class GuiDisplay implements Display {
     @Override
     public void renderGame() {
         // TODO Auto-generated method stub
-    	while (!controller.isGameOver()) {
-            controller.displayState();
-        }
+    	// while (!controller.isGameOver()) {
+        controller.displayState();
+        // }
     }
 
     @Override
