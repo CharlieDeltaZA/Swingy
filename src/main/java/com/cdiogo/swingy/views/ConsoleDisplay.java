@@ -230,7 +230,7 @@ public class ConsoleDisplay implements Display {
             System.out.println("+-----------------------------------+");
             System.out.println("|                                   |");
             System.out.println("|      You have Successfully        |");
-            System.out.println("|      completed this level         |");
+            System.out.println("|      completed this level!        |");
             System.out.println("|                                   |");
             System.out.println("|      Continue your adventure      |");
             System.out.println("|      from the main menu, or       |");
@@ -278,7 +278,7 @@ public class ConsoleDisplay implements Display {
             System.out.println("+----------------------------------+");
             System.out.println("|                                  |");
             System.out.println("|     Your attempt to flea has     |");
-            System.out.println("|     has failed! Prepare for      |");
+            System.out.println("|        failed! Prepare for       |");
             System.out.println("|             BATTLE!              |");
             System.out.println("|                                  |");
             System.out.println("|           c - Continue           |");
