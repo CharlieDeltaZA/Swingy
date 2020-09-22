@@ -36,6 +36,8 @@ public class GuiDisplay implements Display {
     JButton rightBtn = new JButton("East");
     JButton leftBtn = new JButton("West");
     JButton quitBtn = new JButton("Save & Quit");
+    JButton quitConfirmBtn = new JButton("Confirm");
+    JButton quitDenyBtn = new JButton("Deny");
     JButton fightBtn = new JButton("Fight");
     JButton fleaBtn = new JButton("Flea");
     JButton continueBtn = new JButton("Continue");
@@ -346,13 +348,13 @@ public class GuiDisplay implements Display {
 //        messageText.setBackground(Color.LIGHT_GRAY);
 //        messageText.setBounds(505, 11, 190, 72);
 //        panel.add(messageText);
-//        quitBtn.setLocation(540, 473);
-//        quitBtn.setSize(120, 23);
+//        quitConfirmBtn.setLocation(540, 473);
+//        quitConfirmBtn.setSize(120, 23);
 //    
-//        panel.add(quitBtn);
-//        menuBtn.setLocation(540, 439);
-//        menuBtn.setSize(120, 23);
-//        panel.add(menuBtn);
+//        panel.add(quitConfirmBtn);
+//        quitDenyBtn.setLocation(540, 439);
+//        quitDenyBtn.setSize(120, 23);
+//        panel.add(quitDenyBtn);
         // END QUIT
         
 //         frame.setVisible(true);
@@ -378,6 +380,30 @@ public class GuiDisplay implements Display {
         	@Override
         	public void actionPerformed(ActionEvent e) {
                 controller.handleInput("b");
+                controller.displayState();
+        	}
+        });
+
+        quitBtn.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+                controller.handleInput("q");
+                controller.displayState();
+        	}
+        });
+
+        quitConfirmBtn.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+                controller.handleInput("y");
+                controller.displayState();
+        	}
+        });
+
+        quitDenyBtn.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+                controller.handleInput("n");
                 controller.displayState();
         	}
         });
@@ -666,13 +692,13 @@ public class GuiDisplay implements Display {
         messageText.setBackground(Color.LIGHT_GRAY);
         messageText.setBounds(505, 11, 190, 72);
         panel.add(messageText);
-        quitBtn.setLocation(540, 473);
-        quitBtn.setSize(120, 23);
+        quitConfirmBtn.setLocation(540, 473);
+        quitConfirmBtn.setSize(120, 23);
     
-        panel.add(quitBtn);
-        menuBtn.setLocation(540, 439);
-        menuBtn.setSize(120, 23);
-        panel.add(menuBtn);
+        panel.add(quitConfirmBtn);
+        quitDenyBtn.setLocation(540, 439);
+        quitDenyBtn.setSize(120, 23);
+        panel.add(quitDenyBtn);
         
         panel.validate();
         panel.repaint();
