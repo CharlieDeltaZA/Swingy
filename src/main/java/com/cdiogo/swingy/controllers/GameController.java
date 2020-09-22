@@ -210,6 +210,7 @@ public class GameController {
                         savePlayer();
                     }
                     gameOver = true;
+                    System.exit(0);
                 } else if (input.equals("n")) {
                     currentGameState = stateBeforeQuit;
                 }
