@@ -55,7 +55,7 @@ public class ConsoleDisplay implements Display {
     }
 
     @Override
-	public String createCharName() {
+	public void createCharName() {
         String choice = "";
 
         while (choice.equals("")) {
@@ -72,8 +72,8 @@ public class ConsoleDisplay implements Display {
                 choice = sysin.nextLine();
             }
         }
-        // controller.handleInput(choice);
-        return (choice);
+        controller.handleInput(choice);
+        // return (choice);
     }
     
     @Override

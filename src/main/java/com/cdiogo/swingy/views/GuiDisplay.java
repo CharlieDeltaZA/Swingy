@@ -25,7 +25,7 @@ public class GuiDisplay implements Display {
     GameController controller;
     JFrame frame = new JFrame();
     JPanel panel = new JPanel();
-//    JTextArea output = new JTextArea("Hello poes", 500, 500); //??? for map display
+
     JButton backBtn = new JButton("Back");
     JButton saveBtn = new JButton("Save");
     JButton equipBtn = new JButton("Equip");
@@ -35,7 +35,7 @@ public class GuiDisplay implements Display {
     JButton downBtn = new JButton("South");
     JButton rightBtn = new JButton("East");
     JButton leftBtn = new JButton("West");
-    JButton quitBtn = new JButton("Save & Quit");
+    JButton quitBtn = new JButton("Quit");
     JButton quitConfirmBtn = new JButton("Confirm");
     JButton quitDenyBtn = new JButton("Deny");
     JButton fightBtn = new JButton("Fight");
@@ -43,10 +43,18 @@ public class GuiDisplay implements Display {
     JButton continueBtn = new JButton("Continue");
     JButton createBtn = new JButton("Create Character");
     JButton loadBtn = new JButton("Load Character");
-//    JLabel welcome = new JLabel("Welcome to SWINGY");
+    JButton submitClassBtn = new JButton("Submit"); // class index
+    JButton submitIndexBtn = new JButton("Submit"); // saved hero index
+    JButton submitNameBtn = new JButton("Submit"); // name
+
+
+    JSpinner classSelect = new JSpinner();
+    JSpinner heroSelect = new JSpinner();
+
     private final JTextPane welcomeText = new JTextPane();
-    JTextField heroNameText;
     private final JTextPane heroStatsText = new JTextPane();
+    JTextPane mapText = new JTextPane();
+    JTextField heroNameText;
 
     public GuiDisplay(GameController controller) {
         this.controller = controller;
@@ -89,7 +97,6 @@ public class GuiDisplay implements Display {
         // welcomeText.setBounds(10, 11, 352, 193);
         // panel.add(welcomeText);
         
-        // JSpinner classSelect = new JSpinner();
         // classSelect.setModel(new SpinnerNumberModel(1, 1, 4, 1));
         // classSelect.setBounds(410, 215, 92, 23);
         // panel.add(classSelect);
@@ -97,9 +104,8 @@ public class GuiDisplay implements Display {
         // backBtn.setBounds(20, 215, 60, 23);
         // panel.add(backBtn);
         
-        // JButton submitBtn = new JButton("Submit");
-        // submitBtn.setBounds(512, 215, 85, 23);
-        // panel.add(submitBtn);
+        // submitClassBtn.setBounds(512, 215, 85, 23);
+        // panel.add(submitClassBtn);
         
         // JTextArea characterCreateText = new JTextArea();
         // characterCreateText.setBackground(Color.LIGHT_GRAY);
@@ -112,9 +118,8 @@ public class GuiDisplay implements Display {
         // END CREATE SCREEN CLASS
         
         // START CREATE SCREEN NAME
-//        JButton submitBtn = new JButton("Submit");
-//        submitBtn.setBounds(597, 215, 85, 23);
-//        panel.add(submitBtn);
+//        submitNameBtn.setBounds(597, 215, 85, 23);
+//        panel.add(submitNameBtn);
 //        welcomeText.setBackground(Color.LIGHT_GRAY);
 //        
 //        welcomeText.setEditable(false);
@@ -140,9 +145,8 @@ public class GuiDisplay implements Display {
         // END CREATE SCREEN NAME
         
         // START LOAD CHAR SCREEN
-//        JButton submitBtn = new JButton("Submit");
-//        submitBtn.setBounds(597, 215, 85, 23);
-//        panel.add(submitBtn);
+//        submitIndexBtn.setBounds(597, 215, 85, 23);
+//        panel.add(submitIndexBtn);
 //        welcomeText.setBackground(Color.LIGHT_GRAY);
 //      
 //        welcomeText.setEditable(false);
@@ -160,7 +164,6 @@ public class GuiDisplay implements Display {
 //        characterLoadText.setBounds(400, 11, 295, 193);
 //        panel.add(characterLoadText);
 //        
-//        JSpinner heroSelect = new JSpinner();
 //        heroSelect.setModel(new SpinnerNumberModel(1, 1, 4, 1));
 //        heroSelect.setBounds(410, 215, 92, 23);
 //        panel.add(heroSelect);
@@ -170,7 +173,6 @@ public class GuiDisplay implements Display {
         // END LOAD CHAR SCREEN
         
         // START PLAY SCREEN
-//        JTextPane mapText = new JTextPane();
 //        mapText.setEditable(false);
 //        mapText.setBackground(Color.LIGHT_GRAY);
 //        mapText.setBounds(10, 11, 485, 485);
@@ -184,25 +186,25 @@ public class GuiDisplay implements Display {
 //        messageText.setBackground(Color.LIGHT_GRAY);
 //        messageText.setBounds(505, 11, 190, 88);
 //        panel.add(messageText);
-//        upBtn.setSize(60, 23);
-//        upBtn.setLocation(570, 256);
-//        
-//        panel.add(upBtn);
-//        downBtn.setSize(60, 23);
-//        downBtn.setLocation(570, 286);
-//        panel.add(downBtn);
-//        leftBtn.setLocation(505, 286);
-//        leftBtn.setSize(60, 23);
-//        panel.add(leftBtn);
-//        rightBtn.setLocation(635, 286);
-//        rightBtn.setSize(60, 23);
-//        panel.add(rightBtn);
-//        quitBtn.setLocation(635, 473);
-//        quitBtn.setSize(60, 23);
-//        panel.add(quitBtn);
-//        saveBtn.setLocation(505, 473);
-//        saveBtn.setSize(60, 23);
-//        panel.add(saveBtn);
+    //    upBtn.setSize(60, 23);
+    //    upBtn.setLocation(570, 256);
+       
+    //    panel.add(upBtn);
+    //    downBtn.setSize(60, 23);
+    //    downBtn.setLocation(570, 286);
+    //    panel.add(downBtn);
+    //    leftBtn.setLocation(505, 286);
+    //    leftBtn.setSize(60, 23);
+    //    panel.add(leftBtn);
+    //    rightBtn.setLocation(635, 286);
+    //    rightBtn.setSize(60, 23);
+    //    panel.add(rightBtn);
+    //    quitBtn.setLocation(635, 473);
+    //    quitBtn.setSize(60, 23);
+    //    panel.add(quitBtn);
+    //    saveBtn.setLocation(505, 473);
+    //    saveBtn.setSize(60, 23);
+    //    panel.add(saveBtn);
 //        heroStatsText.setText("HeroStats Here");
 //        heroStatsText.setFont(new Font("Monospaced", Font.PLAIN, 11));
 //        heroStatsText.setEditable(false);
@@ -213,7 +215,6 @@ public class GuiDisplay implements Display {
         // END PLAY SCREEN
         
         // START FIGHT SCREEN
-//        JTextPane mapText = new JTextPane();
 //        mapText.setEditable(false);
 //        mapText.setBackground(Color.LIGHT_GRAY);
 //        mapText.setBounds(10, 11, 485, 485);
@@ -236,7 +237,6 @@ public class GuiDisplay implements Display {
         // END FIGHT SCREEN
         
         // START NO ESCAPE
-//        JTextPane mapText = new JTextPane();
 //        mapText.setEditable(false);
 //        mapText.setBackground(Color.LIGHT_GRAY);
 //        mapText.setBounds(10, 11, 485, 485);
@@ -256,7 +256,6 @@ public class GuiDisplay implements Display {
         // END NO ESCAPE
         
         // START ROUND WON
-//        JTextPane mapText = new JTextPane();
 //        mapText.setEditable(false);
 //        mapText.setBackground(Color.LIGHT_GRAY);
 //        mapText.setBounds(10, 11, 485, 485);
@@ -280,7 +279,6 @@ public class GuiDisplay implements Display {
         // END ROUND WON
         
         // START GAME OVER
-//        JTextPane mapText = new JTextPane();
 //        mapText.setEditable(false);
 //        mapText.setBackground(Color.LIGHT_GRAY);
 //        mapText.setBounds(10, 11, 485, 485);
@@ -304,7 +302,6 @@ public class GuiDisplay implements Display {
         // END GAME OVER
         
         // START AFTER ACTION
-//        JTextPane mapText = new JTextPane();
 //        mapText.setEditable(false);
 //        mapText.setBackground(Color.LIGHT_GRAY);
 //        mapText.setBounds(10, 11, 485, 485);
@@ -402,6 +399,83 @@ public class GuiDisplay implements Display {
                 controller.displayState();
         	}
         });
+
+        submitClassBtn.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+                int index = (int)classSelect.getValue();
+                controller.handleInput(Integer.toString(index));
+                controller.displayState();
+        	}
+        });
+
+        submitNameBtn.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+                String name = heroNameText.getText();
+
+                if (!(name.equals("")) || name.length() >= 2) {
+                    controller.handleInput(name);
+                    controller.displayState();
+                }
+        	}
+        });
+
+        upBtn.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+                controller.handleInput("w");
+                controller.displayState();
+        	}
+        });
+
+        downBtn.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+                controller.handleInput("s");
+                controller.displayState();
+        	}
+        });
+
+        rightBtn.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+                controller.handleInput("d");
+                controller.displayState();
+        	}
+        });
+
+        leftBtn.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+                controller.handleInput("a");
+                controller.displayState();
+        	}
+        });
+
+        fightBtn.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+                controller.handleInput("f");
+                controller.displayState();
+        	}
+        });
+
+        fleaBtn.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+                controller.handleInput("r");
+                controller.displayState();
+        	}
+        });
+
+        continueBtn.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+                controller.handleInput("c");
+                controller.displayState();
+        	}
+        });
     			
 	}
 
@@ -436,13 +510,12 @@ public class GuiDisplay implements Display {
     }
 
     @Override
-    public String createCharName() {
+    public void createCharName() {
         // TODO Auto-generated method stub
         panel.removeAll();
         
-        JButton submitBtn = new JButton("Submit");
-        submitBtn.setBounds(597, 215, 85, 23);
-        panel.add(submitBtn);
+        submitNameBtn.setBounds(597, 215, 85, 23);
+        panel.add(submitNameBtn);
         welcomeText.setBackground(Color.LIGHT_GRAY);
         
         welcomeText.setEditable(false);
@@ -464,8 +537,12 @@ public class GuiDisplay implements Display {
         heroNameText.setBounds(410, 216, 159, 20);
         panel.add(heroNameText);
         heroNameText.setColumns(10);
-                
-        return null;
+
+        panel.validate();
+        panel.repaint();
+        
+        frame.setVisible(true);
+     
     }
 
     @Override
@@ -478,7 +555,6 @@ public class GuiDisplay implements Display {
         welcomeText.setBounds(10, 11, 352, 193);
         panel.add(welcomeText);
         
-        JSpinner classSelect = new JSpinner();
         classSelect.setModel(new SpinnerNumberModel(1, 1, 4, 1));
         classSelect.setBounds(410, 215, 92, 23);
         panel.add(classSelect);
@@ -488,9 +564,8 @@ public class GuiDisplay implements Display {
         
         
         
-        JButton submitBtn = new JButton("Submit");
-        submitBtn.setBounds(512, 215, 85, 23);
-        panel.add(submitBtn);
+        submitClassBtn.setBounds(512, 215, 85, 23);
+        panel.add(submitClassBtn);
         
         JTextArea characterCreateText = new JTextArea();
         characterCreateText.setBackground(Color.LIGHT_GRAY);
@@ -510,9 +585,8 @@ public class GuiDisplay implements Display {
         // TODO Auto-generated method stub
         panel.removeAll();
         
-        JButton submitBtn = new JButton("Submit");
-        submitBtn.setBounds(597, 215, 85, 23);
-        panel.add(submitBtn);
+        submitIndexBtn.setBounds(597, 215, 85, 23);
+        panel.add(submitIndexBtn);
         welcomeText.setBackground(Color.LIGHT_GRAY);
       
         welcomeText.setEditable(false);
@@ -530,7 +604,6 @@ public class GuiDisplay implements Display {
         characterLoadText.setBounds(400, 11, 295, 193);
         panel.add(characterLoadText);
         
-        JSpinner heroSelect = new JSpinner();
         heroSelect.setModel(new SpinnerNumberModel(1, 1, 4, 1));
         heroSelect.setBounds(410, 215, 92, 23);
         panel.add(heroSelect);
@@ -557,31 +630,32 @@ public class GuiDisplay implements Display {
         // TODO Auto-generated method stub
         panel.removeAll();
         
-        JTextPane mapText = new JTextPane();
         mapText.setEditable(false);
         mapText.setBackground(Color.LIGHT_GRAY);
         mapText.setBounds(10, 11, 485, 485);
+        printMap();
         panel.add(mapText);
         
         JTextArea messageText = new JTextArea();
         messageText.setWrapStyleWord(true);
         messageText.setLineWrap(true);
-        messageText.setText("Placeholder text that will hopefully word wrap because long messages might exist?!");
+        // messageText.setText("Placeholder text that will hopefully word wrap because long messages might exist?!");
+        messageText.setText("Reach the edge of the map to win the current mission.\nEnemies may be encountered!");
         messageText.setEditable(false);
         messageText.setBackground(Color.LIGHT_GRAY);
         messageText.setBounds(505, 11, 190, 88);
         panel.add(messageText);
         upBtn.setSize(60, 23);
-        upBtn.setLocation(570, 110);
+        upBtn.setLocation(570, 256);
         
         panel.add(upBtn);
         downBtn.setSize(60, 23);
-        downBtn.setLocation(570, 140);
+        downBtn.setLocation(570, 286);
         panel.add(downBtn);
-        leftBtn.setLocation(505, 140);
+        leftBtn.setLocation(505, 286);
         leftBtn.setSize(60, 23);
         panel.add(leftBtn);
-        rightBtn.setLocation(635, 140);
+        rightBtn.setLocation(635, 286);
         rightBtn.setSize(60, 23);
         panel.add(rightBtn);
         quitBtn.setLocation(635, 473);
@@ -591,7 +665,9 @@ public class GuiDisplay implements Display {
         saveBtn.setSize(60, 23);
         panel.add(saveBtn);
         
-        heroStatsText.setText("HeroStats Here");
+        // heroStatsText.setText("HeroStats Here");
+        heroStatsText.setText(controller.getHero().toString());
+
         heroStatsText.setFont(new Font("Monospaced", Font.PLAIN, 11));
         heroStatsText.setEditable(false);
         heroStatsText.setBackground(Color.LIGHT_GRAY);
@@ -604,15 +680,32 @@ public class GuiDisplay implements Display {
 
     }
 
+    private void printMap() {
+        char[][] map;
+        String line = "";
+
+        map = controller.getMap();
+
+        for (int i = 0; i < map[0].length; i++) {
+            for (int k = 0; k < map[0].length; k++) {
+                line += map[i][k];
+                line += " ";
+            }
+            line += "\n";
+        }
+        mapText.setFont(new Font("Monospaced", Font.PLAIN, 12));
+        mapText.setText(line);
+    }
+
     @Override
     public void fightOrFlight() {
         // TODO Auto-generated method stub
         panel.removeAll();
         
-        JTextPane mapText = new JTextPane();
         mapText.setEditable(false);
         mapText.setBackground(Color.LIGHT_GRAY);
         mapText.setBounds(10, 11, 485, 485);
+        printMap();
         panel.add(mapText);
         
         JTextArea messageText = new JTextArea();
@@ -640,10 +733,10 @@ public class GuiDisplay implements Display {
         // TODO Auto-generated method stub
         panel.removeAll();
         
-        JTextPane mapText = new JTextPane();
         mapText.setEditable(false);
         mapText.setBackground(Color.LIGHT_GRAY);
         mapText.setBounds(10, 11, 485, 485);
+        printMap();
         panel.add(mapText);
         
         JTextArea messageText = new JTextArea();
@@ -700,10 +793,10 @@ public class GuiDisplay implements Display {
         // TODO Auto-generated method stub
         panel.removeAll();
         
-        JTextPane mapText = new JTextPane();
         mapText.setEditable(false);
         mapText.setBackground(Color.LIGHT_GRAY);
         mapText.setBounds(10, 11, 485, 485);
+        printMap();
         panel.add(mapText);
         
         JTextArea messageText = new JTextArea();
@@ -729,10 +822,10 @@ public class GuiDisplay implements Display {
         // TODO Auto-generated method stub
         panel.removeAll();
         
-        JTextPane mapText = new JTextPane();
         mapText.setEditable(false);
         mapText.setBackground(Color.LIGHT_GRAY);
         mapText.setBounds(10, 11, 485, 485);
+        printMap();
         panel.add(mapText);
         
         JTextArea messageText = new JTextArea();
@@ -762,10 +855,10 @@ public class GuiDisplay implements Display {
         // TODO Auto-generated method stub
         panel.removeAll();
         
-        JTextPane mapText = new JTextPane();
         mapText.setEditable(false);
         mapText.setBackground(Color.LIGHT_GRAY);
         mapText.setBounds(10, 11, 485, 485);
+        printMap();
         panel.add(mapText);
         
         JTextArea messageText = new JTextArea();
