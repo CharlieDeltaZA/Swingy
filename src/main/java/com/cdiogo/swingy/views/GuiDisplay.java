@@ -12,6 +12,10 @@ import com.cdiogo.swingy.controllers.GameController;
 import com.cdiogo.swingy.models.heroes.Player;
 import javax.swing.JTextPane;
 import java.awt.Font;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class GuiDisplay implements Display {
 
@@ -19,47 +23,75 @@ public class GuiDisplay implements Display {
     JFrame frame = new JFrame();
     JPanel panel = new JPanel();
     JTextArea output = new JTextArea("Hello poes", 500, 500); //??? for map display
-    JButton back = new JButton("Back");
-    JButton save = new JButton("Save");
-    JButton equip = new JButton("Equip");
-    JButton ignore = new JButton("Ignore");
-    JButton menu = new JButton("Return to Menu");
-    JButton up = new JButton("North");
-    JButton down = new JButton("South");
-    JButton right = new JButton("East");
-    JButton left = new JButton("West");
-    JButton quit = new JButton("Quit");
-    JButton create = new JButton("Create Character");
-    JButton load = new JButton("Load Character");
+    JButton backBtn = new JButton("Back");
+    JButton saveBtn = new JButton("Save");
+    JButton equipBtn = new JButton("Equip");
+    JButton ignoreBtn = new JButton("Ignore");
+    JButton menuBtn = new JButton("Return to Menu");
+    JButton upBtn = new JButton("North");
+    JButton downBtn = new JButton("South");
+    JButton rightBtn = new JButton("East");
+    JButton leftBtn = new JButton("West");
+    JButton quitBtn = new JButton("Quit");
+    JButton createBtn = new JButton("Create Character");
+    JButton loadBtn = new JButton("Load Character");
 //    JLabel welcome = new JLabel("Welcome to SWINGY");
-    private final JTextPane welcome = new JTextPane();
+    private final JTextPane welcomeText = new JTextPane();
 
     public GuiDisplay(GameController controller) {
         this.controller = controller;
         frame.setTitle("Swingy - cdiogo");
-        frame.setSize(780, 548);
+        frame.setSize(720, 548);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(panel);
+        frame.getContentPane().add(panel);
         panel.setLayout(null);
-        back.setBounds(277, 475, 55, 23);
-        panel.add(back);
         
         // START SCREEN
-        welcome.setText("\r\n   WELCOME TO                                  \r\n         _____          _                   \r\n        /  ___|        (_)                  \r\n        \\ `--.__      ___ _ __   __ _ _   _ \r\n         `--. \\ \\ /\\ / / | '_ \\ / _` | | | |\r\n        /\\__/ /\\ V  V /| | | | | (_| | |_| |\r\n        \\____/  \\_/\\_/ |_|_| |_|\\__, |\\__, |\r\n                                 __/ | __/ |\r\n                                |___/ |___/ \r\n\r\n\r\n");
-        welcome.setFont(new Font("Monospaced", Font.PLAIN, 11));
-        welcome.setBounds(10, 11, 352, 193);
-        create.setSize(120, 23);
-        create.setLocation(10, 215);
-        load.setSize(120, 23);
-        load.setLocation(140, 215);
-        quit.setSize(75, 23);
-        quit.setLocation(287, 215);
+        welcomeText.setEditable(false);
+        welcomeText.setText("\r\n   WELCOME TO                                  \r\n         _____          _                   \r\n        /  ___|        (_)                  \r\n        \\ `--.__      ___ _ __   __ _ _   _ \r\n         `--. \\ \\ /\\ / / | '_ \\ / _` | | | |\r\n        /\\__/ /\\ V  V /| | | | | (_| | |_| |\r\n        \\____/  \\_/\\_/ |_|_| |_|\\__, |\\__, |\r\n                                 __/ | __/ |\r\n                                |___/ |___/ \r\n\r\n\r\n");
+        welcomeText.setFont(new Font("Monospaced", Font.PLAIN, 11));
+        welcomeText.setBounds(10, 11, 352, 193);
         
-        panel.add(create);
-        panel.add(load);
-        panel.add(quit);
-        panel.add(welcome);
+        createBtn.setSize(135, 23);
+        createBtn.setLocation(10, 215);
+        loadBtn.setSize(110, 23);
+        loadBtn.setLocation(155, 215);
+        quitBtn.setSize(75, 23);
+        quitBtn.setLocation(287, 215);
+        
+        panel.add(createBtn);
+        panel.add(loadBtn);
+        panel.add(quitBtn);
+        panel.add(welcomeText);
         // END START SCREEN
+        
+        // CREATE SCREEN
+        // welcomeText.setEditable(false);
+        // welcomeText.setText("\r\n   WELCOME TO                                  \r\n         _____          _                   \r\n        /  ___|        (_)                  \r\n        \\ `--.__      ___ _ __   __ _ _   _ \r\n         `--. \\ \\ /\\ / / | '_ \\ / _` | | | |\r\n        /\\__/ /\\ V  V /| | | | | (_| | |_| |\r\n        \\____/  \\_/\\_/ |_|_| |_|\\__, |\\__, |\r\n                                 __/ | __/ |\r\n                                |___/ |___/ \r\n\r\n\r\n");
+        // welcomeText.setFont(new Font("Monospaced", Font.PLAIN, 11));
+        // welcomeText.setBounds(10, 11, 352, 193);
+        // panel.add(welcomeText);
+        
+        // JSpinner classSelect = new JSpinner();
+        // classSelect.setModel(new SpinnerNumberModel(1, 1, 4, 1));
+        // classSelect.setBounds(410, 215, 92, 23);
+        // panel.add(classSelect);
+        
+        // backBtn.setBounds(20, 215, 60, 23);
+        // panel.add(backBtn);
+        
+        // JButton submitBtn = new JButton("Submit");
+        // submitBtn.setBounds(512, 215, 85, 23);
+        // panel.add(submitBtn);
+        
+        // JTextArea characterCreateText = new JTextArea();
+        // characterCreateText.setText("\r\n\r\n   Choose a Hero Class\r\n\r\n      1 - Ranger\r\n      2 - Wizard\r\n      3 - Fighter\r\n      4 - Rogue");
+        // characterCreateText.setFont(new Font("Monospaced", Font.PLAIN, 13));
+        // characterCreateText.setEditable(false);
+        // characterCreateText.setBounds(400, 11, 295, 193);
+        // panel.add(characterCreateText);
+        
+        // END CREATE SCREEN
         
         frame.setVisible(true);
     }
@@ -69,20 +101,26 @@ public class GuiDisplay implements Display {
         // TODO Auto-generated method stub
         panel.removeAll();
         
-        welcome.setText("\r\n   WELCOME TO                                  \r\n         _____          _                   \r\n        /  ___|        (_)                  \r\n        \\ `--.__      ___ _ __   __ _ _   _ \r\n         `--. \\ \\ /\\ / / | '_ \\ / _` | | | |\r\n        /\\__/ /\\ V  V /| | | | | (_| | |_| |\r\n        \\____/  \\_/\\_/ |_|_| |_|\\__, |\\__, |\r\n                                 __/ | __/ |\r\n                                |___/ |___/ \r\n\r\n\r\n");
-        welcome.setFont(new Font("Monospaced", Font.PLAIN, 11));
-        welcome.setBounds(10, 11, 352, 193);
-        create.setSize(120, 23);
-        create.setLocation(10, 215);
-        load.setSize(120, 23);
-        load.setLocation(140, 215);
-        quit.setSize(75, 23);
-        quit.setLocation(287, 215);
+        welcomeText.setText("\r\n   WELCOME TO                                  \r\n         _____          _                   \r\n        /  ___|        (_)                  \r\n        \\ `--.__      ___ _ __   __ _ _   _ \r\n         `--. \\ \\ /\\ / / | '_ \\ / _` | | | |\r\n        /\\__/ /\\ V  V /| | | | | (_| | |_| |\r\n        \\____/  \\_/\\_/ |_|_| |_|\\__, |\\__, |\r\n                                 __/ | __/ |\r\n                                |___/ |___/ \r\n\r\n\r\n");
+        welcomeText.setFont(new Font("Monospaced", Font.PLAIN, 11));
+        welcomeText.setBounds(10, 11, 352, 193);
+        createBtn.setSize(135, 23);
+        createBtn.setLocation(10, 215);
+        loadBtn.setSize(110, 23);
+        loadBtn.setLocation(155, 215);
+        quitBtn.setSize(75, 23);
+        quitBtn.setLocation(287, 215);
         
-        panel.add(create);
-        panel.add(load);
-        panel.add(quit);
-        panel.add(welcome);
+        panel.add(createBtn);
+        panel.add(loadBtn);
+        panel.add(quitBtn);
+        panel.add(welcomeText);
+        
+        createBtn.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		controller.handleInput("c");
+        	}
+        });
         
         panel.repaint();
         frame.setVisible(true);
@@ -100,7 +138,39 @@ public class GuiDisplay implements Display {
     public void createCharClass() {
         // TODO Auto-generated method stub
         panel.removeAll();
+        welcomeText.setEditable(false);
+        welcomeText.setText("\r\n   WELCOME TO                                  \r\n         _____          _                   \r\n        /  ___|        (_)                  \r\n        \\ `--.__      ___ _ __   __ _ _   _ \r\n         `--. \\ \\ /\\ / / | '_ \\ / _` | | | |\r\n        /\\__/ /\\ V  V /| | | | | (_| | |_| |\r\n        \\____/  \\_/\\_/ |_|_| |_|\\__, |\\__, |\r\n                                 __/ | __/ |\r\n                                |___/ |___/ \r\n\r\n\r\n");
+        welcomeText.setFont(new Font("Monospaced", Font.PLAIN, 11));
+        welcomeText.setBounds(10, 11, 352, 193);
+        panel.add(welcomeText);
+        
+        JSpinner classSelect = new JSpinner();
+        classSelect.setModel(new SpinnerNumberModel(1, 1, 4, 1));
+        classSelect.setBounds(410, 215, 92, 23);
+        panel.add(classSelect);
+        
+        backBtn.setBounds(20, 215, 60, 23);
+        panel.add(backBtn);
+        
+        backBtn.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		controller.handleInput("b");
+        	}
+        });
+        
+        JButton submitBtn = new JButton("Submit");
+        submitBtn.setBounds(512, 215, 85, 23);
+        panel.add(submitBtn);
+        
+        JTextArea characterCreateText = new JTextArea();
+        characterCreateText.setText("\r\n\r\n   Choose a Hero Class\r\n\r\n      1 - Ranger\r\n      2 - Wizard\r\n      3 - Fighter\r\n      4 - Rogue");
+        characterCreateText.setFont(new Font("Monospaced", Font.PLAIN, 13));
+        characterCreateText.setEditable(false);
+        characterCreateText.setBounds(400, 11, 295, 193);
+        panel.add(characterCreateText);
 
+        panel.repaint();
+        frame.setVisible(true);
     }
 
     @Override
@@ -165,5 +235,4 @@ public class GuiDisplay implements Display {
         panel.removeAll();
 
     }
-    
 }
