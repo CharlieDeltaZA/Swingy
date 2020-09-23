@@ -741,14 +741,14 @@ public class GuiDisplay implements Display {
 //        messageText.setWrapStyleWord(true);
 //        messageText.setLineWrap(true);
         // messageText.setText("Placeholder text that will hopefully word wrap because long messages might exist?!");
-        messageText.setText("Reach the edge of the map to win the current mission.\n\nEnemies may be encountered!");
+        messageText.setText(" Reach the edge of the map to win the current mission.\n\n Enemies may be encountered!");
         if (controller.isHeroEscaped()) {
             controller.setHeroEscaped(false);
-            messageText.setText("You have successfully escaped!");
+            messageText.setText(" You have successfully escaped!");
         }
         if (controller.isLevelUp()) {
             controller.setLevelUp(false);
-            messageText.setText("You have levelled up!");
+            messageText.setText(" You have levelled up!");
         }
 //        messageText.setEditable(false);
 //        messageText.setBackground(Color.LIGHT_GRAY);
@@ -796,6 +796,7 @@ public class GuiDisplay implements Display {
         map = controller.getMap();
 
         for (int i = 0; i < map[0].length; i++) {
+            line += " ";
             for (int k = 0; k < map[0].length; k++) {
                 line += map[i][k];
                 line += " ";
@@ -820,7 +821,7 @@ public class GuiDisplay implements Display {
         
 //        messageText.setWrapStyleWord(true);
 //        messageText.setLineWrap(true);
-        line = String.format("You have encountered a villain!\n\n\t%s", controller.getCurrentEnemy().toString());
+        line = String.format(" You have encountered a villain!\n\n %s", controller.getCurrentEnemy().toString());
         messageText.setText(line);
 //        messageText.setEditable(false);
 //        messageText.setBackground(Color.LIGHT_GRAY);
@@ -851,10 +852,10 @@ public class GuiDisplay implements Display {
         
 //        messageText.setWrapStyleWord(true);
 //        messageText.setLineWrap(true);
-        messageText.setText("You have Successfully completed this level!\r\n\r\nContinue your adventure from the main menu, or try a new character.");
+        messageText.setText(" You have Successfully completed this level!\r\n\r\n Continue your adventure from the main menu, or try a new character.");
 //        messageText.setEditable(false);
 //        messageText.setBackground(Color.LIGHT_GRAY);
-//        messageText.setBounds(505, 11, 190, 138);
+        messageText.setBounds(505, 11, 190, 138);
         panel.add(messageText);
         quitBtn.setLocation(635, 473);
 //        quitBtn.setSize(60, 23);
@@ -877,10 +878,10 @@ public class GuiDisplay implements Display {
         
 //        messageText.setWrapStyleWord(true);
 //        messageText.setLineWrap(true);
-        messageText.setText("Are you sure you would like to quit the game?\r\n\r\nConfirm - Save and Quit\r\nDeny - Return to previous screen");
+        messageText.setText(" Are you sure you would like to quit the game?\r\n\r\n Confirm - Save and Quit\r\n Deny - Return to previous screen");
 //        messageText.setEditable(false);
 //        messageText.setBackground(Color.LIGHT_GRAY);
-//        messageText.setBounds(10, 11, 200, 130);
+        messageText.setBounds(10, 11, 200, 130);
         panel.add(messageText);
         panel.add(quitConfirmBtn);
         panel.add(quitDenyBtn);
@@ -908,7 +909,7 @@ public class GuiDisplay implements Display {
         
 //        messageText.setWrapStyleWord(true);
 //        messageText.setLineWrap(true);
-        messageText.setText("Your attempt to flea has failed!\r\n\r\nPrepare for BATTLE!");
+        messageText.setText(" Your attempt to flea has failed!\r\n\r\n Prepare for BATTLE!");
 //        messageText.setEditable(false);
 //        messageText.setBackground(Color.LIGHT_GRAY);
 //        messageText.setBounds(505, 11, 190, 88);
@@ -935,10 +936,10 @@ public class GuiDisplay implements Display {
         
 //        messageText.setWrapStyleWord(true);
 //        messageText.setLineWrap(true);
-        messageText.setText("      GAME   OVER\r\n\r\nYour hero has died :(\r\n\r\nYou may return to the menu and play again, or you may quit.");
+        messageText.setText("      GAME   OVER\r\n\r\n Your hero has died :(\r\n\r\n You may return to the menu and play again, or you may quit.");
 //        messageText.setEditable(false);
 //        messageText.setBackground(Color.LIGHT_GRAY);
-//        messageText.setBounds(505, 11, 190, 142);
+        messageText.setBounds(505, 11, 190, 142);
         panel.add(messageText);
         quitBtn.setLocation(635, 473);
 //        quitBtn.setSize(60, 23);
@@ -973,18 +974,18 @@ public class GuiDisplay implements Display {
 //        messageText.setLineWrap(true);
 //        messageText.setEditable(false);
 //        messageText.setBackground(Color.LIGHT_GRAY);
-//        messageText.setBounds(505, 11, 190, 154);
+        messageText.setBounds(505, 11, 190, 154);
         panel.add(messageText);
         
         continueBtn.setLocation(505, 176);
 //        continueBtn.setSize(90, 23);
         
         
-        line += String.format("You have defeated the %s\n", enemy.getName());
-        line += String.format("You gain %d XP\n", enemy.getXp());
+        line += String.format(" You have defeated the %s\n", enemy.getName());
+        line += String.format(" You gain %d XP\n", enemy.getXp());
         if (enemy.getArtifact() != null) {
-            line += String.format("\n\nThis villain dropped an artifact!\n%s", enemy.getArtifact().toString());
-            line += "\n\nWould you like to equip it?";
+            line += String.format("\n\n This villain dropped an artifact!\n %s", enemy.getArtifact().toString());
+            line += "\n\n Would you like to equip it?";
             messageText.setText(line);
             panel.add(equipBtn);
             panel.add(ignoreBtn);
