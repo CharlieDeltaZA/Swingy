@@ -29,7 +29,7 @@ public class GuiDisplay implements Display {
     JButton quitConfirmBtn = new JButton("Confirm");
     JButton quitDenyBtn = new JButton("Deny");
     JButton fightBtn = new JButton("Fight");
-    JButton fleaBtn = new JButton("Flea");
+    JButton fleeBtn = new JButton("Flee");
     JButton continueBtn = new JButton("Continue");
     JButton createBtn = new JButton("Create Character");
     JButton loadBtn = new JButton("Load Character");
@@ -223,9 +223,9 @@ public class GuiDisplay implements Display {
 //        fightBtn.setLocation(505, 110);
 //        fightBtn.setSize(60, 23);
 //        panel.add(fightBtn);
-//        fleaBtn.setLocation(505, 140);
-//        fleaBtn.setSize(60, 23);
-//        panel.add(fleaBtn);
+//        fleeBtn.setLocation(505, 140);
+//        fleeBtn.setSize(60, 23);
+//        panel.add(fleeBtn);
         // END FIGHT SCREEN
         
         // START NO ESCAPE
@@ -237,7 +237,7 @@ public class GuiDisplay implements Display {
 //        JTextArea messageText = new JTextArea();
 //        messageText.setWrapStyleWord(true);
 //        messageText.setLineWrap(true);
-//        messageText.setText("Your attempt to flea has failed!\r\n\r\nPrepare for BATTLE!");
+//        messageText.setText("Your attempt to flee has failed!\r\n\r\nPrepare for BATTLE!");
 //        messageText.setEditable(false);
 //        messageText.setBackground(Color.LIGHT_GRAY);
 //        messageText.setBounds(505, 11, 190, 88);
@@ -294,32 +294,32 @@ public class GuiDisplay implements Display {
         // END GAME OVER
         
         // START AFTER ACTION
-//        mapText.setEditable(false);
-//        mapText.setBackground(Color.LIGHT_GRAY);
-//        mapText.setBounds(10, 11, 485, 485);
-//        panel.add(mapText);
-//        
-//        JTextArea messageText = new JTextArea();
-//        messageText.setWrapStyleWord(true);
-//        messageText.setLineWrap(true);
-//        messageText.setText("Placeholder Text");
-//        messageText.setEditable(false);
-//        messageText.setBackground(Color.LIGHT_GRAY);
-//        messageText.setBounds(505, 11, 190, 154);
-//        panel.add(messageText);
-//        
-//        continueBtn.setLocation(505, 176);
-//        continueBtn.setSize(90, 23);
-//        panel.add(continueBtn);
-//        
-//        equipBtn.setLocation(505, 210);
-//        equipBtn.setSize(90, 23);
-//        panel.add(equipBtn);
-//        
-//        ignoreBtn.setLocation(605, 210);
-//        ignoreBtn.setSize(90, 23);
-//        
-//        panel.add(ignoreBtn);
+//       mapText.setEditable(false);
+//       mapText.setBackground(Color.LIGHT_GRAY);
+//       mapText.setBounds(10, 11, 485, 485);
+//       panel.add(mapText);
+//       
+//       JTextArea messageText = new JTextArea();
+//       messageText.setWrapStyleWord(true);
+//       messageText.setLineWrap(true);
+//       messageText.setText("Placeholder Text");
+//       messageText.setEditable(false);
+//       messageText.setBackground(Color.LIGHT_GRAY);
+//       messageText.setBounds(505, 11, 190, 170);
+//       panel.add(messageText);
+//       
+//       continueBtn.setLocation(505, 192);
+//       continueBtn.setSize(90, 23);
+//       panel.add(continueBtn);
+//       
+//       equipBtn.setLocation(505, 226);
+//       equipBtn.setSize(90, 23);
+//       panel.add(equipBtn);
+//       
+//       ignoreBtn.setLocation(605, 226);
+//       ignoreBtn.setSize(90, 23);
+//       
+//       panel.add(ignoreBtn);
         // END AFTER ACTION
         
         // START QUIT
@@ -409,8 +409,8 @@ public class GuiDisplay implements Display {
         // FightFlight
         fightBtn.setLocation(505, 110);
         fightBtn.setSize(60, 23);
-        fleaBtn.setLocation(505, 140);
-        fleaBtn.setSize(60, 23);
+        fleeBtn.setLocation(505, 140);
+        fleeBtn.setSize(60, 23);
         
         // RoundWon
         menuBtn.setLocation(505, 473);
@@ -428,9 +428,9 @@ public class GuiDisplay implements Display {
         // GameOver
         
         // AfterAction
-        equipBtn.setLocation(505, 210);
+        equipBtn.setLocation(505, 226);
         equipBtn.setSize(90, 23);
-        ignoreBtn.setLocation(605, 210);
+        ignoreBtn.setLocation(605, 226);
         ignoreBtn.setSize(90, 23);
                 
     }
@@ -553,7 +553,7 @@ public class GuiDisplay implements Display {
         	}
         });
 
-        fleaBtn.addActionListener(new ActionListener() {
+        fleeBtn.addActionListener(new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
                 controller.handleInput("r");
@@ -626,17 +626,10 @@ public class GuiDisplay implements Display {
         // TODO Auto-generated method stub
         panel.removeAll();
         
-//        submitNameBtn.setBounds(597, 215, 85, 23);
-        
         panel.add(welcomeText);
         panel.add(submitNameBtn);
-        
         characterText.setText("\r\n\r\n   Enter a name for your Hero");
         panel.add(characterText);
-        
-//        heroNameText.setFont(new Font("Monospaced", Font.PLAIN, 11));
-//        heroNameText.setBounds(410, 216, 159, 20);
-//        heroNameText.setColumns(10);
         panel.add(heroNameText);
         panel.add(nameLabel);
 
@@ -653,16 +646,8 @@ public class GuiDisplay implements Display {
         panel.removeAll();
         panel.add(welcomeText);
         
-//        classSelect.setModel(new SpinnerNumberModel(1, 1, 4, 1));
-//        classSelect.setBounds(410, 215, 92, 23);
         panel.add(classSelect);
-        
-//        backBtn.setBounds(20, 215, 60, 23);
         panel.add(backBtn);
-        
-        
-        
-//        submitClassBtn.setBounds(512, 215, 85, 23);
         panel.add(submitClassBtn);
         
         characterText.setText("\r\n\r\n   Choose a Hero Class\r\n\r\n      1 - Ranger\r\n      2 - Wizard\r\n      3 - Fighter\r\n      4 - Rogue");
@@ -684,16 +669,12 @@ public class GuiDisplay implements Display {
         panel.add(characterText);
         
         if (heroes.size() != 0) {
-//            submitIndexBtn.setBounds(597, 215, 85, 23);
             panel.add(submitIndexBtn);
             
             heroSelect.setModel(new SpinnerNumberModel(1, 1, heroes.size(), 1));
-//            heroSelect.setBounds(410, 215, 92, 23);
-//            heroSelect.setBounds(175, 215, 92, 23);
             panel.add(heroSelect);
         }
         
-//        backBtn.setBounds(20, 215, 60, 23);
         panel.add(backBtn);
         
         panel.validate();
@@ -732,15 +713,9 @@ public class GuiDisplay implements Display {
         // TODO Auto-generated method stub
         panel.removeAll();
         
-//        mapText.setEditable(false);
-//        mapText.setBackground(Color.LIGHT_GRAY);
-//        mapText.setBounds(10, 11, 485, 485);
         printMap();
         panel.add(mapText);
         
-//        messageText.setWrapStyleWord(true);
-//        messageText.setLineWrap(true);
-        // messageText.setText("Placeholder text that will hopefully word wrap because long messages might exist?!");
         messageText.setText(" Reach the edge of the map to win the current mission.\n\n Enemies may be encountered!");
         if (controller.isHeroEscaped()) {
             controller.setHeroEscaped(false);
@@ -750,11 +725,8 @@ public class GuiDisplay implements Display {
             controller.setLevelUp(false);
             messageText.setText(" You have levelled up!");
         }
-//        messageText.setEditable(false);
-//        messageText.setBackground(Color.LIGHT_GRAY);
         messageText.setBounds(505, 11, 190, 88);
         quitBtn.setLocation(635, 473);
-//        quitBtn.setSize(60, 23);
         panel.add(messageText);
         panel.add(upBtn);
         panel.add(downBtn);
@@ -763,24 +735,7 @@ public class GuiDisplay implements Display {
         panel.add(quitBtn);
         panel.add(saveBtn);
         
-//        upBtn.setSize(60, 23);
-//        upBtn.setLocation(570, 256);
-//        downBtn.setSize(60, 23);
-//        downBtn.setLocation(570, 286);
-//        leftBtn.setLocation(505, 286);
-//        leftBtn.setSize(60, 23);
-//        rightBtn.setLocation(635, 286);
-//        rightBtn.setSize(60, 23);
-//        saveBtn.setLocation(505, 473);
-//        saveBtn.setSize(60, 23);
-        
-        // heroStatsText.setText("HeroStats Here");
         heroStatsText.setText(controller.getHero().toString());
-
-//        heroStatsText.setFont(new Font("Monospaced", Font.PLAIN, 11));
-//        heroStatsText.setEditable(false);
-//        heroStatsText.setBackground(Color.LIGHT_GRAY);
-//        heroStatsText.setBounds(505, 110, 190, 115);
         panel.add(heroStatsText);
         
         panel.validate();
@@ -813,26 +768,15 @@ public class GuiDisplay implements Display {
         String line = "";
         panel.removeAll();
         
-//        mapText.setEditable(false);
-//        mapText.setBackground(Color.LIGHT_GRAY);
-//        mapText.setBounds(10, 11, 485, 485);
         printMap();
         panel.add(mapText);
         
-//        messageText.setWrapStyleWord(true);
-//        messageText.setLineWrap(true);
         line = String.format(" You have encountered a villain!\n\n %s", controller.getCurrentEnemy().toString());
         messageText.setText(line);
-//        messageText.setEditable(false);
-//        messageText.setBackground(Color.LIGHT_GRAY);
         messageText.setBounds(505, 11, 190, 88);
         panel.add(messageText);
         panel.add(fightBtn);
-        panel.add(fleaBtn);
-//        fightBtn.setLocation(505, 110);
-//        fightBtn.setSize(60, 23);
-//        fleaBtn.setLocation(505, 140);
-//        fleaBtn.setSize(60, 23);
+        panel.add(fleeBtn);
         
         panel.validate();
         panel.repaint();
@@ -844,26 +788,16 @@ public class GuiDisplay implements Display {
         // TODO Auto-generated method stub
         panel.removeAll();
         
-//        mapText.setEditable(false);
-//        mapText.setBackground(Color.LIGHT_GRAY);
-//        mapText.setBounds(10, 11, 485, 485);
         printMap();
         panel.add(mapText);
         
-//        messageText.setWrapStyleWord(true);
-//        messageText.setLineWrap(true);
         messageText.setText(" You have Successfully completed this level!\r\n\r\n Continue your adventure from the main menu, or try a new character.");
-//        messageText.setEditable(false);
-//        messageText.setBackground(Color.LIGHT_GRAY);
         messageText.setBounds(505, 11, 190, 138);
         panel.add(messageText);
         quitBtn.setLocation(635, 473);
-//        quitBtn.setSize(60, 23);
         
         panel.add(quitBtn);
         panel.add(menuBtn);
-//        menuBtn.setLocation(505, 473);
-//        menuBtn.setSize(120, 23);
         
         panel.validate();
         panel.repaint();
@@ -876,19 +810,11 @@ public class GuiDisplay implements Display {
         // TODO Auto-generated method stub
         panel.removeAll();
         
-//        messageText.setWrapStyleWord(true);
-//        messageText.setLineWrap(true);
         messageText.setText(" Are you sure you would like to quit the game?\r\n\r\n Confirm - Save and Quit\r\n Deny - Return to previous screen");
-//        messageText.setEditable(false);
-//        messageText.setBackground(Color.LIGHT_GRAY);
         messageText.setBounds(10, 11, 200, 130);
         panel.add(messageText);
         panel.add(quitConfirmBtn);
         panel.add(quitDenyBtn);
-//        quitConfirmBtn.setLocation(10, 152);
-//        quitConfirmBtn.setSize(90, 23);
-//        quitDenyBtn.setLocation(120, 152);
-//        quitDenyBtn.setSize(90, 23);
         
         panel.validate();
         panel.repaint();
@@ -901,17 +827,10 @@ public class GuiDisplay implements Display {
         // TODO Auto-generated method stub
         panel.removeAll();
         
-//        mapText.setEditable(false);
-//        mapText.setBackground(Color.LIGHT_GRAY);
-//        mapText.setBounds(10, 11, 485, 485);
         printMap();
         panel.add(mapText);
         
-//        messageText.setWrapStyleWord(true);
-//        messageText.setLineWrap(true);
-        messageText.setText(" Your attempt to flea has failed!\r\n\r\n Prepare for BATTLE!");
-//        messageText.setEditable(false);
-//        messageText.setBackground(Color.LIGHT_GRAY);
+        messageText.setText(" Your attempt to flee has failed!\r\n\r\n Prepare for BATTLE!");
         messageText.setBounds(505, 11, 190, 88);
         panel.add(messageText);
         continueBtn.setLocation(505, 110);
@@ -928,25 +847,15 @@ public class GuiDisplay implements Display {
         // TODO Auto-generated method stub
         panel.removeAll();
         
-//        mapText.setEditable(false);
-//        mapText.setBackground(Color.LIGHT_GRAY);
-//        mapText.setBounds(10, 11, 485, 485);
         printMap();
         panel.add(mapText);
         
-//        messageText.setWrapStyleWord(true);
-//        messageText.setLineWrap(true);
         messageText.setText("      GAME   OVER\r\n\r\n Your hero has died :(\r\n\r\n You may return to the menu and play again, or you may quit.");
-//        messageText.setEditable(false);
-//        messageText.setBackground(Color.LIGHT_GRAY);
         messageText.setBounds(505, 11, 190, 142);
         panel.add(messageText);
         quitBtn.setLocation(635, 473);
-//        quitBtn.setSize(60, 23);
       
         panel.add(quitBtn);
-//        menuBtn.setLocation(505, 473);
-//        menuBtn.setSize(120, 23);
         panel.add(menuBtn);
         
         panel.validate();
@@ -962,24 +871,13 @@ public class GuiDisplay implements Display {
         String line = "";
         panel.removeAll();
         
-//        mapText.setEditable(false);
-//        mapText.setBackground(Color.LIGHT_GRAY);
-//        mapText.setBounds(10, 11, 485, 485);
         printMap();
         panel.add(mapText);
         
-        // messageText.setText("Placeholder Text");
-
-//        messageText.setWrapStyleWord(true);
-//        messageText.setLineWrap(true);
-//        messageText.setEditable(false);
-//        messageText.setBackground(Color.LIGHT_GRAY);
-        messageText.setBounds(505, 11, 190, 154);
+        messageText.setBounds(505, 11, 190, 170);
         panel.add(messageText);
         
-        continueBtn.setLocation(505, 176);
-//        continueBtn.setSize(90, 23);
-        
+        continueBtn.setLocation(505, 192);
         
         line += String.format(" You have defeated the %s\n", enemy.getName());
         line += String.format(" You gain %d XP\n", enemy.getXp());
