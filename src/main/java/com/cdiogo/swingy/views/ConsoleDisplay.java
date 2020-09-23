@@ -211,7 +211,7 @@ public class ConsoleDisplay implements Display {
             System.out.println(String.format("    %s    ", controller.getCurrentEnemy().toString()));
             System.out.println("                                        ");
             System.out.println("    f - Fight the enemy                 ");
-            System.out.println("    r - Attempt to flea                 ");
+            System.out.println("    r - Attempt to flee                 ");
             System.out.println("                                        ");
             System.out.println("+--------------------------------------+");
             System.out.print("Your choice: ");
@@ -277,7 +277,7 @@ public class ConsoleDisplay implements Display {
             System.out.print("\033[H\033[2J");
             System.out.println("+----------------------------------+");
             System.out.println("|                                  |");
-            System.out.println("|     Your attempt to flea has     |");
+            System.out.println("|     Your attempt to flee has     |");
             System.out.println("|        failed! Prepare for       |");
             System.out.println("|             BATTLE!              |");
             System.out.println("|                                  |");

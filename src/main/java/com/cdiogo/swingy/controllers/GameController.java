@@ -163,8 +163,8 @@ public class GameController {
                     // FIGHT
                     fightEnemy();
                 } else if (input.equals("r")) {
-                    // FLEA
-                    tryFlea();
+                    // FLEE
+                    tryFlee();
                 } 
                 break;
 
@@ -334,7 +334,7 @@ public class GameController {
         }
     }
 
-    private void tryFlea() {
+    private void tryFlee() {
         // 50% chance to escape
         Random random = new Random();
         int chance = random.nextInt(101);
