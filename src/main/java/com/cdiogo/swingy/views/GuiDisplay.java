@@ -752,7 +752,7 @@ public class GuiDisplay implements Display {
         }
 //        messageText.setEditable(false);
 //        messageText.setBackground(Color.LIGHT_GRAY);
-//        messageText.setBounds(505, 11, 190, 88);
+        messageText.setBounds(505, 11, 190, 88);
         quitBtn.setLocation(635, 473);
 //        quitBtn.setSize(60, 23);
         panel.add(messageText);
@@ -825,7 +825,7 @@ public class GuiDisplay implements Display {
         messageText.setText(line);
 //        messageText.setEditable(false);
 //        messageText.setBackground(Color.LIGHT_GRAY);
-//        messageText.setBounds(505, 11, 190, 88);
+        messageText.setBounds(505, 11, 190, 88);
         panel.add(messageText);
         panel.add(fightBtn);
         panel.add(fleaBtn);
@@ -912,7 +912,7 @@ public class GuiDisplay implements Display {
         messageText.setText(" Your attempt to flea has failed!\r\n\r\n Prepare for BATTLE!");
 //        messageText.setEditable(false);
 //        messageText.setBackground(Color.LIGHT_GRAY);
-//        messageText.setBounds(505, 11, 190, 88);
+        messageText.setBounds(505, 11, 190, 88);
         panel.add(messageText);
         continueBtn.setLocation(505, 110);
         panel.add(continueBtn);
