@@ -58,7 +58,7 @@ public class GuiDisplay implements Display {
         frame.getContentPane().add(panel);
         panel.setLayout(null);
         
-//        initCommonComponents();
+        initCommonComponents();
         configureActionListeners();
         
         // START SCREEN
@@ -139,71 +139,71 @@ public class GuiDisplay implements Display {
         // END CREATE SCREEN NAME
         
         // START LOAD CHAR SCREEN
-//        submitIndexBtn.setBounds(277, 215, 85, 23);
-//        panel.add(submitIndexBtn);
-//        welcomeText.setBackground(Color.LIGHT_GRAY);
-//      
-//        welcomeText.setEditable(false);
-//        welcomeText.setText("\r\n   WELCOME TO                                  \r\n         _____          _                   \r\n        /  ___|        (_)                  \r\n        \\ `--.__      ___ _ __   __ _ _   _ \r\n         `--. \\ \\ /\\ / / | '_ \\ / _` | | | |\r\n        /\\__/ /\\ V  V /| | | | | (_| | |_| |\r\n        \\____/  \\_/\\_/ |_|_| |_|\\__, |\\__, |\r\n                                 __/ | __/ |\r\n                                |___/ |___/ \r\n\r\n\r\n");
-//        welcomeText.setFont(new Font("Monospaced", Font.PLAIN, 11));
-//        welcomeText.setBounds(10, 11, 352, 193);
-//        panel.add(welcomeText);
-//      
-//        characterText.setWrapStyleWord(true);
-//        characterText.setBackground(Color.LIGHT_GRAY);
-//        characterText.setText("\r\n\r\n   Choose a Hero");
-//        characterText.setFont(new Font("Monospaced", Font.PLAIN, 13));
-//        characterText.setEditable(false);
-//        characterText.setBounds(395, 11, 300, 325);
-//        panel.add(characterText);
-//        
-//        heroSelect.setModel(new SpinnerNumberModel(1, 1, 4, 1));
-//        heroSelect.setBounds(175, 215, 92, 23);
-//        panel.add(heroSelect);
-//        
-//        backBtn.setBounds(20, 215, 60, 23);
-//        panel.add(backBtn);
+        // submitIndexBtn.setBounds(277, 215, 85, 23);
+        // panel.add(submitIndexBtn);
+        // welcomeText.setBackground(Color.LIGHT_GRAY);
+      
+        // welcomeText.setEditable(false);
+        // welcomeText.setText("\r\n   WELCOME TO                                  \r\n         _____          _                   \r\n        /  ___|        (_)                  \r\n        \\ `--.__      ___ _ __   __ _ _   _ \r\n         `--. \\ \\ /\\ / / | '_ \\ / _` | | | |\r\n        /\\__/ /\\ V  V /| | | | | (_| | |_| |\r\n        \\____/  \\_/\\_/ |_|_| |_|\\__, |\\__, |\r\n                                 __/ | __/ |\r\n                                |___/ |___/ \r\n\r\n\r\n");
+        // welcomeText.setFont(new Font("Monospaced", Font.PLAIN, 11));
+        // welcomeText.setBounds(10, 11, 352, 193);
+        // panel.add(welcomeText);
+      
+        // characterText.setWrapStyleWord(true);
+        // characterText.setBackground(Color.LIGHT_GRAY);
+        // characterText.setText("\r\n\r\n   Choose a Hero");
+        // characterText.setFont(new Font("Monospaced", Font.PLAIN, 13));
+        // characterText.setEditable(false);
+        // characterText.setBounds(395, 11, 300, 325);
+        // panel.add(characterText);
+        
+        // heroSelect.setModel(new SpinnerNumberModel(1, 1, 4, 1));
+        // heroSelect.setBounds(175, 215, 92, 23);
+        // panel.add(heroSelect);
+        
+        // backBtn.setBounds(20, 215, 60, 23);
+        // panel.add(backBtn);
         // END LOAD CHAR SCREEN
         
         // START PLAY SCREEN
-        mapText.setEditable(false);
-        mapText.setBackground(Color.LIGHT_GRAY);
-        mapText.setBounds(10, 11, 485, 485);
-        panel.add(mapText);
+        // mapText.setEditable(false);
+        // mapText.setBackground(Color.LIGHT_GRAY);
+        // mapText.setBounds(10, 11, 485, 485);
+        // panel.add(mapText);
         
-        messageText.setWrapStyleWord(true);
-        messageText.setLineWrap(true);
-        messageText.setText("Placeholder text that will hopefully word wrap because long messages might exist?!");
-        messageText.setEditable(false);
-        messageText.setBackground(Color.LIGHT_GRAY);
-        messageText.setBounds(505, 11, 190, 88);
-        panel.add(messageText);
-        upBtn.setSize(60, 23);
-        upBtn.setLocation(570, 256);
+        // messageText.setWrapStyleWord(true);
+        // messageText.setLineWrap(true);
+        // messageText.setText("Placeholder text that will hopefully word wrap because long messages might exist?!");
+        // messageText.setEditable(false);
+        // messageText.setBackground(Color.LIGHT_GRAY);
+        // messageText.setBounds(505, 11, 190, 88);
+        // panel.add(messageText);
+        // upBtn.setSize(60, 23);
+        // upBtn.setLocation(570, 256);
        
-        panel.add(upBtn);
-        downBtn.setSize(60, 23);
-        downBtn.setLocation(570, 286);
-        panel.add(downBtn);
-        leftBtn.setLocation(505, 286);
-        leftBtn.setSize(60, 23);
-        panel.add(leftBtn);
-        rightBtn.setLocation(635, 286);
-        rightBtn.setSize(60, 23);
-        panel.add(rightBtn);
-        quitBtn.setLocation(635, 473);
-        quitBtn.setSize(60, 23);
-        panel.add(quitBtn);
-        saveBtn.setLocation(505, 473);
-        saveBtn.setSize(60, 23);
-        panel.add(saveBtn);
-        heroStatsText.setText("HeroStats Here");
-        heroStatsText.setFont(new Font("Monospaced", Font.PLAIN, 11));
-        heroStatsText.setEditable(false);
-        heroStatsText.setBackground(Color.LIGHT_GRAY);
-        heroStatsText.setBounds(505, 110, 190, 115);
+        // panel.add(upBtn);
+        // downBtn.setSize(60, 23);
+        // downBtn.setLocation(570, 286);
+        // panel.add(downBtn);
+        // leftBtn.setLocation(505, 286);
+        // leftBtn.setSize(60, 23);
+        // panel.add(leftBtn);
+        // rightBtn.setLocation(635, 286);
+        // rightBtn.setSize(60, 23);
+        // panel.add(rightBtn);
+        // quitBtn.setLocation(635, 473);
+        // quitBtn.setSize(60, 23);
+        // panel.add(quitBtn);
+        // saveBtn.setLocation(505, 473);
+        // saveBtn.setSize(60, 23);
+        // panel.add(saveBtn);
+        // heroStatsText.setText("HeroStats Here");
+        // heroStatsText.setFont(new Font("Monospaced", Font.PLAIN, 11));
+        // heroStatsText.setEditable(false);
+        // heroStatsText.setBackground(Color.LIGHT_GRAY);
+        // heroStatsText.setBounds(505, 110, 190, 115);
         
-        panel.add(heroStatsText);
+        // panel.add(heroStatsText);
         // END PLAY SCREEN
         
         // START FIGHT SCREEN
@@ -367,7 +367,7 @@ public class GuiDisplay implements Display {
         characterText.setBackground(Color.LIGHT_GRAY);
         characterText.setFont(new Font("Monospaced", Font.PLAIN, 13));
         characterText.setEditable(false);
-        characterText.setBounds(251, 11, 300, 325);
+        characterText.setBounds(395, 11, 300, 325);
         submitIndexBtn.setBounds(277, 215, 85, 23);
         submitClassBtn.setBounds(277, 215, 85, 23);
         submitNameBtn.setBounds(277, 215, 85, 23);
