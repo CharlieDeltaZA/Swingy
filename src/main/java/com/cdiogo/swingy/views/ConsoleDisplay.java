@@ -15,7 +15,10 @@ import lombok.Setter;
 public class ConsoleDisplay implements Display {
     private Scanner sysin;
     private GameController controller;
-
+    private final String COL_GREEN = "\u001b[32m";
+    private final String COL_CYAN = "\u001b[36m";
+    private final String COL_RESET = "\u001b[0m";
+    
     public ConsoleDisplay(GameController controller) {
         sysin = new Scanner(System.in);
         this.controller = controller;
@@ -184,8 +187,16 @@ public class ConsoleDisplay implements Display {
 
             for (int i = 0; i < map[0].length; i++) {
                 for (int k = 0; k < map[0].length; k++) {
-                    System.out.print(map[i][k]);
-                    System.out.print(" ");
+                    if (map[i][k] == 'H') {
+                        System.out.print(COL_GREEN + map[i][k] + COL_RESET);
+                    } else if (map[i][k] == '.') {
+                        System.out.print(COL_CYAN + map[i][k] + COL_RESET);
+                    } else {
+                        System.out.print(map[i][k]);
+                    }
+                    if (map[0].length < 35) {
+                        System.out.print(" ");
+                    }
                 }
                 System.out.print("\n");
             }
