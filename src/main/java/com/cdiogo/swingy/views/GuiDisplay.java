@@ -754,7 +754,9 @@ public class GuiDisplay implements Display {
             line += " ";
             for (int k = 0; k < map[0].length; k++) {
                 line += map[i][k];
-                line += " ";
+                if (map[0].length < 35) {
+                    line += " ";
+                }
             }
             line += "\n";
         }
