@@ -84,12 +84,9 @@ public class GuiDisplay implements Display {
         welcomeText.setMargin(new Insets(10,10,10,10));
 
         // Start Screen Buttons
-        createBtn.setSize(135, 23);
-        createBtn.setLocation(10, 215);
-        loadBtn.setSize(135, 23);
-        loadBtn.setLocation(155, 215);
-        quitBtn.setSize(60, 23);
-        quitBtn.setLocation(302, 215);
+        createBtn.setBounds(10, 215, 135, 23);
+        loadBtn.setBounds(155, 215, 135, 23);
+        quitBtn.setBounds(302, 215, 60, 23);
 
         // Load Char | CharClass | CharName components
         characterText.setWrapStyleWord(true);
@@ -117,56 +114,45 @@ public class GuiDisplay implements Display {
         mapText.setBackground(Color.LIGHT_GRAY);
         mapText.setBounds(10, 11, 485, 485);
         mapText.setFont(new Font("Monospaced", Font.PLAIN, 12));
-        mapText.setMargin(new Insets(5,5,5,5));
+        mapText.setMargin(new Insets(2, 2, 2, 2));
+        messageText.setFont(new Font("Monospaced", Font.PLAIN, 11));
         messageText.setWrapStyleWord(true);
         messageText.setLineWrap(true);
         messageText.setEditable(false);
         messageText.setBackground(Color.LIGHT_GRAY);
-        messageText.setBounds(505, 11, 190, 88);
-        messageText.setMargin(new Insets(10,10,10,10));
-        upBtn.setSize(60, 23);
-        upBtn.setLocation(570, 256);
-        downBtn.setSize(60, 23);
-        downBtn.setLocation(570, 286);
-        leftBtn.setLocation(505, 286);
-        leftBtn.setSize(60, 23);
-        rightBtn.setLocation(635, 286);
-        rightBtn.setSize(60, 23);
-        saveBtn.setLocation(505, 473);
-        saveBtn.setSize(60, 23);
+        messageText.setBounds(505, 11, 209, 88);
+        messageText.setMargin(new Insets(5, 5, 5, 5));
+        upBtn.setBounds(580, 256, 60, 23);
+        downBtn.setBounds(580, 286, 60, 23);
+        leftBtn.setBounds(505, 286, 60, 23);
+        rightBtn.setBounds(654, 286, 60, 23);
+        saveBtn.setBounds(505, 473, 60, 23);
         heroStatsText.setFont(new Font("Monospaced", Font.PLAIN, 11));
         heroStatsText.setEditable(false);
         heroStatsText.setBackground(Color.LIGHT_GRAY);
-        heroStatsText.setBounds(505, 110, 190, 115);
+        heroStatsText.setBounds(505, 110, 209, 135);
         heroStatsText.setMargin(new Insets(5,5,5,5));
-        
+
         // FightFlight
-        fightBtn.setLocation(505, 110);
-        fightBtn.setSize(60, 23);
-        fleeBtn.setLocation(505, 140);
-        fleeBtn.setSize(60, 23);
-        
+        fightBtn.setBounds(505, 120, 60, 23);
+        fleeBtn.setBounds(505, 152, 60, 23);
+
         // RoundWon
-        menuBtn.setLocation(505, 473);
-        menuBtn.setSize(120, 23);
-        
+        menuBtn.setBounds(505, 473, 120, 23);
+
         // QuitGame
-        quitConfirmBtn.setLocation(10, 152);
-        quitConfirmBtn.setSize(90, 23);
-        quitDenyBtn.setLocation(120, 152);
-        quitDenyBtn.setSize(90, 23);
-        
+        quitConfirmBtn.setBounds(10, 152, 90, 23);
+        quitDenyBtn.setBounds(120, 152, 90, 23);
+
         // NoEscape
         continueBtn.setSize(90, 23);
-        
+
         // GameOver
-        
+
         // AfterAction
-        equipBtn.setLocation(505, 226);
-        equipBtn.setSize(90, 23);
-        ignoreBtn.setLocation(605, 226);
-        ignoreBtn.setSize(90, 23);
-                
+        equipBtn.setBounds(505, 226, 90, 23);
+        ignoreBtn.setBounds(605, 226, 90, 23);
+
     }
 
     private void configureActionListeners() {
@@ -342,7 +328,7 @@ public class GuiDisplay implements Display {
         panel = new JPanel();
 
         frame.setTitle("Swingy - cdiogo");
-        frame.setSize(720, 548);
+        frame.setSize(740, 548);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         panel.setBackground(Color.DARK_GRAY);
         frame.getContentPane().add(panel);
@@ -464,7 +450,7 @@ public class GuiDisplay implements Display {
         printMap();
         panel.add(mapText);
         
-        messageText.setBounds(505, 11, 190, 88);
+        messageText.setBounds(505, 11, 209, 88);
         messageText.setText("Reach the edge of the map to win the current mission.\n\nEnemies may be encountered!");
         if (controller.isHeroEscaped()) {
             controller.setHeroEscaped(false);
@@ -474,7 +460,7 @@ public class GuiDisplay implements Display {
             controller.setLevelUp(false);
             messageText.setText("You have levelled up!");
         }
-        quitBtn.setLocation(635, 473);
+        quitBtn.setLocation(654, 473);
         panel.add(messageText);
         panel.add(upBtn);
         panel.add(downBtn);
@@ -523,7 +509,7 @@ public class GuiDisplay implements Display {
         
         line = String.format("You have encountered a villain!\n\n%s", controller.getCurrentEnemy().toString());
         messageText.setText(line);
-        messageText.setBounds(505, 11, 190, 88);
+        messageText.setBounds(505, 11, 209, 98);
         panel.add(messageText);
         panel.add(fightBtn);
         panel.add(fleeBtn);
@@ -542,7 +528,7 @@ public class GuiDisplay implements Display {
         panel.add(mapText);
         
         messageText.setText("You have Successfully completed this level!\r\n\r\nContinue your adventure from the main menu, or try a new character.");
-        messageText.setBounds(505, 11, 190, 138);
+        messageText.setBounds(505, 11, 209, 138);
         panel.add(messageText);
         quitBtn.setLocation(635, 473);
         
@@ -581,7 +567,7 @@ public class GuiDisplay implements Display {
         panel.add(mapText);
         
         messageText.setText("Your attempt to flee has failed!\r\n\r\nPrepare for BATTLE!");
-        messageText.setBounds(505, 11, 190, 88);
+        messageText.setBounds(505, 11, 209, 88);
         panel.add(messageText);
         continueBtn.setLocation(505, 110);
         panel.add(continueBtn);
@@ -600,10 +586,10 @@ public class GuiDisplay implements Display {
         printMap();
         panel.add(mapText);
         
-        messageText.setText("     GAME   OVER\r\n\r\nYour hero has died :(\r\n\r\nYou may return to the menu and play again, or you may quit.");
-        messageText.setBounds(505, 11, 190, 142);
+        messageText.setText("       GAME   OVER\r\n\r\nYour hero has died :(\r\n\r\nYou may return to the menu and play again, or you may quit.");
+        messageText.setBounds(505, 11, 209, 142);
         panel.add(messageText);
-        quitBtn.setLocation(635, 473);
+        quitBtn.setLocation(654, 473);
       
         panel.add(quitBtn);
         panel.add(menuBtn);
@@ -624,7 +610,7 @@ public class GuiDisplay implements Display {
         printMap();
         panel.add(mapText);
         
-        messageText.setBounds(505, 11, 190, 170);
+        messageText.setBounds(505, 11, 209, 170);
         panel.add(messageText);
         
         continueBtn.setLocation(505, 192);
