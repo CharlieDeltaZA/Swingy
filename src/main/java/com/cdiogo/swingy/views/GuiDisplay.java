@@ -13,6 +13,7 @@ import java.awt.event.*;
 public class GuiDisplay implements Display {
 
     private GameController controller;
+    private boolean initialized = false;
     private JFrame frame;
     private JPanel panel;
 
@@ -88,7 +89,7 @@ public class GuiDisplay implements Display {
         createBtn.setBounds(10, 215, 135, 23);
         loadBtn.setBounds(155, 215, 135, 23);
         quitBtn.setBounds(302, 215, 60, 23);
-        displayBtn.setBounds(222, 240, 140, 23);
+        displayBtn.setBounds(222, 245, 140, 23);
 
         // Load Char | CharClass | CharName components
         characterText.setWrapStyleWord(true);
@@ -128,7 +129,7 @@ public class GuiDisplay implements Display {
         downBtn.setBounds(580, 286, 60, 23);
         leftBtn.setBounds(505, 286, 60, 23);
         rightBtn.setBounds(654, 286, 60, 23);
-        saveBtn.setBounds(505, 473, 60, 23);
+        saveBtn.setBounds(505, 443, 60, 23);
         heroStatsText.setFont(new Font("Monospaced", Font.PLAIN, 11));
         heroStatsText.setEditable(false);
         heroStatsText.setBackground(Color.LIGHT_GRAY);
@@ -158,179 +159,178 @@ public class GuiDisplay implements Display {
     }
 
     private void configureActionListeners() {
-		// TODO Auto-generated method stub
-    	createBtn.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
+
+        createBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
                 controller.handleInput("c");
                 controller.displayState();
-        	}
+            }
         });
-    	
-    	loadBtn.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
+        
+        loadBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
                 controller.handleInput("l");
                 controller.displayState();
-        	}
+            }
         });
-    	
-    	backBtn.addActionListener(new ActionListener() {
-        	@Override
-        	public void actionPerformed(ActionEvent e) {
+        
+        backBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
                 controller.handleInput("b");
                 controller.displayState();
-        	}
+            }
         });
 
         quitBtn.addActionListener(new ActionListener() {
-        	@Override
-        	public void actionPerformed(ActionEvent e) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
                 controller.handleInput("q");
                 controller.displayState();
-        	}
+            }
         });
 
         quitConfirmBtn.addActionListener(new ActionListener() {
-        	@Override
-        	public void actionPerformed(ActionEvent e) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
                 controller.handleInput("y");
                 controller.displayState();
-        	}
+            }
         });
 
         quitDenyBtn.addActionListener(new ActionListener() {
-        	@Override
-        	public void actionPerformed(ActionEvent e) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
                 controller.handleInput("n");
                 controller.displayState();
-        	}
+            }
         });
 
         submitClassBtn.addActionListener(new ActionListener() {
-        	@Override
-        	public void actionPerformed(ActionEvent e) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
                 int index = (int)classSelect.getValue();
                 controller.handleInput(Integer.toString(index));
                 controller.displayState();
-        	}
+            }
         });
 
         submitNameBtn.addActionListener(new ActionListener() {
-        	@Override
-        	public void actionPerformed(ActionEvent e) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
                 String name = heroNameText.getText();
 
                 if (!(name.equals("")) || name.length() >= 2) {
                     controller.handleInput(name);
                     controller.displayState();
                 }
-        	}
+            }
         });
 
         submitIndexBtn.addActionListener(new ActionListener() {
-        	@Override
-        	public void actionPerformed(ActionEvent e) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
                 int index = (int)heroSelect.getValue();
                 controller.handleInput(Integer.toString(index));
                 controller.displayState();
-        	}
+            }
         });
 
         upBtn.addActionListener(new ActionListener() {
-        	@Override
-        	public void actionPerformed(ActionEvent e) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
                 controller.handleInput("w");
                 controller.displayState();
-        	}
+            }
         });
 
         downBtn.addActionListener(new ActionListener() {
-        	@Override
-        	public void actionPerformed(ActionEvent e) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
                 controller.handleInput("s");
                 controller.displayState();
-        	}
+            }
         });
 
         rightBtn.addActionListener(new ActionListener() {
-        	@Override
-        	public void actionPerformed(ActionEvent e) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
                 controller.handleInput("d");
                 controller.displayState();
-        	}
+            }
         });
 
         leftBtn.addActionListener(new ActionListener() {
-        	@Override
-        	public void actionPerformed(ActionEvent e) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
                 controller.handleInput("a");
                 controller.displayState();
-        	}
+            }
         });
 
         fightBtn.addActionListener(new ActionListener() {
-        	@Override
-        	public void actionPerformed(ActionEvent e) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
                 controller.handleInput("f");
                 controller.displayState();
-        	}
+            }
         });
 
         fleeBtn.addActionListener(new ActionListener() {
-        	@Override
-        	public void actionPerformed(ActionEvent e) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
                 controller.handleInput("r");
                 controller.displayState();
-        	}
+            }
         });
 
         continueBtn.addActionListener(new ActionListener() {
-        	@Override
-        	public void actionPerformed(ActionEvent e) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
                 controller.handleInput("c");
                 controller.displayState();
-        	}
+            }
         });
 
         equipBtn.addActionListener(new ActionListener() {
-        	@Override
-        	public void actionPerformed(ActionEvent e) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
                 controller.handleInput("y");
                 controller.displayState();
-        	}
+            }
         });
 
         ignoreBtn.addActionListener(new ActionListener() {
-        	@Override
-        	public void actionPerformed(ActionEvent e) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
                 controller.handleInput("n");
                 controller.displayState();
-        	}
+            }
         });
 
         saveBtn.addActionListener(new ActionListener() {
-        	@Override
-        	public void actionPerformed(ActionEvent e) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
                 controller.handleInput("c");
                 controller.displayState();
-        	}
+            }
         });
 
         menuBtn.addActionListener(new ActionListener() {
-        	@Override
-        	public void actionPerformed(ActionEvent e) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
                 controller.handleInput("r");
                 controller.displayState();
-        	}
+            }
         });
 
         displayBtn.addActionListener(new ActionListener() {
-        	@Override
-        	public void actionPerformed(ActionEvent e) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
                 controller.handleInput("x");
                 controller.displayState();
-        	}
+            }
         });
-    			
 	}
 
     private void generateGui() {
@@ -357,7 +357,8 @@ public class GuiDisplay implements Display {
         panel.add(createBtn);
         panel.add(loadBtn);
         panel.add(quitBtn);
-        panel.add(welcomeText);        
+        panel.add(welcomeText);
+        panel.add(displayBtn);
         
         panel.validate();
         panel.repaint();
@@ -448,7 +449,10 @@ public class GuiDisplay implements Display {
     @Override
     public void renderGame() {
         // TODO Auto-generated method stub
-        generateGui();
+        if (!initialized) {
+                generateGui();
+                initialized = true;
+        }
         controller.displayState();
     }
 
@@ -471,7 +475,7 @@ public class GuiDisplay implements Display {
             messageText.setText("You have levelled up!");
         }
         quitBtn.setLocation(654, 473);
-        displayBtn.setLocation(425, 433);
+        displayBtn.setLocation(505, 473);
         panel.add(messageText);
         panel.add(upBtn);
         panel.add(downBtn);
@@ -479,6 +483,7 @@ public class GuiDisplay implements Display {
         panel.add(rightBtn);
         panel.add(quitBtn);
         panel.add(saveBtn);
+        panel.add(displayBtn);
         
         heroStatsText.setText(controller.getHero().toString());
         panel.add(heroStatsText);
@@ -643,5 +648,9 @@ public class GuiDisplay implements Display {
         panel.repaint();
         frame.setVisible(true);
 
+    }
+
+    public void hideFrame() {
+        frame.setVisible(false);
     }
 }

@@ -18,6 +18,7 @@ public class ConsoleDisplay implements Display {
     private final String COL_GREEN = "\u001b[32m";
     private final String COL_CYAN = "\u001b[36m";
     private final String COL_RESET = "\u001b[0m";
+    private boolean gui = false;
     
     public ConsoleDisplay(GameController controller) {
         sysin = new Scanner(System.in);
@@ -142,12 +143,17 @@ public class ConsoleDisplay implements Display {
         choice = sysin.next();
         controller.handleInput(choice);
         // return (choice);
-	}
+    }
+    
+    public void changeDisplay(boolean bool) {
+        System.out.print("\033[H\033[2J");
+        gui = bool;
+    }
 
     @Override
     public void renderGame() {
         // TODO Auto-generated method stub
-        while (!controller.isGameOver()) {
+        while (!controller.isGameOver() && !gui) {
             controller.displayState();
         }
     }

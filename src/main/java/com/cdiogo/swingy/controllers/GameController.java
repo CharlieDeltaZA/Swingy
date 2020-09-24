@@ -95,7 +95,6 @@ public class GameController {
                     
                     case "x":
                         changeDisplay();
-                        display.renderGame();
                         break;
 
                     default:
@@ -152,14 +151,17 @@ public class GameController {
                             currentGameState = gameState.WIN;
                         }
                     }
+                // Save / Quit
                 } else if (input.equals("c")) {
                     savePlayer();
                     System.out.println("Player saved!");
                 } else if (input.equals("q")) {
                     stateBeforeQuit = gameState.PLAY;
                     currentGameState = gameState.QUIT;
+                } else if (input.equals("x")) {
+                    changeDisplay();
                 }
-                // Save / Quit
+                
                 break;
 
             case FIGHT_FLIGHT:
@@ -357,10 +359,14 @@ public class GameController {
 
     private void changeDisplay() {
         if (display instanceof ConsoleDisplay) {
+            console.changeDisplay(true);
             display = gui;
         } else {
+            gui.hideFrame();
+            console.changeDisplay(false);
             display = console;
         }
+        playGame();
     }
 
     private void savePlayer() {
