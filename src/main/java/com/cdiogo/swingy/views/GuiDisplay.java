@@ -12,41 +12,41 @@ import java.awt.event.*;
 
 public class GuiDisplay implements Display {
 
-    GameController controller;
-    JFrame frame;
-    JPanel panel;
+    private GameController controller;
+    private JFrame frame;
+    private JPanel panel;
 
-    JButton backBtn = new JButton("Back");
-    JButton saveBtn = new JButton("Save");
-    JButton equipBtn = new JButton("Equip");
-    JButton ignoreBtn = new JButton("Ignore");
-    JButton menuBtn = new JButton("Return to Menu");
-    JButton upBtn = new JButton("North");
-    JButton downBtn = new JButton("South");
-    JButton rightBtn = new JButton("East");
-    JButton leftBtn = new JButton("West");
-    JButton quitBtn = new JButton("Quit");
-    JButton quitConfirmBtn = new JButton("Confirm");
-    JButton quitDenyBtn = new JButton("Deny");
-    JButton fightBtn = new JButton("Fight");
-    JButton fleeBtn = new JButton("Flee");
-    JButton continueBtn = new JButton("Continue");
-    JButton createBtn = new JButton("Create Character");
-    JButton loadBtn = new JButton("Load Character");
-    JButton submitClassBtn = new JButton("Submit"); // class index
-    JButton submitIndexBtn = new JButton("Submit"); // saved hero index
-    JButton submitNameBtn = new JButton("Submit"); // name
+    private JButton backBtn = new JButton("Back");
+    private JButton saveBtn = new JButton("Save");
+    private JButton equipBtn = new JButton("Equip");
+    private JButton ignoreBtn = new JButton("Ignore");
+    private JButton menuBtn = new JButton("Return to Menu");
+    private JButton upBtn = new JButton("North");
+    private JButton downBtn = new JButton("South");
+    private JButton rightBtn = new JButton("East");
+    private JButton leftBtn = new JButton("West");
+    private JButton quitBtn = new JButton("Quit");
+    private JButton quitConfirmBtn = new JButton("Confirm");
+    private JButton quitDenyBtn = new JButton("Deny");
+    private JButton fightBtn = new JButton("Fight");
+    private JButton fleeBtn = new JButton("Flee");
+    private JButton continueBtn = new JButton("Continue");
+    private JButton createBtn = new JButton("Create Character");
+    private JButton loadBtn = new JButton("Load Character");
+    private JButton submitClassBtn = new JButton("Submit"); // class index
+    private JButton submitIndexBtn = new JButton("Submit"); // saved hero index
+    private JButton submitNameBtn = new JButton("Submit"); // name
 
-    JSpinner classSelect = new JSpinner();
-    JSpinner heroSelect = new JSpinner();
+    private JSpinner classSelect = new JSpinner();
+    private JSpinner heroSelect = new JSpinner();
 
-    private final JTextPane welcomeText = new JTextPane();
-    private final JTextPane heroStatsText = new JTextPane();
-    JTextArea characterText = new JTextArea();
-    JTextPane mapText = new JTextPane();
-    JTextArea messageText = new JTextArea();
-    JTextField heroNameText = new JTextField();
-    JLabel nameLabel = new JLabel("Name: (2 char min)");
+    private JTextPane welcomeText = new JTextPane();
+    private JTextPane heroStatsText = new JTextPane();
+    private JTextArea characterText = new JTextArea();
+    private JTextPane mapText = new JTextPane();
+    private JTextArea messageText = new JTextArea();
+    private JTextField heroNameText = new JTextField();
+    private JLabel nameLabel = new JLabel("Name: (2 char min)");
 
     public GuiDisplay(GameController controller) {
         this.controller = controller;
@@ -81,6 +81,7 @@ public class GuiDisplay implements Display {
         welcomeText.setFont(new Font("Monospaced", Font.PLAIN, 11));
         welcomeText.setEditable(false);
         welcomeText.setBounds(10, 11, 352, 193);
+        welcomeText.setMargin(new Insets(10,10,10,10));
 
         // Start Screen Buttons
         createBtn.setSize(135, 23);
@@ -97,6 +98,7 @@ public class GuiDisplay implements Display {
         characterText.setFont(new Font("Monospaced", Font.PLAIN, 13));
         characterText.setEditable(false);
         characterText.setBounds(395, 11, 300, 325);
+        characterText.setMargin(new Insets(10,10,10,10));
         submitIndexBtn.setBounds(277, 215, 85, 23);
         submitClassBtn.setBounds(277, 215, 85, 23);
         submitNameBtn.setBounds(277, 215, 85, 23);
@@ -115,11 +117,13 @@ public class GuiDisplay implements Display {
         mapText.setBackground(Color.LIGHT_GRAY);
         mapText.setBounds(10, 11, 485, 485);
         mapText.setFont(new Font("Monospaced", Font.PLAIN, 12));
+        mapText.setMargin(new Insets(5,5,5,5));
         messageText.setWrapStyleWord(true);
         messageText.setLineWrap(true);
         messageText.setEditable(false);
         messageText.setBackground(Color.LIGHT_GRAY);
         messageText.setBounds(505, 11, 190, 88);
+        messageText.setMargin(new Insets(10,10,10,10));
         upBtn.setSize(60, 23);
         upBtn.setLocation(570, 256);
         downBtn.setSize(60, 23);
@@ -134,6 +138,7 @@ public class GuiDisplay implements Display {
         heroStatsText.setEditable(false);
         heroStatsText.setBackground(Color.LIGHT_GRAY);
         heroStatsText.setBounds(505, 110, 190, 115);
+        heroStatsText.setMargin(new Insets(5,5,5,5));
         
         // FightFlight
         fightBtn.setLocation(505, 110);
@@ -460,14 +465,14 @@ public class GuiDisplay implements Display {
         panel.add(mapText);
         
         messageText.setBounds(505, 11, 190, 88);
-        messageText.setText(" Reach the edge of the map to win the current mission.\n\n Enemies may be encountered!");
+        messageText.setText("Reach the edge of the map to win the current mission.\n\nEnemies may be encountered!");
         if (controller.isHeroEscaped()) {
             controller.setHeroEscaped(false);
-            messageText.setText(" You have successfully escaped!");
+            messageText.setText("You have successfully escaped!");
         }
         if (controller.isLevelUp()) {
             controller.setLevelUp(false);
-            messageText.setText(" You have levelled up!");
+            messageText.setText("You have levelled up!");
         }
         quitBtn.setLocation(635, 473);
         panel.add(messageText);
@@ -516,7 +521,7 @@ public class GuiDisplay implements Display {
         printMap();
         panel.add(mapText);
         
-        line = String.format(" You have encountered a villain!\n\n %s", controller.getCurrentEnemy().toString());
+        line = String.format("You have encountered a villain!\n\n%s", controller.getCurrentEnemy().toString());
         messageText.setText(line);
         messageText.setBounds(505, 11, 190, 88);
         panel.add(messageText);
@@ -536,7 +541,7 @@ public class GuiDisplay implements Display {
         printMap();
         panel.add(mapText);
         
-        messageText.setText(" You have Successfully completed this level!\r\n\r\n Continue your adventure from the main menu, or try a new character.");
+        messageText.setText("You have Successfully completed this level!\r\n\r\nContinue your adventure from the main menu, or try a new character.");
         messageText.setBounds(505, 11, 190, 138);
         panel.add(messageText);
         quitBtn.setLocation(635, 473);
@@ -555,7 +560,7 @@ public class GuiDisplay implements Display {
         // TODO Auto-generated method stub
         panel.removeAll();
         
-        messageText.setText(" Are you sure you would like to quit the game?\r\n\r\n Confirm - Save and Quit\r\n Deny - Return to previous screen");
+        messageText.setText("Are you sure you would like to quit the game?\r\n\r\nConfirm - Save and Quit\r\nDeny - Return to previous screen");
         messageText.setBounds(10, 11, 200, 130);
         panel.add(messageText);
         panel.add(quitConfirmBtn);
@@ -575,7 +580,7 @@ public class GuiDisplay implements Display {
         printMap();
         panel.add(mapText);
         
-        messageText.setText(" Your attempt to flee has failed!\r\n\r\n Prepare for BATTLE!");
+        messageText.setText("Your attempt to flee has failed!\r\n\r\nPrepare for BATTLE!");
         messageText.setBounds(505, 11, 190, 88);
         panel.add(messageText);
         continueBtn.setLocation(505, 110);
@@ -595,7 +600,7 @@ public class GuiDisplay implements Display {
         printMap();
         panel.add(mapText);
         
-        messageText.setText("      GAME   OVER\r\n\r\n Your hero has died :(\r\n\r\n You may return to the menu and play again, or you may quit.");
+        messageText.setText("     GAME   OVER\r\n\r\nYour hero has died :(\r\n\r\nYou may return to the menu and play again, or you may quit.");
         messageText.setBounds(505, 11, 190, 142);
         panel.add(messageText);
         quitBtn.setLocation(635, 473);
@@ -624,11 +629,11 @@ public class GuiDisplay implements Display {
         
         continueBtn.setLocation(505, 192);
         
-        line += String.format(" You have defeated the %s\n", enemy.getName());
-        line += String.format(" You gain %d XP\n", enemy.getXp());
+        line += String.format("You have defeated the %s\n", enemy.getName());
+        line += String.format("You gain %d XP\n", enemy.getXp());
         if (enemy.getArtifact() != null) {
-            line += String.format("\n\n This villain dropped an artifact!\n %s", enemy.getArtifact().toString());
-            line += "\n\n Would you like to equip it?";
+            line += String.format("\n\nThis villain dropped an artifact!\n%s", enemy.getArtifact().toString());
+            line += "\n\nWould you like to equip it?";
             messageText.setText(line);
             panel.add(equipBtn);
             panel.add(ignoreBtn);
