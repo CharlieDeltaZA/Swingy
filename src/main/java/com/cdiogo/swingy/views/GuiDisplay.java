@@ -81,7 +81,7 @@ public class GuiDisplay implements Display {
         welcomeText.setFont(new Font("Monospaced", Font.PLAIN, 11));
         welcomeText.setEditable(false);
         welcomeText.setBounds(10, 11, 352, 193);
-        welcomeText.setMargin(new Insets(10,10,10,10));
+        welcomeText.setMargin(new Insets(10, 10, 10, 10));
 
         // Start Screen Buttons
         createBtn.setBounds(10, 215, 135, 23);
@@ -94,8 +94,8 @@ public class GuiDisplay implements Display {
         characterText.setBackground(Color.LIGHT_GRAY);
         characterText.setFont(new Font("Monospaced", Font.PLAIN, 13));
         characterText.setEditable(false);
-        characterText.setBounds(395, 11, 300, 325);
-        characterText.setMargin(new Insets(10,10,10,10));
+        characterText.setBounds(395, 11, 319, 325);
+        characterText.setMargin(new Insets(10, 10, 10, 10));
         submitIndexBtn.setBounds(277, 215, 85, 23);
         submitClassBtn.setBounds(277, 215, 85, 23);
         submitNameBtn.setBounds(277, 215, 85, 23);
@@ -115,7 +115,7 @@ public class GuiDisplay implements Display {
         mapText.setBounds(10, 11, 485, 485);
         mapText.setFont(new Font("Monospaced", Font.PLAIN, 12));
         mapText.setMargin(new Insets(2, 2, 2, 2));
-        messageText.setFont(new Font("Monospaced", Font.PLAIN, 11));
+        messageText.setFont(new Font("Monospaced", Font.PLAIN, 12));
         messageText.setWrapStyleWord(true);
         messageText.setLineWrap(true);
         messageText.setEditable(false);
@@ -131,7 +131,7 @@ public class GuiDisplay implements Display {
         heroStatsText.setEditable(false);
         heroStatsText.setBackground(Color.LIGHT_GRAY);
         heroStatsText.setBounds(505, 110, 209, 135);
-        heroStatsText.setMargin(new Insets(5,5,5,5));
+        heroStatsText.setMargin(new Insets(5, 5, 5, 5));
 
         // FightFlight
         fightBtn.setBounds(505, 120, 60, 23);
