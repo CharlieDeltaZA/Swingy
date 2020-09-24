@@ -36,6 +36,7 @@ public class GuiDisplay implements Display {
     private JButton submitClassBtn = new JButton("Submit"); // class index
     private JButton submitIndexBtn = new JButton("Submit"); // saved hero index
     private JButton submitNameBtn = new JButton("Submit"); // name
+    private JButton displayBtn = new JButton("Switch to Console");
 
     private JSpinner classSelect = new JSpinner();
     private JSpinner heroSelect = new JSpinner();
@@ -87,6 +88,7 @@ public class GuiDisplay implements Display {
         createBtn.setBounds(10, 215, 135, 23);
         loadBtn.setBounds(155, 215, 135, 23);
         quitBtn.setBounds(302, 215, 60, 23);
+        displayBtn.setBounds(222, 240, 140, 23);
 
         // Load Char | CharClass | CharName components
         characterText.setWrapStyleWord(true);
@@ -320,6 +322,14 @@ public class GuiDisplay implements Display {
                 controller.displayState();
         	}
         });
+
+        displayBtn.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+                controller.handleInput("x");
+                controller.displayState();
+        	}
+        });
     			
 	}
 
@@ -461,6 +471,7 @@ public class GuiDisplay implements Display {
             messageText.setText("You have levelled up!");
         }
         quitBtn.setLocation(654, 473);
+        displayBtn.setLocation(425, 433);
         panel.add(messageText);
         panel.add(upBtn);
         panel.add(downBtn);

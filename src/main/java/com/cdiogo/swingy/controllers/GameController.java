@@ -92,6 +92,11 @@ public class GameController {
                         stateBeforeQuit = gameState.START;
                         currentGameState = gameState.QUIT;
                         break;
+                    
+                    case "x":
+                        changeDisplay();
+                        display.renderGame();
+                        break;
 
                     default:
                         System.out.println("Bad Choice - START");
@@ -347,6 +352,14 @@ public class GameController {
             hero.setPositionY(yBeforeMove);
             heroEscaped = true;
             currentGameState = gameState.PLAY;
+        }
+    }
+
+    private void changeDisplay() {
+        if (display instanceof ConsoleDisplay) {
+            display = gui;
+        } else {
+            display = console;
         }
     }
 

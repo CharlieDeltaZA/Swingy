@@ -28,7 +28,7 @@ public class ConsoleDisplay implements Display {
     public void startScreen() {
         String choice = "";
 
-        while (!(choice.equals("c") || choice.equals("l") || choice.equals("q"))) {
+        while (!(choice.equals("c") || choice.equals("l") || choice.equals("q") || choice.equals("x"))) {
             System.out.print("\033[H\033[2J");
             System.out.flush();
             System.out.println("+----------------------------------------------+");
@@ -44,6 +44,7 @@ public class ConsoleDisplay implements Display {
             System.out.println("|                                              |");
             System.out.println("|     c - Create a Character                   |");
             System.out.println("|     l - Load an existing Character           |");
+            System.out.println("|     x - Switch to GUI                        |");
             System.out.println("|     q - Quit Game                            |");
             System.out.println("|                                              |");
             System.out.println("+----------------------------------------------+");
@@ -157,7 +158,7 @@ public class ConsoleDisplay implements Display {
         char[][] map;
 
         while (!(choice.equals("w") || choice.equals("a") || choice.equals("s") || choice.equals("d")
-                                    || choice.equals("q") || choice.equals("c"))) {
+                                    || choice.equals("q") || choice.equals("c") || choice.equals("x"))) {
 
             System.out.print("\033[H\033[2J");
             System.out.println("+---------------------------------------+");
@@ -176,8 +177,9 @@ public class ConsoleDisplay implements Display {
             }
 
             System.out.println("|     w/a/s/d - Move Hero               |");
-            System.out.println("|     q       - Quit Game               |");
             System.out.println("|     c       - Save Hero               |");
+            System.out.println("|     x       - Switch to GUI           |");
+            System.out.println("|     q       - Quit Game               |");
             System.out.println("|                                       |");
             System.out.println("+---------------------------------------+");
 
