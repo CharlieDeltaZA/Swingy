@@ -13,8 +13,8 @@ import java.awt.event.*;
 public class GuiDisplay implements Display {
 
     GameController controller;
-    JFrame frame = new JFrame();
-    JPanel panel = new JPanel();
+    JFrame frame;
+    JPanel panel;
 
     JButton backBtn = new JButton("Back");
     JButton saveBtn = new JButton("Save");
@@ -50,16 +50,6 @@ public class GuiDisplay implements Display {
 
     public GuiDisplay(GameController controller) {
         this.controller = controller;
-        
-        frame.setTitle("Swingy - cdiogo");
-        frame.setSize(720, 548);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        panel.setBackground(Color.DARK_GRAY);
-        frame.getContentPane().add(panel);
-        panel.setLayout(null);
-        
-        initCommonComponents();
-        configureActionListeners();
         
         // START SCREEN
 //         welcomeText.setEditable(false);
@@ -603,7 +593,22 @@ public class GuiDisplay implements Display {
     			
 	}
 
-	@Override
+    private void generateGui() {
+        frame = new JFrame();
+        panel = new JPanel();
+
+        frame.setTitle("Swingy - cdiogo");
+        frame.setSize(720, 548);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        panel.setBackground(Color.DARK_GRAY);
+        frame.getContentPane().add(panel);
+        panel.setLayout(null);
+        
+        initCommonComponents();
+        configureActionListeners();
+    }
+    
+    @Override
     public void startScreen() {
         // TODO Auto-generated method stub
         panel.removeAll();        
@@ -703,9 +708,8 @@ public class GuiDisplay implements Display {
     @Override
     public void renderGame() {
         // TODO Auto-generated method stub
-    	// while (!controller.isGameOver()) {
+        generateGui();
         controller.displayState();
-        // }
     }
 
     @Override
