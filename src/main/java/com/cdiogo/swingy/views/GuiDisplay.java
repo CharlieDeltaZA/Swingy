@@ -51,287 +51,26 @@ public class GuiDisplay implements Display {
     public GuiDisplay(GameController controller) {
         this.controller = controller;
         
-        // START SCREEN
-//         welcomeText.setEditable(false);
-//         welcomeText.setText("\r\n   WELCOME TO                                  \r\n         _____          _                   \r\n        /  ___|        (_)                  \r\n        \\ `--.__      ___ _ __   __ _ _   _ \r\n         `--. \\ \\ /\\ / / | '_ \\ / _` | | | |\r\n        /\\__/ /\\ V  V /| | | | | (_| | |_| |\r\n        \\____/  \\_/\\_/ |_|_| |_|\\__, |\\__, |\r\n                                 __/ | __/ |\r\n                                |___/ |___/ \r\n\r\n\r\n");
-//         welcomeText.setFont(new Font("Monospaced", Font.PLAIN, 11));
-//         welcomeText.setBounds(10, 11, 352, 193);
-//         welcomeText.setBackground(Color.LIGHT_GRAY);
-//        
-//         createBtn.setSize(135, 23);
-//         createBtn.setLocation(10, 215);
-//         loadBtn.setSize(135, 23);
-//         loadBtn.setLocation(155, 215);
-//         quitBtn.setSize(60, 23);
-//         quitBtn.setLocation(302, 215);
-//        
-//         panel.add(createBtn);
-//         panel.add(loadBtn);
-//         panel.add(quitBtn);
-//         panel.add(welcomeText);
-        // END START SCREEN
+        // Eclipse GUI Builder debugging below //
         
-        // CREATE SCREEN CLASS
-//         welcomeText.setBackground(Color.LIGHT_GRAY);
-//         welcomeText.setEditable(false);
-//         welcomeText.setText("\r\n   WELCOME TO                                  \r\n         _____          _                   \r\n        /  ___|        (_)                  \r\n        \\ `--.__      ___ _ __   __ _ _   _ \r\n         `--. \\ \\ /\\ / / | '_ \\ / _` | | | |\r\n        /\\__/ /\\ V  V /| | | | | (_| | |_| |\r\n        \\____/  \\_/\\_/ |_|_| |_|\\__, |\\__, |\r\n                                 __/ | __/ |\r\n                                |___/ |___/ \r\n\r\n\r\n");
-//         welcomeText.setFont(new Font("Monospaced", Font.PLAIN, 11));
-//         welcomeText.setBounds(10, 11, 352, 193);
-//         panel.add(welcomeText);
-//        
-//         classSelect.setModel(new SpinnerNumberModel(1, 1, 4, 1));
-//         classSelect.setBounds(175, 215, 92, 23);
-//         panel.add(classSelect);
-//        
-//         backBtn.setBounds(20, 215, 60, 23);
-//         panel.add(backBtn);
-//        
-//         submitClassBtn.setBounds(277, 215, 85, 23);
-//         panel.add(submitClassBtn);
-//        
-//         characterText.setBackground(Color.LIGHT_GRAY);
-//         characterText.setText("\r\n\r\n   Choose a Hero Class\r\n\r\n      1 - Ranger\r\n      2 - Wizard\r\n      3 - Fighter\r\n      4 - Rogue");
-//         characterText.setFont(new Font("Monospaced", Font.PLAIN, 13));
-//         characterText.setEditable(false);
-//         characterText.setBounds(395, 11, 300, 325);
-//         panel.add(characterText);
+        // generateGui();
+        // initCommonComponents();
+        // configureActionListeners();
         
-        // END CREATE SCREEN CLASS
+        // Uncomment only 1 of the below functions to render that screen
         
-        // START CREATE SCREEN NAME
-//        submitNameBtn.setBounds(277, 215, 85, 23);
-//        panel.add(submitNameBtn);
-//        welcomeText.setBackground(Color.LIGHT_GRAY);
-//        
-//        welcomeText.setEditable(false);
-//        welcomeText.setText("\r\n   WELCOME TO                                  \r\n         _____          _                   \r\n        /  ___|        (_)                  \r\n        \\ `--.__      ___ _ __   __ _ _   _ \r\n         `--. \\ \\ /\\ / / | '_ \\ / _` | | | |\r\n        /\\__/ /\\ V  V /| | | | | (_| | |_| |\r\n        \\____/  \\_/\\_/ |_|_| |_|\\__, |\\__, |\r\n                                 __/ | __/ |\r\n                                |___/ |___/ \r\n\r\n\r\n");
-//        welcomeText.setFont(new Font("Monospaced", Font.PLAIN, 11));
-//        welcomeText.setBounds(10, 11, 352, 193);
-//        panel.add(welcomeText);
-//        
-//        characterText.setBackground(Color.LIGHT_GRAY);
-//        characterText.setText("\r\n\r\n   Enter a name for your Hero");
-//        characterText.setFont(new Font("Monospaced", Font.PLAIN, 13));
-//        characterText.setEditable(false);
-//          characterText.setBounds(395, 11, 300, 325);
-//        panel.add(characterText);
-//        
-//        heroNameText.setFont(new Font("Monospaced", Font.PLAIN, 11));
-//        heroNameText.setBounds(20, 216, 159, 20);
-//        heroNameText.setColumns(10);
-//        panel.add(heroNameText);
-//        
-//        
-//        nameLabel.setForeground(Color.WHITE);
-//        nameLabel.setBounds(20, 203, 140, 14);
-//        panel.add(nameLabel);
+        // startScreen();
+        // createCharName();
+        // createCharClass();
+        // loadChar(controller.getHeroes()); //some missing comps due to logic
+        // playGame();
+        // fightOrFlight();
+        // noEscape();
+        // roundWon();
+        // gameOver();
+        // afterAction(); // some missing buttons due to logic
+        // quitGame();
         
-        // END CREATE SCREEN NAME
-        
-        // START LOAD CHAR SCREEN
-        // submitIndexBtn.setBounds(277, 215, 85, 23);
-        // panel.add(submitIndexBtn);
-        // welcomeText.setBackground(Color.LIGHT_GRAY);
-      
-        // welcomeText.setEditable(false);
-        // welcomeText.setText("\r\n   WELCOME TO                                  \r\n         _____          _                   \r\n        /  ___|        (_)                  \r\n        \\ `--.__      ___ _ __   __ _ _   _ \r\n         `--. \\ \\ /\\ / / | '_ \\ / _` | | | |\r\n        /\\__/ /\\ V  V /| | | | | (_| | |_| |\r\n        \\____/  \\_/\\_/ |_|_| |_|\\__, |\\__, |\r\n                                 __/ | __/ |\r\n                                |___/ |___/ \r\n\r\n\r\n");
-        // welcomeText.setFont(new Font("Monospaced", Font.PLAIN, 11));
-        // welcomeText.setBounds(10, 11, 352, 193);
-        // panel.add(welcomeText);
-      
-        // characterText.setWrapStyleWord(true);
-        // characterText.setBackground(Color.LIGHT_GRAY);
-        // characterText.setText("\r\n\r\n   Choose a Hero");
-        // characterText.setFont(new Font("Monospaced", Font.PLAIN, 13));
-        // characterText.setEditable(false);
-        // characterText.setBounds(395, 11, 300, 325);
-        // panel.add(characterText);
-        
-        // heroSelect.setModel(new SpinnerNumberModel(1, 1, 4, 1));
-        // heroSelect.setBounds(175, 215, 92, 23);
-        // panel.add(heroSelect);
-        
-        // backBtn.setBounds(20, 215, 60, 23);
-        // panel.add(backBtn);
-        // END LOAD CHAR SCREEN
-        
-        // START PLAY SCREEN
-        // mapText.setEditable(false);
-        // mapText.setBackground(Color.LIGHT_GRAY);
-        // mapText.setBounds(10, 11, 485, 485);
-        // panel.add(mapText);
-        
-        // messageText.setWrapStyleWord(true);
-        // messageText.setLineWrap(true);
-        // messageText.setText("Placeholder text that will hopefully word wrap because long messages might exist?!");
-        // messageText.setEditable(false);
-        // messageText.setBackground(Color.LIGHT_GRAY);
-        // messageText.setBounds(505, 11, 190, 88);
-        // panel.add(messageText);
-        // upBtn.setSize(60, 23);
-        // upBtn.setLocation(570, 256);
-       
-        // panel.add(upBtn);
-        // downBtn.setSize(60, 23);
-        // downBtn.setLocation(570, 286);
-        // panel.add(downBtn);
-        // leftBtn.setLocation(505, 286);
-        // leftBtn.setSize(60, 23);
-        // panel.add(leftBtn);
-        // rightBtn.setLocation(635, 286);
-        // rightBtn.setSize(60, 23);
-        // panel.add(rightBtn);
-        // quitBtn.setLocation(635, 473);
-        // quitBtn.setSize(60, 23);
-        // panel.add(quitBtn);
-        // saveBtn.setLocation(505, 473);
-        // saveBtn.setSize(60, 23);
-        // panel.add(saveBtn);
-        // heroStatsText.setText("HeroStats Here");
-        // heroStatsText.setFont(new Font("Monospaced", Font.PLAIN, 11));
-        // heroStatsText.setEditable(false);
-        // heroStatsText.setBackground(Color.LIGHT_GRAY);
-        // heroStatsText.setBounds(505, 110, 190, 115);
-        
-        // panel.add(heroStatsText);
-        // END PLAY SCREEN
-        
-        // START FIGHT SCREEN
-//        mapText.setEditable(false);
-//        mapText.setBackground(Color.LIGHT_GRAY);
-//        mapText.setBounds(10, 11, 485, 485);
-//        panel.add(mapText);
-//        
-//        JTextArea messageText = new JTextArea();
-//        messageText.setWrapStyleWord(true);
-//        messageText.setLineWrap(true);
-//        messageText.setText("Placeholder text that will hopefully word wrap because long messages might exist?!");
-//        messageText.setEditable(false);
-//        messageText.setBackground(Color.LIGHT_GRAY);
-//        messageText.setBounds(505, 11, 190, 88);
-//        panel.add(messageText);
-//        fightBtn.setLocation(505, 110);
-//        fightBtn.setSize(60, 23);
-//        panel.add(fightBtn);
-//        fleeBtn.setLocation(505, 140);
-//        fleeBtn.setSize(60, 23);
-//        panel.add(fleeBtn);
-        // END FIGHT SCREEN
-        
-        // START NO ESCAPE
-//        mapText.setEditable(false);
-//        mapText.setBackground(Color.LIGHT_GRAY);
-//        mapText.setBounds(10, 11, 485, 485);
-//        panel.add(mapText);
-//        
-//        JTextArea messageText = new JTextArea();
-//        messageText.setWrapStyleWord(true);
-//        messageText.setLineWrap(true);
-//        messageText.setText("Your attempt to flee has failed!\r\n\r\nPrepare for BATTLE!");
-//        messageText.setEditable(false);
-//        messageText.setBackground(Color.LIGHT_GRAY);
-//        messageText.setBounds(505, 11, 190, 88);
-//        panel.add(messageText);
-//        continueBtn.setLocation(505, 110);
-//        continueBtn.setSize(90, 23);
-//        panel.add(continueBtn);
-        // END NO ESCAPE
-        
-        // START ROUND WON
-//        mapText.setEditable(false);
-//        mapText.setBackground(Color.LIGHT_GRAY);
-//        mapText.setBounds(10, 11, 485, 485);
-//        panel.add(mapText);
-//        
-//        JTextArea messageText = new JTextArea();
-//        messageText.setWrapStyleWord(true);
-//        messageText.setLineWrap(true);
-//        messageText.setText("You have Successfully completed this level!\r\n\r\nContinue your adventure from the main menu, or try a new character.");
-//        messageText.setEditable(false);
-//        messageText.setBackground(Color.LIGHT_GRAY);
-//        messageText.setBounds(505, 11, 190, 138);
-//        panel.add(messageText);
-//        quitBtn.setLocation(635, 473);
-//        quitBtn.setSize(60, 23);
-//        
-//        panel.add(quitBtn);
-//        menuBtn.setLocation(505, 473);
-//        menuBtn.setSize(120, 23);
-//        panel.add(menuBtn);
-        // END ROUND WON
-        
-        // START GAME OVER
-//        mapText.setEditable(false);
-//        mapText.setBackground(Color.LIGHT_GRAY);
-//        mapText.setBounds(10, 11, 485, 485);
-//        panel.add(mapText);
-//        
-//        JTextArea messageText = new JTextArea();
-//        messageText.setWrapStyleWord(true);
-//        messageText.setLineWrap(true);
-//        messageText.setText("      GAME   OVER\r\n\r\nYour hero has died :(\r\n\r\nYou may return to the menu and play again, or you may quit.");
-//        messageText.setEditable(false);
-//        messageText.setBackground(Color.LIGHT_GRAY);
-//        messageText.setBounds(505, 11, 190, 142);
-//        panel.add(messageText);
-//        quitBtn.setLocation(635, 473);
-//        quitBtn.setSize(60, 23);
-//      
-//        panel.add(quitBtn);
-//        menuBtn.setLocation(505, 473);
-//        menuBtn.setSize(120, 23);
-//        panel.add(menuBtn);
-        // END GAME OVER
-        
-        // START AFTER ACTION
-//       mapText.setEditable(false);
-//       mapText.setBackground(Color.LIGHT_GRAY);
-//       mapText.setBounds(10, 11, 485, 485);
-//       panel.add(mapText);
-//       
-//       JTextArea messageText = new JTextArea();
-//       messageText.setWrapStyleWord(true);
-//       messageText.setLineWrap(true);
-//       messageText.setText("Placeholder Text");
-//       messageText.setEditable(false);
-//       messageText.setBackground(Color.LIGHT_GRAY);
-//       messageText.setBounds(505, 11, 190, 170);
-//       panel.add(messageText);
-//       
-//       continueBtn.setLocation(505, 192);
-//       continueBtn.setSize(90, 23);
-//       panel.add(continueBtn);
-//       
-//       equipBtn.setLocation(505, 226);
-//       equipBtn.setSize(90, 23);
-//       panel.add(equipBtn);
-//       
-//       ignoreBtn.setLocation(605, 226);
-//       ignoreBtn.setSize(90, 23);
-//       
-//       panel.add(ignoreBtn);
-        // END AFTER ACTION
-        
-        // START QUIT
-        
-//        JTextArea messageText = new JTextArea();
-//        messageText.setWrapStyleWord(true);
-//        messageText.setLineWrap(true);
-//        messageText.setText("Are you sure you would like to quit the game?\r\n\r\nConfirm - Save and Quit\r\nDeny - Return to previous screen");
-//        messageText.setEditable(false);
-//        messageText.setBackground(Color.LIGHT_GRAY);
-//        messageText.setBounds(10, 11, 200, 130);
-//        panel.add(messageText);
-//        quitConfirmBtn.setLocation(10, 152);
-//        quitConfirmBtn.setSize(90, 23);
-//    
-//        panel.add(quitConfirmBtn);
-//        quitDenyBtn.setLocation(120, 152);
-//        quitDenyBtn.setSize(90, 23);
-//        panel.add(quitDenyBtn);
-        // END QUIT
-        
-//         frame.setVisible(true);
     }
 
     // Init common components that will be used frequently and probably don't need updating at any point
@@ -720,6 +459,7 @@ public class GuiDisplay implements Display {
         printMap();
         panel.add(mapText);
         
+        messageText.setBounds(505, 11, 190, 88);
         messageText.setText(" Reach the edge of the map to win the current mission.\n\n Enemies may be encountered!");
         if (controller.isHeroEscaped()) {
             controller.setHeroEscaped(false);
@@ -729,7 +469,6 @@ public class GuiDisplay implements Display {
             controller.setLevelUp(false);
             messageText.setText(" You have levelled up!");
         }
-        messageText.setBounds(505, 11, 190, 88);
         quitBtn.setLocation(635, 473);
         panel.add(messageText);
         panel.add(upBtn);
