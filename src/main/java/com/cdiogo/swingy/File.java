@@ -7,6 +7,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 
 import com.cdiogo.swingy.models.PlayerFactory;
 import com.cdiogo.swingy.models.heroes.Player;
@@ -26,6 +32,9 @@ public class File {
         String filename = System.getProperty("user.dir") + "/saves.txt";
         List<Player> heroes = new ArrayList<>();
         String line;
+        int lineNum = 1;
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(filename));
             // String line = reader.readLine();
@@ -36,6 +45,15 @@ public class File {
                             Integer.parseInt(splitLine[2]), Integer.parseInt(splitLine[3]),
                             Integer.parseInt(splitLine[4]), Integer.parseInt(splitLine[5]),
                             Integer.parseInt(splitLine[6]), splitLine[7], splitLine[8], splitLine[9]);
+
+                    Set<ConstraintViolation<Player>> constraintViolations = validator.validate(hero);
+
+                    for (ConstraintViolation<Player> violation : constraintViolations)
+                        System.out.println(String.format("Validation Failed: %s - Hero on line: %d", violation.getMessage(), lineNum));
+            
+                    if (constraintViolations.size() > 0)
+                        hero = null;
+                        
                     if (hero != null) {
                         heroes.add(hero);
                     }
@@ -44,9 +62,10 @@ public class File {
                     // TODO: handle exception
                     e.printStackTrace();
                 }
+                lineNum++;
             }
             reader.close();
-            System.out.println(heroes);
+            // System.out.println(heroes);
             return (heroes);
         } catch (FileNotFoundException e) {
             // TODO remove the stackTrace
