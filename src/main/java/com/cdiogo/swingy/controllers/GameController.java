@@ -131,10 +131,12 @@ public class GameController {
                     break;
                 } else {
                     int index = Integer.parseInt(input);
-                    hero = heroes.get(index - 1);
-                    // System.out.println(hero.toString());
-                    initMap();
-                    currentGameState = gameState.PLAY;
+                    if (index <= heroes.size()) {
+                        hero = heroes.get(index - 1);
+                        // System.out.println(hero.toString());
+                        initMap();
+                        currentGameState = gameState.PLAY;
+                    }
                 }
                 break;
 
