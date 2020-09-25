@@ -107,7 +107,6 @@ public class ConsoleDisplay implements Display {
             System.out.println("                                         ");
             System.out.println("              Choose a Hero              ");
             System.out.println("                                         ");
-            // TODO: Handle bad index (GameController)
             try {
                 if (heroes.size() != 0) {
                     for (Player hero : heroes) {
