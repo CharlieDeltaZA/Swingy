@@ -131,7 +131,7 @@ public class GameController {
                     break;
                 } else {
                     int index = Integer.parseInt(input);
-                    if (index <= heroes.size()) {
+                    if (index <= heroes.size() && index != 0) {
                         hero = heroes.get(index - 1);
                         // System.out.println(hero.toString());
                         initMap();
