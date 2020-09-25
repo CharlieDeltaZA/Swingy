@@ -353,6 +353,7 @@ public class GuiDisplay implements Display {
         panel.removeAll();        
         
         quitBtn.setLocation(302, 215);
+        displayBtn.setLocation(222, 245);
         panel.add(createBtn);
         panel.add(loadBtn);
         panel.add(quitBtn);
