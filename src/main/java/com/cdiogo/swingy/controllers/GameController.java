@@ -9,6 +9,7 @@ import java.util.Random;
 
 import com.cdiogo.swingy.File;
 import com.cdiogo.swingy.models.Map;
+import com.cdiogo.swingy.models.Model;
 import com.cdiogo.swingy.models.PlayerFactory;
 import com.cdiogo.swingy.models.artifacts.Armour;
 import com.cdiogo.swingy.models.artifacts.Artifact;
@@ -26,6 +27,7 @@ public class GameController {
     private ConsoleDisplay console = new ConsoleDisplay(this);
     private GuiDisplay gui = new GuiDisplay(this);
     private Display display;
+    private Model model;
     private Player hero;
     private Villain currentEnemy;
     private List<Player> heroes;
@@ -56,6 +58,7 @@ public class GameController {
         heroEscaped = false;
         heroWon = false;
         levelUp = false;
+        model = new Model();
         mapper = new Map(this);
         file = new File();
         heroes = file.loadFromFile();
@@ -116,7 +119,7 @@ public class GameController {
                 break;
 
             case CREATE_NAME:
-                if (input.length() > 2) {
+                if (input.length() >= 2) {
                     createHero(input);
                     currentGameState = gameState.PLAY;
                 }
@@ -240,7 +243,7 @@ public class GameController {
                 // break;
         }
     }
-
+//fight
     private void levelUp() {
         int newXp = hero.getXp() + currentEnemy.getXp();
         int levelThresh = (hero.getLevel() * 1000 + (int)Math.pow((double)hero.getLevel() - 1, 2.0) * 450);
@@ -255,7 +258,7 @@ public class GameController {
             hero.setXp(newXp);
         }
     }
-
+//fight
     private void equipArtifact() {
         Artifact enemyArt = currentEnemy.getArtifact();
 
@@ -267,7 +270,7 @@ public class GameController {
             hero.setHelm(new Helm(enemyArt.getArtifactName()));
         }
     }
-
+//fight
     private void fightEnemy() {
         System.out.println("FIGHT!");
         System.out.println(villains.size());
@@ -340,7 +343,7 @@ public class GameController {
             currentGameState = gameState.AFTER_ACTION;
         }
     }
-
+//fight 
     private void tryFlee() {
         // 50% chance to escape
         Random random = new Random();
@@ -368,7 +371,7 @@ public class GameController {
         }
         playGame();
     }
-
+// file
     private void savePlayer() {
         // Add current hero to heroes from file
         if (heroes != null) {
@@ -388,7 +391,7 @@ public class GameController {
         }
         file.saveFile();
     }
-
+// map
     private boolean checkWon() {
         if (hero.getPositionX() == 0 || hero.getPositionY() == 0 || hero.getPositionX() == map[0].length - 1
                 || hero.getPositionY() == map[0].length - 1) {
@@ -396,7 +399,7 @@ public class GameController {
         }
         return (false);
     }
-
+//fight
     private boolean checkConflict() {
         for (Villain villain : villains) {
             if (villain.getPositionX() == hero.getPositionX() && villain.getPositionY() == hero.getPositionY()) {
@@ -406,7 +409,7 @@ public class GameController {
         }
         return (false);
     }
-
+// map
     private void movePlayer(String move) {
         // x and y seemingly reversed? Weird Java behaviour.
         xBeforeMove = hero.getPositionX();
@@ -424,12 +427,13 @@ public class GameController {
             hero.setPositionY(yBeforeMove + 1);
         }
     }
-
+// map
     private void updateMap() {
         map[hero.getPositionX()][hero.getPositionY()] = 'H';
         map[xBeforeMove][yBeforeMove] = '.';
     }
 
+    // map
     private void initMap() {
         map = mapper.generateMap(hero.getLevel());
         villains = generateVillains(map[0].length, hero.getLevel());
@@ -523,6 +527,7 @@ public class GameController {
         }
     }
 
+    // map
     private void spawnVillains() {
         Random random = new Random();
 
@@ -548,7 +553,7 @@ public class GameController {
             }
         }
     }
-
+    // map
     private boolean validateSpawn(int x, int y) {
         return (map[x][y] == '*');
     }

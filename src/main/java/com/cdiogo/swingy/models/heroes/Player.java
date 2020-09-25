@@ -2,6 +2,7 @@ package com.cdiogo.swingy.models.heroes;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.cdiogo.swingy.models.artifacts.Armour;
@@ -15,9 +16,11 @@ import lombok.Setter;
 @Getter
 public abstract class Player {
     @NotNull
+    @NotBlank(message = "Hero name must not be blank")
     protected String heroName;
 
     @NotNull
+    @NotBlank(message = "Hero class must not be blank")
     protected String heroClass;
 
     @NotNull
@@ -48,6 +51,7 @@ public abstract class Player {
     @NotNull
     @Min(value = 0, message = "Edge of map exceeded")
     protected int positionX;
+    
     @NotNull
     @Min(value = 0, message = "Edge of map exceeded")
     protected int positionY;
