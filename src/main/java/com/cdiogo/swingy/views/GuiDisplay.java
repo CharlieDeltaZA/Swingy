@@ -44,11 +44,11 @@ public class GuiDisplay implements Display {
 
     private JTextPane welcomeText = new JTextPane();
     private JTextPane heroStatsText = new JTextPane();
-    private JTextArea characterText = new JTextArea();
     private JTextPane mapText = new JTextPane();
+    private JTextArea characterText = new JTextArea();
     private JTextArea messageText = new JTextArea();
-    private JTextField heroNameText = new JTextField();
     private JLabel nameLabel = new JLabel("Name: (2 char min)");
+    private JTextField heroNameText = new JTextField();
 
     public GuiDisplay(GameController controller) {
         this.controller = controller;
@@ -350,7 +350,6 @@ public class GuiDisplay implements Display {
     
     @Override
     public void startScreen() {
-        // TODO Auto-generated method stub
         panel.removeAll();        
         
         quitBtn.setLocation(302, 215);
@@ -362,42 +361,35 @@ public class GuiDisplay implements Display {
         
         panel.validate();
         panel.repaint();
-        
         frame.setVisible(true);
-
     }
 
     @Override
     public void createCharName() {
-        // TODO Auto-generated method stub
         panel.removeAll();
         
-        panel.add(welcomeText);
-        panel.add(submitNameBtn);
         characterText.setText("\r\n\r\n   Enter a name for your Hero");
         panel.add(characterText);
+        panel.add(welcomeText);
+        panel.add(submitNameBtn);
         panel.add(heroNameText);
         panel.add(nameLabel);
 
         panel.validate();
         panel.repaint();
-        
         frame.setVisible(true);
-     
     }
 
     @Override
     public void createCharClass() {
-        // TODO Auto-generated method stub
         panel.removeAll();
-        panel.add(welcomeText);
-        
-        panel.add(classSelect);
-        panel.add(backBtn);
-        panel.add(submitClassBtn);
         
         characterText.setText("\r\n\r\n   Choose a Hero Class\r\n\r\n      1 - Ranger\r\n      2 - Wizard\r\n      3 - Fighter\r\n      4 - Rogue");
         panel.add(characterText);
+        panel.add(welcomeText);
+        panel.add(classSelect);
+        panel.add(backBtn);
+        panel.add(submitClassBtn);
 
         panel.validate();
         panel.repaint();
@@ -406,27 +398,22 @@ public class GuiDisplay implements Display {
 
     @Override
     public void loadChar(List<Player> heroes) {
-        // TODO Auto-generated method stub
         panel.removeAll();
         
-        panel.add(welcomeText);
-        
         displayHeroes(heroes);
+        panel.add(welcomeText);
         panel.add(characterText);
-        
+        panel.add(backBtn);
+
         if (heroes.size() != 0) {
-            panel.add(submitIndexBtn);
-            
             heroSelect.setModel(new SpinnerNumberModel(1, 1, heroes.size(), 1));
+            panel.add(submitIndexBtn);
             panel.add(heroSelect);
         }
-        
-        panel.add(backBtn);
         
         panel.validate();
         panel.repaint();
         frame.setVisible(true);
-
     }
 
     private void displayHeroes(List<Player> heroes) {
@@ -440,30 +427,25 @@ public class GuiDisplay implements Display {
             }
         } else {
             line += "\tNo Saved Heroes found!\n";
-            line += "\tTry creating one instead";
+            line += "\tTry creating one instead.";
         }
-
         characterText.setText(line);
     }
 
     @Override
     public void renderGame() {
-        // TODO Auto-generated method stub
         if (!initialized) {
-                generateGui();
-                initialized = true;
+            generateGui();
+            initialized = true;
         }
         controller.displayState();
     }
 
     @Override
     public void playGame() {
-        // TODO Auto-generated method stub
         panel.removeAll();
         
         printMap();
-        panel.add(mapText);
-        
         messageText.setBounds(505, 11, 209, 88);
         messageText.setText("Reach the edge of the map to win the current mission.\n\nEnemies may be encountered!");
         if (controller.isHeroEscaped()) {
@@ -476,6 +458,8 @@ public class GuiDisplay implements Display {
         }
         quitBtn.setLocation(654, 473);
         displayBtn.setLocation(505, 473);
+        heroStatsText.setText(controller.getHero().toString());
+        panel.add(mapText);
         panel.add(messageText);
         panel.add(upBtn);
         panel.add(downBtn);
@@ -484,14 +468,11 @@ public class GuiDisplay implements Display {
         panel.add(quitBtn);
         panel.add(saveBtn);
         panel.add(displayBtn);
-        
-        heroStatsText.setText(controller.getHero().toString());
         panel.add(heroStatsText);
         
         panel.validate();
         panel.repaint();
         frame.setVisible(true);
-
     }
 
     private void printMap() {
@@ -516,16 +497,14 @@ public class GuiDisplay implements Display {
 
     @Override
     public void fightOrFlight() {
-        // TODO Auto-generated method stub
         String line = "";
         panel.removeAll();
         
         printMap();
-        panel.add(mapText);
-        
         line = String.format("You have encountered a villain!\n\n%s", controller.getCurrentEnemy().toString());
         messageText.setText(line);
         messageText.setBounds(505, 11, 209, 98);
+        panel.add(mapText);
         panel.add(messageText);
         panel.add(fightBtn);
         panel.add(fleeBtn);
@@ -537,29 +516,24 @@ public class GuiDisplay implements Display {
 
     @Override
     public void roundWon() {
-        // TODO Auto-generated method stub
         panel.removeAll();
         
         printMap();
-        panel.add(mapText);
-        
         messageText.setText("You have Successfully completed this level!\r\n\r\nContinue your adventure from the main menu, or try a new character.");
         messageText.setBounds(505, 11, 209, 138);
-        panel.add(messageText);
         quitBtn.setLocation(635, 473);
-        
+        panel.add(messageText);
+        panel.add(mapText);
         panel.add(quitBtn);
         panel.add(menuBtn);
         
         panel.validate();
         panel.repaint();
         frame.setVisible(true);
-
     }
 
     @Override
     public void quitGame() {
-        // TODO Auto-generated method stub
         panel.removeAll();
         
         messageText.setText("Are you sure you would like to quit the game?\r\n\r\nConfirm - Save and Quit\r\nDeny - Return to previous screen");
@@ -571,65 +545,54 @@ public class GuiDisplay implements Display {
         panel.validate();
         panel.repaint();
         frame.setVisible(true);
-
     }
 
     @Override
     public void noEscape() {
-        // TODO Auto-generated method stub
         panel.removeAll();
         
         printMap();
-        panel.add(mapText);
-        
         messageText.setText("Your attempt to flee has failed!\r\n\r\nPrepare for BATTLE!");
         messageText.setBounds(505, 11, 209, 88);
-        panel.add(messageText);
         continueBtn.setLocation(505, 110);
+        panel.add(messageText);
+        panel.add(mapText);
         panel.add(continueBtn);
                 
         panel.validate();
         panel.repaint();
         frame.setVisible(true);
-
     }
 
     @Override
     public void gameOver() {
-        // TODO Auto-generated method stub
         panel.removeAll();
         
         printMap();
-        panel.add(mapText);
-        
         messageText.setText("       GAME   OVER\r\n\r\nYour hero has died :(\r\n\r\nYou may return to the menu and play again, or you may quit.");
         messageText.setBounds(505, 11, 209, 142);
-        panel.add(messageText);
         quitBtn.setLocation(654, 473);
-      
+        panel.add(mapText);
+        panel.add(messageText);
         panel.add(quitBtn);
         panel.add(menuBtn);
         
         panel.validate();
         panel.repaint();
         frame.setVisible(true);
-
     }
 
     @Override
     public void afterAction() {
-        // TODO Auto-generated method stub
         Villain enemy = controller.getCurrentEnemy();
         String line = "";
         panel.removeAll();
         
         printMap();
-        panel.add(mapText);
-        
         messageText.setBounds(505, 11, 209, 170);
-        panel.add(messageText);
-        
         continueBtn.setLocation(505, 192);
+        panel.add(mapText);
+        panel.add(messageText);
         
         line += String.format("You have defeated the %s\n", enemy.getName());
         line += String.format("You gain %d XP\n", enemy.getXp());
@@ -647,7 +610,6 @@ public class GuiDisplay implements Display {
         panel.validate();
         panel.repaint();
         frame.setVisible(true);
-
     }
 
     public void hideFrame() {
