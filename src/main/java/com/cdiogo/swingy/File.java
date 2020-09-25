@@ -60,7 +60,12 @@ public class File {
 
                 } catch (NumberFormatException e) {
                     // TODO: handle exception
-                    e.printStackTrace();
+                    System.out.println(String.format("There is a problem with one of the numbers on line %d of the 'saves.txt' file.", lineNum));
+                    // e.printStackTrace();
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    //TODO: handle exception
+                    System.out.println(String.format("There is a missing item on line %d of the 'saves.txt' file.", lineNum));
+                    // e.printStackTrace();
                 }
                 lineNum++;
             }
