@@ -44,14 +44,19 @@ public abstract class Player {
     @Min(value=0, message="Health cannot be lower than 0")
     protected int hp;
 
+    @NotNull
     protected Armour armour;
+    
+    @NotNull
     protected Weapon weapon;
+
+    @NotNull
     protected Helm helm;
 
     @NotNull
     @Min(value = 0, message = "Edge of map exceeded")
     protected int positionX;
-    
+
     @NotNull
     @Min(value = 0, message = "Edge of map exceeded")
     protected int positionY;
