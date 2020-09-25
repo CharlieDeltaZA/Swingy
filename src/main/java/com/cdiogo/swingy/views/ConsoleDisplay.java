@@ -7,11 +7,6 @@ import com.cdiogo.swingy.controllers.GameController;
 import com.cdiogo.swingy.models.heroes.Player;
 import com.cdiogo.swingy.models.villains.Villain;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
 public class ConsoleDisplay implements Display {
     private Scanner sysin;
     private GameController controller;
@@ -29,9 +24,8 @@ public class ConsoleDisplay implements Display {
     public void startScreen() {
         String choice = "";
 
-        while (!(choice.equals("c") || choice.equals("l") || choice.equals("q") || choice.equals("x"))) {
+        while (!(choice.equals("c") || choice.equals("l") || choice.equals("x") || choice.equals("q"))) {
             System.out.print("\033[H\033[2J");
-            System.out.flush();
             System.out.println("+----------------------------------------------+");
             System.out.println("|  WELCOME TO                                  |");
             System.out.println("|      _____          _                        |");
@@ -54,8 +48,6 @@ public class ConsoleDisplay implements Display {
                 choice = sysin.next();
             }
         }
-
-        // System.out.println("You chose... something! " + choice);
         controller.handleInput(choice);
     }
 
@@ -65,7 +57,6 @@ public class ConsoleDisplay implements Display {
 
         while (choice.equals("")) {
             System.out.print("\033[H\033[2J");
-            System.out.flush();
             System.out.println("+-------------------------+");
             System.out.println("|                         |");
             System.out.println("|     Enter Hero Name     |");
@@ -73,12 +64,10 @@ public class ConsoleDisplay implements Display {
             System.out.println("+-------------------------+");
             System.out.print("Hero Name: ");
             if (sysin.hasNext()) {
-                // choice = sysin.next();
                 choice = sysin.nextLine();
             }
         }
         controller.handleInput(choice);
-        // return (choice);
     }
     
     @Override
@@ -87,7 +76,6 @@ public class ConsoleDisplay implements Display {
 
         while (!(choice.equals("1") || choice.equals("2") || choice.equals("3") || choice.equals("4") || choice.equals("b"))) {
             System.out.print("\033[H\033[2J");
-            System.out.flush();
             System.out.println("+--------------------------+");
             System.out.println("|                          |");
             System.out.println("|     Enter Hero Class     |");
@@ -101,7 +89,9 @@ public class ConsoleDisplay implements Display {
             System.out.println("|                          |");
             System.out.println("+--------------------------+");
             System.out.print("Hero Class: ");
-            choice = sysin.next();
+            if (sysin.hasNext()) {
+                choice = sysin.next();
+            }
         }
         controller.handleInput(choice);
     }
@@ -109,40 +99,43 @@ public class ConsoleDisplay implements Display {
     @Override
 	public void loadChar(List<Player> heroes) {
         int i = 1;
-        String choice;
+        String choice = "";
 
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-        System.out.println("+---------------------------------------+");
-        System.out.println("                                         ");
-        System.out.println("              Choose a Hero              ");
-        System.out.println("                                         ");
-        // TODO: Handle bad index (GameController) / non number / 'b' input
-        try {
-            if (heroes.size() != 0) {
-                for (Player hero : heroes) {
-                    System.out.println(String.format("   %d - %s : %s ", i, hero.getHeroName(), hero.getHeroClass()));
-                    i++;
+        while (!(choice.equals("b") || choice.matches("\\d+"))) {
+            System.out.print("\033[H\033[2J");
+            System.out.println("+---------------------------------------+");
+            System.out.println("                                         ");
+            System.out.println("              Choose a Hero              ");
+            System.out.println("                                         ");
+            // TODO: Handle bad index (GameController)
+            try {
+                if (heroes.size() != 0) {
+                    for (Player hero : heroes) {
+                        System.out.println(String.format("   %d - %s : %s ", i, hero.getHeroName(), hero.getHeroClass()));
+                        i++;
+                    }
+                    i = 1;
+                } else {
+                    System.out.println("   No Saved Heroes found!                ");
+                    System.out.println("   Try creating one instead              ");
                 }
-            } else {
-                System.out.println("   No Saved Heroes found!                ");
-                System.out.println("   Try creating one instead              ");
+    
+            } catch (NullPointerException e) {
+                //TODO: handle exception
+                System.out.println("Caught NullPtrExc");
+                e.printStackTrace();
             }
-
-        } catch (NullPointerException e) {
-            //TODO: handle exception
-            e.printStackTrace();
+    
+            System.out.println("                                         ");
+            System.out.println("   b - Back to Menu                      ");
+            System.out.println("                                         ");
+            System.out.println("+---------------------------------------+");
+            System.out.print("Your choice: ");
+            if (sysin.hasNext()) {
+                choice = sysin.next();
+            }
         }
-
-
-        System.out.println("                                         ");
-        System.out.println("   b - Back to Menu                      ");
-        System.out.println("                                         ");
-        System.out.println("+---------------------------------------+");
-        System.out.print("Your choice: ");
-        choice = sysin.next();
         controller.handleInput(choice);
-        // return (choice);
     }
     
     public void changeDisplay(boolean bool) {
@@ -152,7 +145,6 @@ public class ConsoleDisplay implements Display {
 
     @Override
     public void renderGame() {
-        // TODO Auto-generated method stub
         while (!controller.isGameOver() && !gui) {
             controller.displayState();
         }
@@ -210,9 +202,10 @@ public class ConsoleDisplay implements Display {
             }
 
             System.out.print("Your choice: ");
-            choice = sysin.next();
+            if (sysin.hasNext()) {
+                choice = sysin.next();
+            }
         }
-
         controller.handleInput(choice);
     }
 
@@ -226,7 +219,6 @@ public class ConsoleDisplay implements Display {
             System.out.println("                                        ");
             System.out.println("    You have encountered a villain!     ");
             System.out.println("                                        ");
-            // System.out.println("                                        ");
             System.out.println(String.format("    %s    ", controller.getCurrentEnemy().toString()));
             System.out.println("                                        ");
             System.out.println("    f - Fight the enemy                 ");
@@ -234,7 +226,9 @@ public class ConsoleDisplay implements Display {
             System.out.println("                                        ");
             System.out.println("+--------------------------------------+");
             System.out.print("Your choice: ");
-            choice = sysin.next();
+            if (sysin.hasNext()) {
+                choice = sysin.next();
+            }
 
         }
         controller.handleInput(choice);
@@ -261,7 +255,9 @@ public class ConsoleDisplay implements Display {
             System.out.println("|                                   |");
             System.out.println("+-----------------------------------+");
             System.out.print("Your choice: ");
-            choice = sysin.next();
+            if (sysin.hasNext()) {
+                choice = sysin.next();
+            }
         }
         controller.handleInput(choice);
     }
@@ -283,7 +279,9 @@ public class ConsoleDisplay implements Display {
             System.out.println("|                                  |");
             System.out.println("+----------------------------------+");
             System.out.print("Your choice: ");
-            choice = sysin.next();
+            if (sysin.hasNext()) {
+                choice = sysin.next();
+            }
         }
         controller.handleInput(choice);
     }
@@ -304,7 +302,9 @@ public class ConsoleDisplay implements Display {
             System.out.println("|                                  |");
             System.out.println("+----------------------------------+");
             System.out.print("Your choice: ");
-            choice = sysin.next();
+            if (sysin.hasNext()) {
+                choice = sysin.next();
+            }
         }
         controller.handleInput(choice);
 
@@ -331,7 +331,9 @@ public class ConsoleDisplay implements Display {
                 System.out.println("                                    ");
                 System.out.println("+----------------------------------+");
                 System.out.print("Your choice: ");
-                choice = sysin.next();
+                if (sysin.hasNext()) {
+                    choice = sysin.next();
+                }
             }
         } else {
             while (!(choice.equals("c"))) {
@@ -344,7 +346,9 @@ public class ConsoleDisplay implements Display {
                 System.out.println("                                    ");
                 System.out.println("+----------------------------------+");
                 System.out.print("Your choice: ");
-                choice = sysin.next();
+                if (sysin.hasNext()) {
+                    choice = sysin.next();
+                }
             }
         }
         controller.handleInput(choice);
@@ -371,7 +375,9 @@ public class ConsoleDisplay implements Display {
             System.out.println("|                                  |");
             System.out.println("+----------------------------------+");
             System.out.print("Your choice: ");
-            choice = sysin.next();
+            if (sysin.hasNext()) {
+                choice = sysin.next();
+            }
         }
         controller.handleInput(choice);
     }
