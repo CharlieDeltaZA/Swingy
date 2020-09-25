@@ -250,12 +250,15 @@ public class GameController {
         System.out.println("newXp: "+newXp);
         System.out.println("LevelThresh: "+levelThresh);
 
-        if (newXp >= levelThresh) {
-            levelUp = true;
-            hero.setLevel(hero.getLevel() + 1);
-            hero.setXp(newXp);
-        } else {
-            hero.setXp(newXp);
+        // Level 10 is max level
+        if (hero.getLevel() < 10) {
+            if (newXp >= levelThresh) {
+                levelUp = true;
+                hero.setLevel(hero.getLevel() + 1);
+                hero.setXp(newXp);
+            } else {
+                hero.setXp(newXp);
+            }
         }
     }
 //fight
