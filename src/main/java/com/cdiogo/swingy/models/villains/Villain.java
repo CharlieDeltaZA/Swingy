@@ -61,25 +61,25 @@ public class Villain {
                 atkMin = 9;
                 defMin = 7;
                 this.xp = (int)(250 * multiplier);
-                this.hp = random.nextInt(45) + 25;
+                this.hp = random.nextInt(45) + (int)(25 * multiplier);
                 break;
             case "Bandit":
                 atkMin = 8;
                 defMin = 6;
                 this.xp = (int)(150 * multiplier);
-                this.hp = random.nextInt(45) + 25;
+                this.hp = random.nextInt(40) + (int)(25 * multiplier);
                 break;
             case "Leshen":
                 atkMin = 12;
                 defMin = 10;
                 this.xp = (int)(350 * multiplier);
-                this.hp = random.nextInt(50) + 40;
+                this.hp = random.nextInt(50) + (int)(40 * multiplier);
                 break;
             case "Vampire":
                 atkMin = 8;
                 defMin = 9;
                 this.xp = (int)(200 * multiplier);
-                this.hp = random.nextInt(45) + 30;
+                this.hp = random.nextInt(45) + (int)(30 * multiplier);
                 break;
             default:
                 System.out.println(String.format("Unrecognized Villain type '%s'", name));
@@ -88,8 +88,6 @@ public class Villain {
 
         this.attack = atkMin + random.nextInt((level + 5));
         this.defense = defMin + random.nextInt((level + 5));
-
-        // System.out.println(String.format("Multiplier: %f", multiplier));
 
     }
 
