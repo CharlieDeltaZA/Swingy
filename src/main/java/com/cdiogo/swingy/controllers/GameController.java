@@ -294,15 +294,34 @@ public class GameController {
         }
 
         while (heroEffectiveHp > 0 && enemyEffectiveHp > 0) {
+            int heroAtkRoll = rand.nextInt(50);
+            int enemyAtkRoll = rand.nextInt(50);
+
             if (heroInit >= enemyInit) {
                 // Hero Attacks first
-                enemyEffectiveHp -= heroEffectiveAtk;
-                heroEffectiveHp -= enemyEffectiveAtk;
+                if (heroAtkRoll > enemyEffectiveDef) {
+                    enemyEffectiveHp -= heroEffectiveAtk;
+                } else if (heroAtkRoll <= enemyEffectiveDef) {
+                    enemyEffectiveHp -= heroEffectiveAtk / 2;
+                }
+                if (enemyAtkRoll > heroEffectiveDef) {
+                    heroEffectiveHp -= enemyEffectiveAtk;
+                } else if (enemyAtkRoll <= heroEffectiveDef) {
+                    heroEffectiveHp -= enemyEffectiveAtk / 2;
+                }
                 
             } else {
                 // Enemy Attacks first
-                heroEffectiveHp -= enemyEffectiveAtk;
-                enemyEffectiveHp -= heroEffectiveAtk;
+                if (enemyAtkRoll > heroEffectiveDef) {
+                    heroEffectiveHp -= enemyEffectiveAtk;
+                } else if (enemyAtkRoll <= heroEffectiveDef) {
+                    heroEffectiveHp -= enemyEffectiveAtk / 2;
+                }
+                if (heroAtkRoll > enemyEffectiveDef) {
+                    enemyEffectiveHp -= heroEffectiveAtk;
+                } else if (heroAtkRoll <= enemyEffectiveDef) {
+                    enemyEffectiveHp -= heroEffectiveAtk / 2;
+                }
             }
         }
         if (heroEffectiveHp <= 0) {
