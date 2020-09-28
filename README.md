@@ -20,7 +20,16 @@ Build with Maven:
 mvn clean package
 ```
 
-Run with Java, specificying which interface you would like to use:
+Run with Java, specifying which interface you would like to use:
 ```
 java -jar ./target/swingy.jar [console/gui]
 ```
+
+The gui version requires a working X11 server if you are running a headless version of Unix.
+Best bet is to get MobaXterm, ensure the X11 server is running, and then on the headless machine,
+```
+export DISPLAY=localhost:0.0
+```
+where `localhost` is the IPv4 address of the Unix machine.
+
+Tested on Mac & WSL/Win10
