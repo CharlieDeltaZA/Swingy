@@ -22,7 +22,7 @@ mvn clean package
 
 Run with Java, specifying which interface you would like to use:
 ```
-java -jar ./target/swingy.jar [console/gui]
+java -jar ./target/swingy-1.0.jar [console/gui]
 ```
 
 The gui version requires a working X11 server if you are running a headless version of Unix.
