@@ -496,6 +496,10 @@ public class GuiDisplay implements Display {
             controller.setLevelUp(false);
             messageText.setText("You have levelled up!");
         }
+        if (controller.isSaved()) {
+            controller.setSaved(false);
+            messageText.setText("Player Saved!");
+        }
         quitBtn.setLocation(155, 454);
         displayBtn.setLocation(10, 454);
         heroStatsText.setText(controller.getHero().toString());
