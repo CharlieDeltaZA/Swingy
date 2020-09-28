@@ -176,7 +176,7 @@ public class GuiDisplay implements Display {
 
         // AfterAction
         equipBtn.setBounds(10, 226, 90, 23);
-        ignoreBtn.setBounds(120, 226, 90, 23);
+        ignoreBtn.setBounds(130, 226, 90, 23);
         equipBtn.setFont(new Font("Monospaced", Font.PLAIN, 11));
         ignoreBtn.setFont(new Font("Monospaced", Font.PLAIN, 11));
 
@@ -525,7 +525,7 @@ public class GuiDisplay implements Display {
             line += " ";
             for (int k = 0; k < map[0].length; k++) {
                 line += map[i][k];
-                if (map[0].length < 35) {
+                if (map[0].length < 45) {
                     line += " ";
                 }
             }
