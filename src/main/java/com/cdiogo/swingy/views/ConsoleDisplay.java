@@ -12,6 +12,7 @@ public class ConsoleDisplay implements Display {
     private GameController controller;
     private final String COL_GREEN = "\u001b[32m";
     private final String COL_CYAN = "\u001b[36m";
+    private final String COL_RED = "\u001b[31m";
     private final String COL_RESET = "\u001b[0m";
     private boolean gui = false;
     
@@ -173,6 +174,13 @@ public class ConsoleDisplay implements Display {
                 System.out.println("|                                       |");
             }
 
+            if (controller.isSaved()) {
+                controller.setSaved(false);
+                System.out.println("|             Player Saved!             |");
+                System.out.println("|                                       |");
+
+            }
+
             System.out.println("|     w/a/s/d - Move Hero               |");
             System.out.println("|     c       - Save Hero               |");
             System.out.println("|     x       - Switch to GUI           |");
@@ -190,6 +198,8 @@ public class ConsoleDisplay implements Display {
                         System.out.print(COL_GREEN + map[i][k] + COL_RESET);
                     } else if (map[i][k] == '.') {
                         System.out.print(COL_CYAN + map[i][k] + COL_RESET);
+                    } else if (map[i][k] == 'V') {
+                        System.out.print(COL_RED + map[i][k] + COL_RESET);
                     } else {
                         System.out.print(map[i][k]);
                     }
