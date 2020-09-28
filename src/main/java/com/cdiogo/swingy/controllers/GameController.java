@@ -9,7 +9,6 @@ import java.util.Random;
 
 import com.cdiogo.swingy.File;
 import com.cdiogo.swingy.models.Map;
-import com.cdiogo.swingy.models.Model;
 import com.cdiogo.swingy.models.PlayerFactory;
 import com.cdiogo.swingy.models.artifacts.Armour;
 import com.cdiogo.swingy.models.artifacts.Artifact;
@@ -27,7 +26,6 @@ public class GameController {
     private ConsoleDisplay console = new ConsoleDisplay(this);
     private GuiDisplay gui = new GuiDisplay(this);
     private Display display;
-    private Model model;
     private Player hero;
     private Villain currentEnemy;
     private List<Player> heroes;
@@ -58,7 +56,6 @@ public class GameController {
         heroEscaped = false;
         heroWon = false;
         levelUp = false;
-        model = new Model();
         mapper = new Map(this);
         file = new File();
         heroes = file.loadFromFile();
