@@ -41,6 +41,7 @@ public class GameController {
     private boolean gameOver;
     private boolean heroEscaped;
     private boolean levelUp;
+    private boolean saved;
     private boolean heroWon;
     private Map mapper;
     private char[][] map;
@@ -56,6 +57,7 @@ public class GameController {
         heroEscaped = false;
         heroWon = false;
         levelUp = false;
+        saved = false;
         mapper = new Map(this);
         file = new File();
         heroes = file.loadFromFile();
@@ -150,7 +152,6 @@ public class GameController {
                 // Save / Quit
                 } else if (input.equals("c")) {
                     savePlayer();
-                    System.out.println("Player saved!");
                 } else if (input.equals("q")) {
                     stateBeforeQuit = gameState.PLAY;
                     currentGameState = gameState.QUIT;
@@ -361,6 +362,7 @@ public class GameController {
             file.addLine(heroString);
         }
         file.saveFile();
+        saved = true;
     }
 
     private boolean checkWon() {
@@ -486,7 +488,6 @@ public class GameController {
             if (validateSpawn(x, y)) {
                 villain.setPositionX(x);
                 villain.setPositionY(y);
-                // TODO: Remove below line
                 map[x][y] = 'V';
             } else {
                 x = random.nextInt(map[0].length);
@@ -495,7 +496,6 @@ public class GameController {
                 if (validateSpawn(x, y)) {
                     villain.setPositionX(x);
                     villain.setPositionY(y);
-                    // TODO: Remove below line
                     map[x][y] = 'V';
                 }
             }
