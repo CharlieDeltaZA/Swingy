@@ -9,6 +9,7 @@ import com.cdiogo.swingy.models.villains.Villain;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.text.ParseException;
 
 public class GuiDisplay implements Display {
 
@@ -32,12 +33,12 @@ public class GuiDisplay implements Display {
     private JButton fightBtn = new JButton("Fight");
     private JButton fleeBtn = new JButton("Flee");
     private JButton continueBtn = new JButton("Continue");
-    private JButton createBtn = new JButton("Create Character");
-    private JButton loadBtn = new JButton("Load Character");
+    private JButton createBtn = new JButton("Create Hero");
+    private JButton loadBtn = new JButton("Load Hero");
     private JButton submitClassBtn = new JButton("Submit"); // class index
     private JButton submitIndexBtn = new JButton("Submit"); // saved hero index
     private JButton submitNameBtn = new JButton("Submit"); // name
-    private JButton displayBtn = new JButton("Switch to Console");
+    private JButton displayBtn = new JButton("Switch View");
 
     private JSpinner classSelect = new JSpinner();
     private JSpinner heroSelect = new JSpinner();
@@ -52,15 +53,15 @@ public class GuiDisplay implements Display {
 
     public GuiDisplay(GameController controller) {
         this.controller = controller;
-        
+
         // Eclipse GUI Builder debugging below //
-        
+
         // generateGui();
         // initCommonComponents();
         // configureActionListeners();
-        
+
         // Uncomment only 1 of the below functions to render that screen
-        
+
         // startScreen();
         // createCharName();
         // createCharClass();
@@ -72,24 +73,30 @@ public class GuiDisplay implements Display {
         // gameOver();
         // afterAction(); // some missing buttons due to logic
         // quitGame();
-        
+
     }
 
-    // Init common components that will be used frequently and probably don't need updating at any point
+    // Init common components that will be used frequently and probably don't need
+    // updating at any point
     private void initCommonComponents() {
         // welcome to Swingy text
         welcomeText.setBackground(Color.LIGHT_GRAY);
-        welcomeText.setText("\r\n   WELCOME TO                                  \r\n         _____          _                   \r\n        /  ___|        (_)                  \r\n        \\ `--.__      ___ _ __   __ _ _   _ \r\n         `--. \\ \\ /\\ / / | '_ \\ / _` | | | |\r\n        /\\__/ /\\ V  V /| | | | | (_| | |_| |\r\n        \\____/  \\_/\\_/ |_|_| |_|\\__, |\\__, |\r\n                                 __/ | __/ |\r\n                                |___/ |___/ \r\n\r\n\r\n");
+        welcomeText.setText(
+                "\r\n   WELCOME TO\r\n         _____          _                   \r\n        /  ___|        (_)                  \r\n        \\ `--.__      ___ _ __   __ _ _   _ \r\n         `--. \\ \\ /\\ / / | '_ \\ / _` | | | |\r\n        /\\__/ /\\ V  V /| | | | | (_| | |_| |\r\n        \\____/  \\_/\\_/ |_|_| |_|\\__, |\\__, |\r\n                                 __/ | __/ |\r\n                                |___/ |___/ \r\n\r\n\r\n");
         welcomeText.setFont(new Font("Monospaced", Font.PLAIN, 11));
         welcomeText.setEditable(false);
         welcomeText.setBounds(10, 11, 352, 193);
         welcomeText.setMargin(new Insets(10, 10, 10, 10));
 
         // Start Screen Buttons
-        createBtn.setBounds(10, 215, 135, 23);
-        loadBtn.setBounds(155, 215, 135, 23);
-        quitBtn.setBounds(302, 215, 60, 23);
-        displayBtn.setBounds(222, 245, 140, 23);
+        createBtn.setBounds(10, 215, 125, 23);
+        loadBtn.setBounds(145, 215, 125, 23);
+        quitBtn.setBounds(292, 215, 65, 23);
+        displayBtn.setBounds(10, 249, 125, 23);
+        createBtn.setFont(new Font("Monospaced", Font.PLAIN, 11));
+        loadBtn.setFont(new Font("Monospaced", Font.PLAIN, 11));
+        quitBtn.setFont(new Font("Monospaced", Font.PLAIN, 11));
+        displayBtn.setFont(new Font("Monospaced", Font.PLAIN, 11));
 
         // Load Char | CharClass | CharName components
         characterText.setWrapStyleWord(true);
@@ -97,25 +104,29 @@ public class GuiDisplay implements Display {
         characterText.setBackground(Color.LIGHT_GRAY);
         characterText.setFont(new Font("Monospaced", Font.PLAIN, 13));
         characterText.setEditable(false);
-        characterText.setBounds(395, 11, 319, 325);
+        characterText.setBounds(395, 11, 319, 193);
         characterText.setMargin(new Insets(10, 10, 10, 10));
         submitIndexBtn.setBounds(277, 215, 85, 23);
         submitClassBtn.setBounds(277, 215, 85, 23);
-        submitNameBtn.setBounds(277, 215, 85, 23);
-        backBtn.setBounds(20, 215, 60, 23);
+        submitNameBtn.setBounds(277, 227, 85, 23);
+        backBtn.setBounds(10, 215, 75, 23);
+        submitIndexBtn.setFont(new Font("Monospaced", Font.PLAIN, 11));
+        submitClassBtn.setFont(new Font("Monospaced", Font.PLAIN, 11));
+        submitNameBtn.setFont(new Font("Monospaced", Font.PLAIN, 11));
+        backBtn.setFont(new Font("Monospaced", Font.PLAIN, 11));
         heroSelect.setBounds(175, 215, 92, 23);
         classSelect.setModel(new SpinnerNumberModel(1, 1, 4, 1));
         classSelect.setBounds(175, 215, 92, 23);
         nameLabel.setForeground(Color.WHITE);
-        nameLabel.setBounds(20, 203, 140, 14);
+        nameLabel.setBounds(15, 210, 140, 14);
         heroNameText.setFont(new Font("Monospaced", Font.PLAIN, 11));
-        heroNameText.setBounds(20, 216, 159, 20);
+        heroNameText.setBounds(10, 228, 159, 20);
         heroNameText.setColumns(10);
-        
+
         // Play
         mapText.setEditable(false);
         mapText.setBackground(Color.LIGHT_GRAY);
-        mapText.setBounds(10, 11, 485, 485);
+        mapText.setBounds(230, 11, 768, 707);
         mapText.setFont(new Font("Monospaced", Font.PLAIN, 12));
         mapText.setMargin(new Insets(2, 2, 2, 2));
         messageText.setFont(new Font("Monospaced", Font.PLAIN, 12));
@@ -123,38 +134,51 @@ public class GuiDisplay implements Display {
         messageText.setLineWrap(true);
         messageText.setEditable(false);
         messageText.setBackground(Color.LIGHT_GRAY);
-        messageText.setBounds(505, 11, 209, 88);
+        messageText.setBounds(10, 11, 210, 88);
         messageText.setMargin(new Insets(5, 5, 5, 5));
-        upBtn.setBounds(580, 256, 60, 23);
-        downBtn.setBounds(580, 286, 60, 23);
-        leftBtn.setBounds(505, 286, 60, 23);
-        rightBtn.setBounds(654, 286, 60, 23);
-        saveBtn.setBounds(505, 443, 60, 23);
+        upBtn.setBounds(80, 260, 70, 23);
+        downBtn.setBounds(80, 290, 70, 23);
+        leftBtn.setBounds(10, 290, 65, 23);
+        rightBtn.setBounds(155, 290, 65, 23);
+        saveBtn.setBounds(10, 420, 70, 23);
+        upBtn.setFont(new Font("Monospaced", Font.PLAIN, 11));
+        downBtn.setFont(new Font("Monospaced", Font.PLAIN, 11));
+        leftBtn.setFont(new Font("Monospaced", Font.PLAIN, 11));
+        rightBtn.setFont(new Font("Monospaced", Font.PLAIN, 11));
+        saveBtn.setFont(new Font("Monospaced", Font.PLAIN, 11));
         heroStatsText.setFont(new Font("Monospaced", Font.PLAIN, 11));
         heroStatsText.setEditable(false);
         heroStatsText.setBackground(Color.LIGHT_GRAY);
-        heroStatsText.setBounds(505, 110, 209, 135);
+        heroStatsText.setBounds(10, 110, 210, 135);
         heroStatsText.setMargin(new Insets(5, 5, 5, 5));
 
         // FightFlight
-        fightBtn.setBounds(505, 120, 60, 23);
-        fleeBtn.setBounds(505, 152, 60, 23);
+        fightBtn.setBounds(10, 120, 70, 23);
+        fleeBtn.setBounds(10, 152, 70, 23);
+        fightBtn.setFont(new Font("Monospaced", Font.PLAIN, 11));
+        fleeBtn.setFont(new Font("Monospaced", Font.PLAIN, 11));
 
         // RoundWon
-        menuBtn.setBounds(505, 473, 120, 23);
+        menuBtn.setBounds(10, 165, 135, 23);
+        menuBtn.setFont(new Font("Monospaced", Font.PLAIN, 11));
 
         // QuitGame
         quitConfirmBtn.setBounds(10, 152, 90, 23);
         quitDenyBtn.setBounds(120, 152, 90, 23);
+        quitConfirmBtn.setFont(new Font("Monospaced", Font.PLAIN, 11));
+        quitDenyBtn.setFont(new Font("Monospaced", Font.PLAIN, 11));
 
         // NoEscape
         continueBtn.setSize(90, 23);
+        continueBtn.setFont(new Font("Monospaced", Font.PLAIN, 11));
 
         // GameOver
 
         // AfterAction
-        equipBtn.setBounds(505, 226, 90, 23);
-        ignoreBtn.setBounds(605, 226, 90, 23);
+        equipBtn.setBounds(10, 226, 90, 23);
+        ignoreBtn.setBounds(120, 226, 90, 23);
+        equipBtn.setFont(new Font("Monospaced", Font.PLAIN, 11));
+        ignoreBtn.setFont(new Font("Monospaced", Font.PLAIN, 11));
 
     }
 
@@ -166,14 +190,14 @@ public class GuiDisplay implements Display {
                 controller.displayState();
             }
         });
-        
+
         loadBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 controller.handleInput("l");
                 controller.displayState();
             }
         });
-        
+
         backBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -209,6 +233,12 @@ public class GuiDisplay implements Display {
         submitClassBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                try {
+                    classSelect.commitEdit();
+                } catch (ParseException err) {
+                    // TODO Auto-generated catch block
+                    err.printStackTrace();
+                }
                 int index = (int)classSelect.getValue();
                 controller.handleInput(Integer.toString(index));
                 controller.displayState();
@@ -230,6 +260,12 @@ public class GuiDisplay implements Display {
         submitIndexBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                try {
+                    heroSelect.commitEdit();
+                } catch (ParseException err) {
+                    // TODO Auto-generated catch block
+                    err.printStackTrace();
+                }
                 int index = (int)heroSelect.getValue();
                 controller.handleInput(Integer.toString(index));
                 controller.displayState();
@@ -338,7 +374,7 @@ public class GuiDisplay implements Display {
         panel = new JPanel();
 
         frame.setTitle("Swingy - cdiogo");
-        frame.setSize(740, 548);
+        frame.setSize(1024, 768);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         panel.setBackground(Color.DARK_GRAY);
         frame.getContentPane().add(panel);
@@ -352,8 +388,8 @@ public class GuiDisplay implements Display {
     public void startScreen() {
         panel.removeAll();        
         
-        quitBtn.setLocation(302, 215);
-        displayBtn.setLocation(222, 245);
+        quitBtn.setLocation(292, 215);
+        displayBtn.setLocation(10, 249);
         panel.add(createBtn);
         panel.add(loadBtn);
         panel.add(quitBtn);
@@ -370,6 +406,7 @@ public class GuiDisplay implements Display {
         panel.removeAll();
         
         characterText.setText("\r\n\r\n   Enter a name for your Hero");
+        characterText.setSize(319, 193);
         panel.add(characterText);
         panel.add(welcomeText);
         panel.add(submitNameBtn);
@@ -386,6 +423,7 @@ public class GuiDisplay implements Display {
         panel.removeAll();
         
         characterText.setText("\r\n\r\n   Choose a Hero Class\r\n\r\n      1 - Ranger\r\n      2 - Wizard\r\n      3 - Fighter\r\n      4 - Rogue");
+        characterText.setSize(319, 193);
         panel.add(characterText);
         panel.add(welcomeText);
         panel.add(classSelect);
@@ -401,6 +439,7 @@ public class GuiDisplay implements Display {
     public void loadChar(List<Player> heroes) {
         panel.removeAll();
         
+        characterText.setSize(319, 420);
         displayHeroes(heroes);
         panel.add(welcomeText);
         panel.add(characterText);
@@ -447,7 +486,7 @@ public class GuiDisplay implements Display {
         panel.removeAll();
         
         printMap();
-        messageText.setBounds(505, 11, 209, 88);
+        messageText.setBounds(10, 11, 210, 88);
         messageText.setText("Reach the edge of the map to win the current mission.\n\nEnemies may be encountered!");
         if (controller.isHeroEscaped()) {
             controller.setHeroEscaped(false);
@@ -457,8 +496,8 @@ public class GuiDisplay implements Display {
             controller.setLevelUp(false);
             messageText.setText("You have levelled up!");
         }
-        quitBtn.setLocation(654, 473);
-        displayBtn.setLocation(505, 473);
+        quitBtn.setLocation(155, 454);
+        displayBtn.setLocation(10, 454);
         heroStatsText.setText(controller.getHero().toString());
         panel.add(mapText);
         panel.add(messageText);
@@ -504,7 +543,7 @@ public class GuiDisplay implements Display {
         printMap();
         line = String.format("You have encountered a villain!\n\n%s", controller.getCurrentEnemy().toString());
         messageText.setText(line);
-        messageText.setBounds(505, 11, 209, 98);
+        messageText.setBounds(10, 11, 210, 98);
         panel.add(mapText);
         panel.add(messageText);
         panel.add(fightBtn);
@@ -521,8 +560,8 @@ public class GuiDisplay implements Display {
         
         printMap();
         messageText.setText("You have Successfully completed this level!\r\n\r\nContinue your adventure from the main menu, or try a new character.");
-        messageText.setBounds(505, 11, 209, 138);
-        quitBtn.setLocation(635, 473);
+        messageText.setBounds(10, 11, 210, 138);
+        quitBtn.setLocation(155, 165);
         panel.add(messageText);
         panel.add(mapText);
         panel.add(quitBtn);
@@ -554,8 +593,8 @@ public class GuiDisplay implements Display {
         
         printMap();
         messageText.setText("Your attempt to flee has failed!\r\n\r\nPrepare for BATTLE!");
-        messageText.setBounds(505, 11, 209, 88);
-        continueBtn.setLocation(505, 110);
+        messageText.setBounds(10, 11, 210, 88);
+        continueBtn.setLocation(10, 110);
         panel.add(messageText);
         panel.add(mapText);
         panel.add(continueBtn);
@@ -571,8 +610,8 @@ public class GuiDisplay implements Display {
         
         printMap();
         messageText.setText("       GAME   OVER\r\n\r\nYour hero has died :(\r\n\r\nYou may return to the menu and play again, or you may quit.");
-        messageText.setBounds(505, 11, 209, 142);
-        quitBtn.setLocation(654, 473);
+        messageText.setBounds(10, 11, 210, 142);
+        quitBtn.setLocation(155, 165);
         panel.add(mapText);
         panel.add(messageText);
         panel.add(quitBtn);
@@ -590,8 +629,8 @@ public class GuiDisplay implements Display {
         panel.removeAll();
         
         printMap();
-        messageText.setBounds(505, 11, 209, 170);
-        continueBtn.setLocation(505, 192);
+        messageText.setBounds(10, 11, 210, 170);
+        continueBtn.setLocation(10, 192);
         panel.add(mapText);
         panel.add(messageText);
         
