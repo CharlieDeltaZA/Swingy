@@ -34,10 +34,12 @@ public abstract class Player {
 
     @NotNull
     @Min(value=0, message="Attack cannot be lower than 0")
+    @Max(value=100, message="Attack cannot be higher than 100")
     protected int attack;
 
     @NotNull
     @Min(value=0, message="Defense cannot be lower than 0")
+    @Max(value=100, message="Defense cannot be higher than 100")
     protected int defense;
 
     @NotNull
