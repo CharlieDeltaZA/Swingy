@@ -96,7 +96,4 @@ public class Villain {
         return (String.format("%s - HP: %d Atk: %d Def: %d", this.name, this.hp, this.attack, this.defense));
     }
 
-    public String debugCoords() {
-        return (String.format("X: %d Y: %d", this.positionX, this.positionY));
-    }
 }

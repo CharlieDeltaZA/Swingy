@@ -75,10 +75,12 @@ public class File {
         } catch (FileNotFoundException e) {
             // TODO remove the stackTrace
             System.out.println(String.format("File '%s' not found, continuing", filename));
-            e.printStackTrace();
+            // e.printStackTrace();
         } catch (IOException e) {
             // TODO Auto-generated catch block
+            System.out.println(String.format("There was a problem reading file '%s'", filename));
             e.printStackTrace();
+            // System.exit(0);
         }
         return (null);
     }

@@ -21,7 +21,6 @@ public abstract class PlayerFactory {
             default:
                 System.out.println(String.format("Hero Class '%s' not recognized", heroClass));
                 System.exit(0);
-                // break;
         }
         return (null);
     }
@@ -39,7 +38,6 @@ public abstract class PlayerFactory {
             default:
                 System.out.println(String.format("Hero Class '%s' not recognized", heroClass));
                 System.exit(0);
-                // break;
         }
         return (null);
     }

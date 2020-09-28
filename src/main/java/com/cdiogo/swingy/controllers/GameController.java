@@ -62,11 +62,9 @@ public class GameController {
 
         switch (displayType) {
             case "console":
-                System.out.println("Cool, lets console");
                 display = console;
                 break;
             case "gui":
-                System.out.println("Not yet mate");
                 display = gui;
                 break;
             default:
@@ -76,7 +74,6 @@ public class GameController {
     }
 
     public void handleInput(String input) {
-        System.out.println("Input: " + input);
         switch (currentGameState) {
             case START:
                 switch (input) {
@@ -100,7 +97,6 @@ public class GameController {
                     default:
                         System.out.println("Bad Choice - START");
                         System.exit(0);
-                        // break;
                 }
                 break; // case START
 
@@ -109,7 +105,6 @@ public class GameController {
                     currentGameState = gameState.START;
                     break;
                 } else {
-                    // createHero(input);
                     heroClass = input;
                     currentGameState = gameState.CREATE_NAME;
                 }
@@ -130,7 +125,6 @@ public class GameController {
                     int index = Integer.parseInt(input);
                     if (index <= heroes.size() && index != 0) {
                         hero = heroes.get(index - 1);
-                        // System.out.println(hero.toString());
                         initMap();
                         currentGameState = gameState.PLAY;
                     }
@@ -167,7 +161,7 @@ public class GameController {
                 break;
 
             case FIGHT_FLIGHT:
-                // Fight / Run
+                // Fight / Flee
                 if (input.equals("f")) {
                     // FIGHT
                     fightEnemy();
@@ -239,15 +233,12 @@ public class GameController {
                 gameOver = true;
                 System.out.println("Bad Game State");
                 System.exit(0);
-                // break;
         }
     }
-//fight
+
     private void levelUp() {
         int newXp = hero.getXp() + currentEnemy.getXp();
         int levelThresh = (hero.getLevel() * 1000 + (int)Math.pow((double)hero.getLevel() - 1, 2.0) * 450);
-        System.out.println("newXp: "+newXp);
-        System.out.println("LevelThresh: "+levelThresh);
 
         // Level 10 is max level
         if (hero.getLevel() < 10) {
@@ -260,7 +251,7 @@ public class GameController {
             }
         }
     }
-//fight
+
     private void equipArtifact() {
         Artifact enemyArt = currentEnemy.getArtifact();
 
@@ -272,10 +263,8 @@ public class GameController {
             hero.setHelm(new Helm(enemyArt.getArtifactName()));
         }
     }
-//fight
+    // This fight logic can be improved, but will do for now.
     private void fightEnemy() {
-        System.out.println("FIGHT!");
-        System.out.println(villains.size());
         Random rand = new Random();
 
         int heroInit = rand.nextInt(21);
@@ -301,51 +290,31 @@ public class GameController {
                     enemyEffectiveHp += currentEnemy.getArtifact().getArtifactValue();
                     break;
             }
-            // System.out.println(currentEnemy.getArtifact().toString());
         }
 
-        System.out.println("");
-        System.out.println(String.format("HeroInit: %d ; EnemyInit: %d", heroInit, enemyInit));
-        System.out.println(String.format("effHP: %d ; effAtk: %d ; effDef: %d ;", heroEffectiveHp, heroEffectiveAtk, heroEffectiveDef));
-        System.out.println(String.format("ENEMYeffHP: %d ; ENEMYeffAtk: %d ; ENEMYeffDef: %d ;", enemyEffectiveHp, enemyEffectiveAtk, enemyEffectiveDef));
-
         while (heroEffectiveHp > 0 && enemyEffectiveHp > 0) {
-            System.out.println("---------------------");
-            System.out.println("Hero: " + heroEffectiveHp);
-            System.out.println("Enemy: " + enemyEffectiveHp);
             if (heroInit >= enemyInit) {
                 // Hero Attacks first
-                System.out.println("Hero Attacks first");
                 enemyEffectiveHp -= heroEffectiveAtk;
                 heroEffectiveHp -= enemyEffectiveAtk;
                 
             } else {
                 // Enemy Attacks first
-                System.out.println("Enemy Attacks first");
                 heroEffectiveHp -= enemyEffectiveAtk;
                 enemyEffectiveHp -= heroEffectiveAtk;
             }
         }
-        // currentEnemy.setDefeated(true);
-        // villains.remove(currentEnemy);
-        System.out.println("");
-        System.out.println(String.format("HeroInit: %d ; EnemyInit: %d", heroInit, enemyInit));
-        System.out.println(String.format("effHP: %d ; effAtk: %d ; effDef: %d ;", heroEffectiveHp, heroEffectiveAtk, heroEffectiveDef));
-        System.out.println(String.format("ENEMYeffHP: %d ; ENEMYeffAtk: %d ; ENEMYeffDef: %d ;", enemyEffectiveHp, enemyEffectiveAtk, enemyEffectiveDef));
-        // updateMap();
-        // currentGameState = gameState.AFTER_ACTION;
         if (heroEffectiveHp <= 0) {
             currentGameState = gameState.GAME_OVER;
         } else if (enemyEffectiveHp <= 0) {
             currentEnemy.setDefeated(true);
             villains.remove(currentEnemy);
-            System.out.println(villains.size());
             
             updateMap();
             currentGameState = gameState.AFTER_ACTION;
         }
     }
-//fight 
+
     private void tryFlee() {
         // 50% chance to escape
         Random random = new Random();
@@ -373,7 +342,7 @@ public class GameController {
         }
         playGame();
     }
-// file
+
     private void savePlayer() {
         // Add current hero to heroes from file
         if (heroes != null) {
@@ -393,7 +362,7 @@ public class GameController {
         }
         file.saveFile();
     }
-// map
+
     private boolean checkWon() {
         if (hero.getPositionX() == 0 || hero.getPositionY() == 0 || hero.getPositionX() == map[0].length - 1
                 || hero.getPositionY() == map[0].length - 1) {
@@ -401,7 +370,7 @@ public class GameController {
         }
         return (false);
     }
-//fight
+
     private boolean checkConflict() {
         for (Villain villain : villains) {
             if (villain.getPositionX() == hero.getPositionX() && villain.getPositionY() == hero.getPositionY()) {
@@ -411,13 +380,11 @@ public class GameController {
         }
         return (false);
     }
-// map
+
     private void movePlayer(String move) {
         // x and y seemingly reversed? Weird Java behaviour.
         xBeforeMove = hero.getPositionX();
         yBeforeMove = hero.getPositionY();
-
-        System.out.println(String.format("Pos before move: (%d,%d)", xBeforeMove, yBeforeMove));
 
         if (move.equals("w")) {
             hero.setPositionX(xBeforeMove - 1);
@@ -429,37 +396,20 @@ public class GameController {
             hero.setPositionY(yBeforeMove + 1);
         }
     }
-// map
+
     private void updateMap() {
         map[hero.getPositionX()][hero.getPositionY()] = 'H';
         map[xBeforeMove][yBeforeMove] = '.';
     }
 
-    // map
+
     private void initMap() {
         map = mapper.generateMap(hero.getLevel());
         villains = generateVillains(map[0].length, hero.getLevel());
         spawnVillains();
-
-        System.out.println(String.format("Hero X: %d ; Hero Y: %d", hero.getPositionX(), hero.getPositionY()));
-
-        // Debug map after villains spawned
-        for (int i = 0; i < map[0].length; i++) {
-            for (int k = 0; k < map[0].length; k++) {
-                System.out.print(map[i][k]);
-            }
-            System.out.print("\n");
-        }
-
-        // Debug villains
-        for (Villain vil : villains) {
-            System.out.println(vil.toString() + " - " + vil.debugCoords());
-        }
     }
 
     private void createHero(String heroName) {
-        // String heroClass = "";
-        // String heroName;
 
         switch (heroClass) {
             case "1":
@@ -478,16 +428,12 @@ public class GameController {
                 System.out.println("Unrecognized Hero Class");
                 System.exit(0);
         }
-        // heroName = display.createCharName();
         hero = PlayerFactory.newPlayer(heroName, heroClass);
 
-        System.out.println(hero.toString());
-        System.out.println(String.format("X: %d ; Y: %d", hero.getPositionX(), hero.getPositionY()));
         initMap();
     }
 
     public void displayState() {
-        System.out.println("CURRENT GAME STATE : " + currentGameState);
         switch (currentGameState) {
             case START:
                 display.startScreen();
@@ -529,7 +475,7 @@ public class GameController {
         }
     }
 
-    // map
+
     private void spawnVillains() {
         Random random = new Random();
 
@@ -555,7 +501,7 @@ public class GameController {
             }
         }
     }
-    // map
+
     private boolean validateSpawn(int x, int y) {
         return (map[x][y] == '*');
     }
@@ -570,25 +516,16 @@ public class GameController {
         String artifactType = artifactTypes[random.nextInt(3)];
         switch (artifactType) {
             case "Weapon":
-                // System.out.println("Generating weapon");
                 return (new Weapon(weaponTypes[random.nextInt(5)]));
-                // break;
             case "Armour":
-                // System.out.println("Generating armour");
                 return (new Armour(armourTypes[random.nextInt(5)]));
-                // break;
             case "Helm":
-                // System.out.println("Generating helm");
                 return (new Helm(helmTypes[random.nextInt(3)]));
-                // break;
             
             default:
                 System.out.println("Something went wrong generating artifact, returning null");
                 return (null);
-                // break;
         }
-
-        // return (null);
     }
     
     private List<Villain> generateVillains(int mapSize, int level) {
@@ -606,7 +543,6 @@ public class GameController {
             villain = new Villain(villainTypes[random.nextInt(4)], level);
             if (artifactChance >= 80) {
                 villain.setArtifact(generateArtifact());
-                System.out.println(String.format("Artifact Generated :: %s", villain.getArtifact().toString()));
             } else {
                 villain.setArtifact(null);
             }
