@@ -30,6 +30,6 @@ Best bet is to get MobaXterm, ensure the X11 server is running, and then on the 
 ```
 export DISPLAY=localhost:0.0
 ```
-where `localhost` is the IPv4 address of the Unix machine.
+where `localhost` is the IP address being reported by MobaXterm as the server IP.
 
 Tested on Mac & WSL/Win10
