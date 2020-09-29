@@ -1,11 +1,11 @@
 # Swingy
 
-### Score TBC/100
+### Score 113/100
 #### Mandatory
-TBC/100
+100/100
 
 #### Bonus
-TBC/25
+13/25
 
 #### Project Overview:
 2nd Java project @ WeThinkCode_
